@@ -8,7 +8,7 @@ os:
 
 env:
     global:
-        - DESTINATION_CONDA_CHANNEL=""
+        - DESTINATION_CONDA_CHANNEL="bccp"
         - TARGET_ARCH="x64"
         - CONDA_INSTALL_LOCN="${HOME}/miniconda"
 
@@ -19,6 +19,10 @@ env:
         # can have any value. The setting below avoids known-bad builds on
         # python 2.6 and 3.3 for some packages.
         - PYTHON_BUILD_RESTRICTIONS="2.7*|>=3.4"
+        
+        # The value below needs to be set but will be ignored.
+        - CONDA_NPY="1.11"
+        - CONDA_VERSION=4.2*
 
 # Matrix is fully specified (for now) by os versions
 
@@ -42,13 +46,16 @@ install:
     # downgrading conda itself from conda-forge.
     - conda config --add channels defaults
 
-    - conda install conda-build=2.0*
+    - conda install conda-build=2.0.10
 
     # Install conda-build-all
     - conda install -c conda-forge conda-build-all=1.0*
 
     # Finally, install extruder
     - conda install -c astropy extruder
+    
+    # To ease debugging, list installed packages
+    - conda info -a
 
 script:
     # Only upload if this is NOT a pull request.
