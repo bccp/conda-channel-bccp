@@ -50,14 +50,14 @@ install:
     # downgrading conda itself from conda-forge.
     - conda config --add channels defaults
 
-    - conda install conda-build=2.0.10
+    - conda install conda-build
 
     # Install conda-build-all
-    - conda install conda-build-all=1.0*
-
-    # Finally, install extruder
-    - conda install -c astropy extruder
+    - conda install conda-build-all
     
+    # install extruder for the dependencies
+    - conda install -c astropy extruder
+
     # To ease debugging, list installed packages
     - conda info -a
 
@@ -71,7 +71,7 @@ script:
         fi;
       fi
     # Get ready to build.
-    - extrude_recipes requirements.yml
+    - python extrude_recipes requirements.yml
     # Packages are uploaded as they are built.
     - echo "conda build-all recipes --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  --matrix-max-n-minor-versions 3 --inspect-channels conda-forge astropy $UPLOAD"
     - if [[ -d recipes ]]; then conda build-all recipes --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  --matrix-max-n-minor-versions 3 --inspect-channels conda-forge astropy $UPLOAD; fi
