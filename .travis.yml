@@ -21,7 +21,6 @@ env:
         - PYTHON_BUILD_RESTRICTIONS="2.7*|>=3.4"
         
         - NUMPY_BUILD_RESTRICTION="numpy <1.12"
-        
         # The value below needs to be set but will be ignored.
         - CONDA_NPY="1.11"
         - CONDA_VERSION=4.2*
@@ -35,6 +34,9 @@ install:
     - bash miniconda.sh -b -p $CONDA_INSTALL_LOCN
     - export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
     - conda config --set always_yes true
+
+    - PIN_FILE_CONDA=${CONDA_INSTALL_LOCN}/conda-meta/pinned
+    - echo "conda ${CONDA_VERSION}" > $PIN_FILE_CONDA
 
     - conda update --quiet conda
 
@@ -51,7 +53,7 @@ install:
     - conda install conda-build=2.0.10
 
     # Install conda-build-all
-    - conda install -c conda-forge conda-build-all=1.0*
+    - conda install conda-build-all=1.0*
 
     # Finally, install extruder
     - conda install -c astropy extruder
