@@ -13,7 +13,7 @@ env:
         - CONDA_INSTALL_LOCN="${HOME}/miniconda"
 
         # Defines BINSTAR_TOKEN for your binstar channel
-        - secure: "aU1Cy86whEXvN3OvMqC04loeOMD0T1E7AWbZ65Aji36cuoX/FkxA10GDPyvq434Bzb+4FHfVDKxV71H/2MWFLbpp9RhiE8vJbvExfT30LD80Sh9aqilUS8jabOyLvIgkkORSw16rHfbb0PST3D5n7j+fbMVsLt4uT+YugkibsGFVR/rDjnr/XjrnFQVv2Ugm3dJ+AaRKTZoSgHKxeAgf3V2YJNqPKU7aY9lZ4yKS7w7a26zAAKcRgDNyFxzB/bIgaM2+5I3as1ugXgg1MTC7YdjTlublCvk595OPoIVm6AmaFbTdtdwVqG5oEeYjyt6jxwxkUh/N0gFJvV8CJTd7/RWzJaJP2RS5vcN9H1mo5h4gZvmTM5AWEmwaXMW+KUT2zDmJ1XSuGAjnbKDzn6DRgkiV7ySmr0jCDtLWpYvPdqWU3ZGhiVm4vZ/QOf7MRQlwc9qc9RKkc1SLANKZgLjKLkRTdK2Gyzq2z5a2/Xt9t4We3wct9kG7ITNgq0YfkZO0yaJSSPDTNTky4pFKWU27qf/DQ2xpQFM6D8SAcAYMVl1ZIlIEc2ViIr0AGuP+aMAxShKPJeGwejHWt1GxCmpALk7OJpvt3OJ0AH2/hXw8RlLBMio7EWgqecUgFrofsyox0/0lqqs8lk7VZLxzpk/pG2cAPj4XiF6lvC3uEQvgtRc="
+        - secure: "0fIuL2KuDNRVWFERTa3Z6oVyFSc01CISoJWEui+oLCjkSceN68UsHbOQ/o5lv2SA6JFCOGwqkTlcf+51ewPG4kt7mqYUS+2snNeSxA+2/fYfI/pjgbePVsN6uhke0UHUOgljEvy9qUlfZ7Ai2q2/Z/ijPFn01dd7vw0fItZZJ1vnQtq7L1bYOkK5jh1T0ns3FW0MG8KnT1j+m89ZIT4fsdQw/l8vnu5mEev4bvUUqXQ2dRDHR+/ZLme1wj/HHXbiSR7+i+l3N1OJpc2fWZKiZrnM+Tyl3xwG17FvSZ6qHoay5wwyW/hy2foce4uBSbVHmQQVcgBzLSKxB0JvPNadnsi3Vs2ktgKT1eigxQEak1W6YO6qZa7272AvlVkhTIqMzQ6YA/Skr+1kv5xYMxKWKhzTRKOlirrBtku02+dKZ3mgNxlTzxjFBPbZrixqz3eNsOGhKvNFzGn1vdtwSe5uKODK1nB+CWWdCX4AwmfmE06grmGmgkuTRL0WqbDuM8f0L5ulyGIwB06KpUtpG/duwtxC/2puZGwkvXbjb0R8SrR1+6JB9d7D0dLcdxXgw/35OFn0CDB9NodQ23K8MxbzBbPaBXrvqMQ3IU7kWoguqjSK7yjDw6AQTX7691VFMUhgqjjOL36bhrF+f3FeJlII3zO3SJi1qmwK3uVFAsHPkZY="
 
         # The python build restriction MUST be set at the moment, though it
         # can have any value. The setting below avoids known-bad builds on
@@ -73,5 +73,5 @@ script:
     # Get ready to build.
     - python extrude_recipes requirements.yml
     # Packages are uploaded as they are built.
-    - echo "conda build-all recipes --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  --matrix-max-n-minor-versions 3 --inspect-channels conda-forge astropy $UPLOAD"
+    - echo "conda build-all recipes --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  --matrix-max-n-minor-versions 3 --inspect-channels conda-forge astropy bccp $UPLOAD"
     - if [[ -d recipes ]]; then conda build-all recipes --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  --matrix-max-n-minor-versions 3 --inspect-channels conda-forge astropy $UPLOAD; fi
