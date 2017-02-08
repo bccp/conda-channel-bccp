@@ -1,0 +1,59 @@
+# The language in this case has no bearing - we are going to be making use of "conda" for a
+# python distribution for the scientific python stack.
+language: c
+
+os:
+  - linux
+  - osx
+
+env:
+    global:
+        - DESTINATION_CONDA_CHANNEL=""
+        - TARGET_ARCH="x64"
+        - CONDA_INSTALL_LOCN="${HOME}/miniconda"
+
+        # Defines BINSTAR_TOKEN for your binstar channel
+        - secure: "aU1Cy86whEXvN3OvMqC04loeOMD0T1E7AWbZ65Aji36cuoX/FkxA10GDPyvq434Bzb+4FHfVDKxV71H/2MWFLbpp9RhiE8vJbvExfT30LD80Sh9aqilUS8jabOyLvIgkkORSw16rHfbb0PST3D5n7j+fbMVsLt4uT+YugkibsGFVR/rDjnr/XjrnFQVv2Ugm3dJ+AaRKTZoSgHKxeAgf3V2YJNqPKU7aY9lZ4yKS7w7a26zAAKcRgDNyFxzB/bIgaM2+5I3as1ugXgg1MTC7YdjTlublCvk595OPoIVm6AmaFbTdtdwVqG5oEeYjyt6jxwxkUh/N0gFJvV8CJTd7/RWzJaJP2RS5vcN9H1mo5h4gZvmTM5AWEmwaXMW+KUT2zDmJ1XSuGAjnbKDzn6DRgkiV7ySmr0jCDtLWpYvPdqWU3ZGhiVm4vZ/QOf7MRQlwc9qc9RKkc1SLANKZgLjKLkRTdK2Gyzq2z5a2/Xt9t4We3wct9kG7ITNgq0YfkZO0yaJSSPDTNTky4pFKWU27qf/DQ2xpQFM6D8SAcAYMVl1ZIlIEc2ViIr0AGuP+aMAxShKPJeGwejHWt1GxCmpALk7OJpvt3OJ0AH2/hXw8RlLBMio7EWgqecUgFrofsyox0/0lqqs8lk7VZLxzpk/pG2cAPj4XiF6lvC3uEQvgtRc="
+
+        # The python build restriction MUST be set at the moment, though it
+        # can have any value. The setting below avoids known-bad builds on
+        # python 2.6 and 3.3 for some packages.
+        - PYTHON_BUILD_RESTRICTIONS="2.7*|>=3.4"
+
+# Matrix is fully specified (for now) by os versions
+
+install:
+    # Install and set up miniconda.
+    - if [ $TRAVIS_OS_NAME == "linux" ]; then wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh; fi
+    - if [ $TRAVIS_OS_NAME == "osx" ]; then wget http://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh -O miniconda.sh; fi
+    - bash miniconda.sh -b -p $CONDA_INSTALL_LOCN
+    - export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
+    - conda config --set always_yes true
+
+    - conda update --quiet conda
+
+    # Install a couple of dependencies we need for sure.
+    - conda install --quiet --yes astropy anaconda-client jinja2 cython pycrypto
+
+    - conda config --add channels astropy
+    - conda config --add channels conda-forge
+
+    # "Add" defaults to make it the highest priority channel to avoid
+    # downgrading conda itself from conda-forge.
+    - conda config --add channels defaults
+
+    - conda install conda-build=2.0*
+
+    # Install conda-build-all
+    - conda install -c conda-forge conda-build-all=1.0*
+
+    # Finally, install extruder
+    - conda install -c astropy extruder
+
+script:
+    # Only upload if this is NOT a pull request.
+    - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then UPLOAD="--upload-channels $DESTINATION_CONDA_CHANNEL"; else UPLOAD=""; fi'
+    # Get ready to build.
+    - extrude_recipes requirements.yml
+    # Packages are uploaded as they are built.
+    - if [[ -d recipes ]]; then conda build-all recipes --matrix-conditions="python $PYTHON_BUILD_RESTRICTIONS" --inspect-channels conda-forge $DESTINATION_CONDA_CHANNEL $UPLOAD; fi

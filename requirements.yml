@@ -1,0 +1,5 @@
+- name: mpi4py_test
+  version: 0.0.10
+  numpy_compiled_extensions: false
+  excluded_platforms:
+      - 'win-64'
