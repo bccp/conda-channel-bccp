@@ -1,0 +1,44 @@
+{% set name = "bigfile" %}
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+build:
+  number : 0
+  script : python setup.py install
+  skip : True  # [py36]
+  skip : True  # [win]
+
+requirements:
+  build:
+    - python
+    - numpy 
+    - cython
+    - mpi4py
+
+  run:
+    - python
+    - numpy
+    - mpi4py
+
+test:
+  # Python imports
+  imports:
+    - bigfile
+    - bigfile.tests
+
+about:
+  home: http://github.com/rainwoodman/bigfile
+  license: BSD-2-Clause
+  summary: 'python binding of BigFile, a peta scale IO format'
+  license_family: BSD
+
+extra:
+  recipe-maintainers:
+    - rainwoodman
