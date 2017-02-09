@@ -18,17 +18,6 @@ build:
 requirements:
   build:
     - python
-    - numpy
-    - scipy
-    - astropy
-    - mpi4py
-    - mpi4py_test
-    - pmesh
-    - kdcount
-    - mpsort
-    - bigfile
-    - dask
-
   run:
     - python
     - numpy
@@ -41,6 +30,7 @@ requirements:
     - mpsort
     - bigfile
     - dask
+    - h5py
 
 test:
   # Python imports
