@@ -11,6 +11,7 @@ source:
 
 build:
   number : 0
+  script : python setup.py install --single-version-externally-managed --record rec.txt
   skip : True  # [py36]
   skip : True  # [win]
 
@@ -20,13 +21,13 @@ requirements:
     - setuptools
     - numpy
     - astropy
-    - gcc [osx]
+    - gcc
 
   run:
     - python
     - numpy
     - astropy
-    - libgcc [osx]
+    - libgcc
 
 test:
   # Python imports
