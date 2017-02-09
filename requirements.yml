@@ -1,6 +1,5 @@
 - name: mpi4py_test
-  version: 0.0.10
-      
+
 - name: kdcount
   version: 0.3.21
 
