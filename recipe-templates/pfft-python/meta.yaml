@@ -20,6 +20,7 @@ requirements:
     - cython
     - numpy
     - mpi4py
+    - gcc
 
   run:
     - python
