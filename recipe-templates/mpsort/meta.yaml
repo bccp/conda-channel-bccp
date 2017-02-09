@@ -1,6 +1,4 @@
 {% set name = "mpsort" %}
-{% set version = "0.1.11" %}
-{% set sha256 = "84e269af4a77b6b2f1f805cb44d7fc0a4a7acb5a298f197d9a30f8ef82f1a5b4" %}
 
 package:
   name: {{ name|lower }}
@@ -9,10 +7,10 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  md5: {{ md5}}
 
 build:
-  number : 0
+  number : 1
   script : python setup.py install
   skip : True  # [py36]
   skip : True  # [win]
@@ -21,12 +19,12 @@ requirements:
   build:
     - python
     - cython
-    - numpy x.x
+    - numpy
     - mpi4py
 
   run:
     - python
-    - numpy x.x
+    - numpy
     - mpi4py
 
 test:
