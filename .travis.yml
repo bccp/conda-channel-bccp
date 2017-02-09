@@ -52,6 +52,9 @@ install:
     # Install conda-build-all
     - conda install -c conda-forge conda-build-all=1.0*
     
+    # so we can grab compiled packages for dependencies
+    - conda config --add channels bccp
+    
     # To ease debugging, list installed packages
     - conda info -a
 
