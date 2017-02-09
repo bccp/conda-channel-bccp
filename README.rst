@@ -31,3 +31,5 @@ The packages maintained here are:
 .. _`mpi4py_test` : https://github.com/rainwoodman/mpi4py_test
 .. _`mpsort` : https://github.com/rainwoodman/MP-sort
 .. _`pfft-python` : https://github.com/rainwoodman/pfft-python
+
+The Anaconda channel of BCCP can be found at: http://anaconda.org/bccp/
