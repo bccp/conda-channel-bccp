@@ -1,8 +1,17 @@
 - name: mpi4py_test
   version: 0.0.10
-  numpy_compiled_extensions: false
-  excluded_platforms:
-      - 'win-64'
       
 - name: kdcount
   version: 0.3.21
+
+- name: pfft-python
+  version: 0.1.12
+
+- name: classylss
+  version: 0.1.17
+
+- name: bigfile
+  version: 0.1.24
+
+- name: mpsort
+  version: 0.1.11
