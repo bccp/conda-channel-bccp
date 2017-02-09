@@ -59,10 +59,14 @@ class Package(object):
                  excluded_platforms=None,
                  include_extras=False):
         self._pypi_name = pypi_name
-        self.required_version = version
+        if version is not None:
+            self.required_version = version
+        else:
+            self._required_version = None
         self._build = False
         self._url = None
         self._md5 = None
+        self._version = None
         self._build_platforms = None
         self._extra_meta = None
         self._build_pythons = None
@@ -144,6 +148,13 @@ class Package(object):
         return self._url
 
     @property
+    def version(self):
+        if not self._version:
+            self._retrieve_package_metadata()
+
+        return self._version
+
+    @property
     def md5(self):
         if not self._md5:
             self._retrieve_package_metadata()
@@ -221,7 +232,7 @@ class Package(object):
         Get URL and md5 checksum from PyPI for either the specified version
         or the most recent version.
         """
-        if not self.required_version:
+        if self.required_version is None:
             version = get_pypi_info(self.pypi_name)
         else:
             version = self.required_version
@@ -247,6 +258,8 @@ class Package(object):
             md5sum = None
         self._url = url
         self._md5 = md5sum
+        self._version = version
+
 
     @property
     def supported_platform(self):
@@ -317,7 +330,7 @@ def render_template(package, template, folder=TEMPLATE_FOLDER):
     full_template_path = os.path.abspath(folder)
     jinja_env = Environment(loader=FileSystemLoader(full_template_path))
     tpl = jinja_env.get_template('/'.join([package.conda_name, template]))
-    rendered = tpl.render(version=package.required_version, md5=package.md5)
+    rendered = tpl.render(version=package.version, md5=package.md5)
     return rendered
 
 
@@ -378,7 +391,7 @@ def main(args=None):
 
     # Write recipes from templates.
     for p in packages:
-        print('Writing recipe for {}.'.format(p.conda_name))
+        print('Writing recipe for {}-{}.'.format(p.conda_name, p.version))
         recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name)
         template_path = os.path.join(template_dir, p.conda_name)
         try:
