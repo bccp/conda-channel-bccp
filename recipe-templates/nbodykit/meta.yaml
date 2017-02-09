@@ -1,0 +1,67 @@
+{% set name = "nbodykit" %}
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+  
+build:
+  number : 0
+  script : python setup.py install
+  skip : True  # [py36]
+  skip : True  # [win]
+
+requirements:
+  build:
+    - python
+    - numpy
+    - scipy
+    - astropy
+    - mpi4py
+    - mpi4py_test
+    - pmesh
+    - kdcount
+    - mpsort
+    - bigfile
+    - dask
+
+  run:
+    - python
+    - numpy
+    - scipy
+    - astropy
+    - mpi4py
+    - mpi4py_test
+    - pmesh
+    - kdcount
+    - mpsort
+    - bigfile
+    - dask
+
+test:
+  # Python imports
+  imports:
+    - nbodykit
+    - nbodykit.algorithms
+    - nbodykit.base
+    - nbodykit.cosmology
+    - nbodykit.extern
+    - nbodykit.io
+    - nbodykit.source
+    - nbodykit.source.mesh
+    - nbodykit.source.particle
+    - nbodykit.tests
+
+about:
+  home: http://github.com/bccp/nbodykit
+  license: GPL
+  summary: 'Analysis kit for large-scale structure datasets, the massively parallel way'
+  license_family: GPL
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
