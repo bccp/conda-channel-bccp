@@ -18,7 +18,7 @@ from jinja2 import Environment, FileSystemLoader, Template
 from jinja2.exceptions import TemplateNotFound
 
 PYPI_XMLRPC = 'https://pypi.python.org/pypi'
-TEMPLATE_FOLDER = 'recipe_templates'
+TEMPLATE_FOLDER = 'recipe-templates'
 RECIPE_FOLDER = 'recipes'
 ALL_PLATFORMS = ['osx-64', 'linux-64', 'linux-32', 'win-32', 'win-64']
 
@@ -321,45 +321,6 @@ def render_template(package, template, folder=TEMPLATE_FOLDER):
     return rendered
 
 
-def generate_skeleton(package, path):
-    """
-    Use conda skeleton pypi to generate a recipe for a package and
-    save it to path.
-
-    Parameters
-    ----------
-
-    package: Package
-        The package for which a recipe is to be generated.
-
-    path: str
-        Path to which the recipe should be written.
-    """
-
-    additional_arguments = ['--version', str(package.required_version),
-                            '--output-dir', path]
-    additional_arguments = {}
-    if package.include_extras:
-        additional_arguments['all_extras'] = True
-
-    # Options below ensure an egg is not included in the built package
-    # additional_arguments['setup_options'] = [
-    #     '--single-version-externally-managed',
-    #     '--record rec.txt'
-    # ]
-
-    if package.setup_options:
-        additional_arguments['setup_options'] = package.setup_options
-
-    if package.numpy_compiled_extensions:
-        additional_arguments['pin_numpy'] = True
-
-    skeletonize(package.pypi_name, 'pypi',
-                output_dir=path,
-                version=str(package.required_version),
-                **additional_arguments)
-
-
 def inject_requirements(package, recipe_path):
     """
     Two packages get special treatment so that restrictions on build versions,
@@ -410,18 +371,20 @@ def main(args=None):
     except OSError:
         needs_recipe = []
 
-    build_recipe = [p for p in packages if p.conda_name in needs_recipe]
-    build_not_recipe = [p for p in packages if p.conda_name not in needs_recipe]
-
-    if build_recipe or build_not_recipe:
+    try:
         os.mkdir(RECIPE_FOLDER)
+    except OSError:
+        pass
 
     # Write recipes from templates.
-    for p in build_recipe:
+    for p in packages:
         print('Writing recipe for {}.'.format(p.conda_name))
         recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name)
         template_path = os.path.join(template_dir, p.conda_name)
-        os.mkdir(recipe_path)
+        try:
+	    os.mkdir(recipe_path)
+	except OSError:
+            pass
         templates = [d for d in os.listdir(template_path) if
                      not d.startswith('.')]
         for template in templates:
@@ -429,55 +392,6 @@ def main(args=None):
             with open(os.path.join(recipe_path, template), 'wt') as f:
                 f.write(rendered)
         inject_requirements(p, recipe_path)
-
-    # check conda-forge for a recipe, and if it is not found, add to the skeleton
-    # list.
-    build_skeleton = []
-    for p in build_not_recipe:
-        # Try grabbing the recipe from a URL
-        try:
-            recipe_meta = requests.get(CONDA_FORGE_RECIPE_BASE.format(p.conda_name))
-            recipe_meta.raise_for_status()
-        except requests.HTTPError:
-            build_skeleton.append(p)
-            continue
-
-        print("Pulling recipe from conda-forge for {}".format(p.conda_name))
-        recipe_meta = recipe_meta.text
-
-        # Check the version number of the recipe and perhaps modify it
-        version_from_recipe = re.search('version = "(.*)"', recipe_meta)
-        if not version_from_recipe:
-            # Try looking for the recipe in the yaml instead of the jinja template.
-            version_from_recipe = re.search('^\s+version: (\d.*)$', recipe_meta)
-            print(recipe_meta)
-
-        version_from_recipe = version_from_recipe.group(1)
-
-        print("recipe version: {}\nrequirements version: {}".format(version_from_recipe, p.required_version))
-        assert p.required_version == version_from_recipe
-
-        # render the recipe
-        # The environ below is for the emcee recipe.
-        rendered = Template(recipe_meta).render(environ=os.environ)
-        # write the recipe
-        recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name)
-
-
-        os.mkdir(recipe_path)
-        with open(os.path.join(recipe_path, 'meta.yaml'), 'w') as f:
-            f.writelines(rendered)
-
-        # inject requirements
-        inject_requirements(p, recipe_path)
-
-    # Use conda skeleton to generate recipes for the simple cases
-    for p in build_skeleton:
-        print('generating skeleton for {}'.format(p.conda_name))
-        recipe_destination = os.path.join(RECIPE_FOLDER, p.conda_name)
-        generate_skeleton(p, RECIPE_FOLDER)
-
-        inject_requirements(p, recipe_destination)
 
 if __name__ == '__main__':
     main()
