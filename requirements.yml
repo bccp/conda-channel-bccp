@@ -6,6 +6,3 @@
       
 - name: kdcount
   version: 0.3.21
-  numpy_compiled_extensions: false
-  excluded_platforms:
-      - 'win-64'
