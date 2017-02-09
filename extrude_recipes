@@ -382,8 +382,8 @@ def main(args=None):
         recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name)
         template_path = os.path.join(template_dir, p.conda_name)
         try:
-	    os.mkdir(recipe_path)
-	except OSError:
+            os.mkdir(recipe_path)
+        except OSError:
             pass
         templates = [d for d in os.listdir(template_path) if
                      not d.startswith('.')]
