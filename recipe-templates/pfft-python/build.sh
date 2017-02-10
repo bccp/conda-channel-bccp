@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
+
 if [ `uname` == Darwin ]; then
 	export LIBS="-Wl,-rpath,$CONDA_PREFIX/lib"
 fi

@@ -9,6 +9,12 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   md5: {{ md5 }}
 
+build:
+  number : 0
+  script : 
+      - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
+      - python setup.py install
+
 requirements:
   build:
     - python
