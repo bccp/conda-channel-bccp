@@ -1,3 +1,5 @@
+- name: mpi4py
+
 - name: mpi4py_test
 
 - name: kdcount
