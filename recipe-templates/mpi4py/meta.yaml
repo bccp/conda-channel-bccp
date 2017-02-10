@@ -1,0 +1,53 @@
+{% set name = "mpi4py" %}
+
+package:
+  name: mpi4py
+  version: "2.0.0"
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+
+build:
+  number : 0
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - python
+
+test:
+  # Python imports
+  imports:
+    - mpi4py
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: https://bitbucket.org/mpi4py/mpi4py/
+  license: BSD License
+  summary: 'Python bindings for MPI'
+  license_family: BSD
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
