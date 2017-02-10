@@ -7,10 +7,9 @@ import re
 
 import requests
 
-from ruamel import yaml
+import ruamel_yaml as yaml
 
 from conda import config
-from conda_build.api import skeletonize
 
 from six.moves import xmlrpc_client as xmlrpclib
 

@@ -42,7 +42,7 @@ install:
 
     # Install a couple of dependencies we need for sure.
     - conda install --quiet --yes astropy anaconda-client jinja2 cython pycrypto
-    - conda install -c conda-forge ruamel.yaml
+    - conda install ruamel_yaml
     
     # needed for mac and classylss
     - conda install gcc
