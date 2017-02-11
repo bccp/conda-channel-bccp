@@ -27,6 +27,7 @@ requirements:
     - kdcount
     - mpsort
     - bigfile
+    - halotools
     - dask
     - h5py
 
