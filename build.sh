@@ -20,7 +20,7 @@ build ()
     
     source activate $PYTHON
     conda install --use-local --yes *
-    
+    conda update --use-local --yes *
     popd
 
     bundle-anaconda bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX
