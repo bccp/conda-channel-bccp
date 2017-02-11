@@ -15,11 +15,12 @@ build ()
     pushd recipes
     conda build --no-test --python $PYTHON mpi4py
     for f in *; do
-        conda build --no-test --skip-existing --python $PYTHON $f
+        conda build --no-test --python $PYTHON $f
     done
     
     source activate $PYTHON
-    conda install --use-local --yes *
+    
+    conda install --use-local -f --yes *
     conda update --use-local --yes *
     popd
 
