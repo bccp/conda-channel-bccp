@@ -18,7 +18,7 @@ build ()
     done
     
     source activate $PYTHON
-    conda install --use-local *
+    conda install --use-local --yes *
     
     popd
     
