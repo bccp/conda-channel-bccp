@@ -12,7 +12,7 @@ build ()
     local PYTHON=$1
     
     pushd recipes
-    conda build --no-test mpi4py
+    conda build --no-test --python $PYTHON mpi4py
     for f in *; do
         conda build --no-test --skip-existing --python $PYTHON $f
     done
