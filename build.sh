@@ -24,5 +24,6 @@ build ()
     
 }
 
-build 2.7
 build 3.6
+build 3.5
+build 2.7
