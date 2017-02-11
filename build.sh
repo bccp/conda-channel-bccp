@@ -3,6 +3,7 @@ git reset --hard
 git checkout nersc
 git pull origin nersc
 
+source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 source /usr/common/contrib/bccp/anaconda3/bin/activate root
 
 python extrude_recipes requirements.yml
@@ -21,6 +22,8 @@ build ()
     conda install --use-local --yes *
     
     popd
+
+    bundle-anaconda bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX
     
 }
 
