@@ -10,7 +10,7 @@ source:
   md5: {{ md5 }}
   
 build:
-  number : 0
+  number : 1
   script : 
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
       - python setup.py install
@@ -29,8 +29,11 @@ requirements:
     - kdcount
     - mpsort
     - bigfile
+    - pandas
     - dask
+    - cachey
     - h5py
+    - halotools
 
 test:
   # Python imports
