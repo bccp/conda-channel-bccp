@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # only one argument allowed
 if [ $# -eq 1 ] && [ "$1" != "--clean" ]; then
     echo "usage: build.sh [--clean]"
