@@ -10,7 +10,7 @@ source:
   md5: {{ md5 }}
   
 build:
-  number : 0
+  number : 1
   script : python setup.py install
 
 requirements:
@@ -27,9 +27,11 @@ requirements:
     - kdcount
     - mpsort
     - bigfile
-    - halotools
+    - pandas
     - dask
+    - cachey
     - h5py
+    - halotools
 
 test:
   # Python imports
@@ -47,9 +49,9 @@ test:
 
 about:
   home: http://github.com/bccp/nbodykit
-  license: GPL
+  license: GPL3
   summary: 'Analysis kit for large-scale structure datasets, the massively parallel way'
-  license_family: GPL
+  license_family: GPL3
 
 # See
 # http://docs.continuum.io/conda/build.html for
