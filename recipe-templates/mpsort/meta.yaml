@@ -27,11 +27,12 @@ requirements:
     - numpy
     - mpi4py
 
-test:
-  # Python imports
-  imports:
-    - mpsort
-    - mpsort.tests
+# tests will fail on NERSC login nodes due to MPI import
+# test:
+#   # Python imports
+#   imports:
+#     - mpsort
+#     - mpsort.tests
 
 about:
   home: http://github.com/rainwoodman/mpsort

@@ -35,19 +35,20 @@ requirements:
     - h5py
     - halotools
 
-test:
-  # Python imports
-  imports:
-    - nbodykit
-    - nbodykit.algorithms
-    - nbodykit.base
-    - nbodykit.cosmology
-    - nbodykit.extern
-    - nbodykit.io
-    - nbodykit.source
-    - nbodykit.source.mesh
-    - nbodykit.source.particle
-    - nbodykit.tests
+# fail on NERSC login nodes due to MPI import
+#test:
+#  # Python imports
+#  imports:
+#    - nbodykit
+#    - nbodykit.algorithms
+#    - nbodykit.base
+#    - nbodykit.cosmology
+#    - nbodykit.extern
+#    - nbodykit.io
+#    - nbodykit.source
+#    - nbodykit.source.mesh
+#    - nbodykit.source.particle
+#    - nbodykit.tests
 
 about:
   home: http://github.com/bccp/nbodykit

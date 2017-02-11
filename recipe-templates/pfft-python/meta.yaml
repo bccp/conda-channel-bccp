@@ -26,10 +26,11 @@ requirements:
     - numpy
     - mpi4py
 
-test:
-  imports:
-    - pfft
-    - pfft.tests
+# fails on NERSC login nodes due to MPI import 
+#test:
+#  imports:
+#    - pfft
+#    - pfft.tests
 
 about:
   home: http://github.com/rainwoodman/pfft-python

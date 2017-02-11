@@ -6,25 +6,27 @@ if [ $# -eq 1 ] && [ "$1" != "--clean" ]; then
     exit 1
 fi
 
+INSTALL_FLAG=""
+BUILD_FLAG="--skip-existing"
+
 # get the CLEAN flags
 if [ "$1" = "--clean" ]; then
     INSTALL_FLAG="-f"
     BUILD_FLAG=""
-else
-    INSTALL_FLAG=""
-    BUILD_FLAG="--skip-existing"
+    shift
 fi
 
 # get the latest changes from github
-git reset --hard
-git checkout nersc
-git pull origin nersc
+#git reset --hard
+#git checkout nersc
+#git pull origin nersc
 
 # get the bundle-anaconda command
 source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 
 # activate our root anaconda install to start
 source /usr/common/contrib/bccp/anaconda3/bin/activate root
+conda build purge
 
 # make the recipes
 python extrude_recipes requirements.yml
