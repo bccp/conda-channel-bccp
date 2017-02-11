@@ -23,7 +23,7 @@ build ()
     conda update --use-local --yes *
     popd
 
-    bundle-anaconda bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX
+    bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX
     
 }
 
