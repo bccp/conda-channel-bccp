@@ -16,6 +16,9 @@ if [ "$1" = "--clean" ]; then
     shift
 fi
 
+# cd to the conda-channel-bccp dir
+cd /usr/common/contrib/bccp/conda-channel-bccp
+
 # get the latest changes from github
 git reset --hard
 git checkout nersc
