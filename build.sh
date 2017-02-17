@@ -20,9 +20,9 @@ fi
 cd /usr/common/contrib/bccp/conda-channel-bccp
 
 # get the latest changes from github
-git reset --hard
-git checkout nersc
-git pull origin nersc
+# git reset --hard
+# git checkout nersc
+# git pull origin nersc
 
 # get the bundle-anaconda command
 source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
