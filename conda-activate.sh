@@ -27,6 +27,7 @@ case $1 in
     *)
     (>&2 echo "give a Python version number 2.7, 3.5 or 3.6")
     (>&2 echo "    (Got $1)")
+    return 1
     ;;
 esac 
 
