@@ -1,0 +1,38 @@
+{% set name = "runtests" %}
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+build:
+  number : 0
+  script : python setup.py install
+
+requirements:
+  build:
+    - python
+
+  run:
+    - python
+    - pytest
+    - coverage
+
+test:
+  # Python imports
+  imports:
+    - runtests
+
+about:
+  home: http://github.com/rainwoodman/runtests
+  license: BSD-2-Clause
+  summary: 'Running pytest tests the reproducible way.'
+  license_family: BSD
+
+extra:
+  recipe-maintainers:
+    - rainwoodman

@@ -1,5 +1,7 @@
 - name: mpi4py_test
 
+- name: runtests
+
 - name: kdcount
 
 - name: pfft-python
