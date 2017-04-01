@@ -1,0 +1,61 @@
+{% set name = "fastpm" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5}}
+
+build:
+  number : 0
+  script : python setup.py install
+
+requirements:
+  build:
+    - python
+    - cython
+    - numpy
+    - scipy
+    - pmesh
+    - abopt
+    - runtests
+
+  run:
+    - python
+    - cython
+    - numpy
+    - scipy
+    - pmesh
+    - abopt
+    - runtests
+
+test:
+  # Python imports
+  imports:
+    - fastpm
+    - fastpm.tests
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  #home: The package home page
+  license: GPLv3
+  summary: 'FastPM in Python'
+  license_family: AGPL
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
