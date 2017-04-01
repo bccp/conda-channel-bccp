@@ -10,7 +10,7 @@ source:
   md5: {{ md5}}
 
 build:
-  number : 0
+  number : 1
   script : python setup.py install
 
 requirements:
@@ -21,7 +21,7 @@ requirements:
     - scipy
     - pmesh
     - abopt
-    - mpi4py_test
+    - runtests
 
   run:
     - python
@@ -30,7 +30,7 @@ requirements:
     - scipy
     - pmesh
     - abopt
-    - mpi4py_test
+    - runtests
 
 test:
   # Python imports
