@@ -24,7 +24,7 @@ requirements:
     - scipy
     - astropy
     - mpi4py
-    - mpi4py_test
+    - runtests
     - pmesh
     - kdcount
     - mpsort
