@@ -8,10 +8,10 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   md5: {{ md5 }}
-  
+
 build:
   number : 1
-  script : 
+  script :
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
       - python setup.py install
 
@@ -47,7 +47,7 @@ requirements:
 #    - nbodykit.io
 #    - nbodykit.source
 #    - nbodykit.source.mesh
-#    - nbodykit.source.particle
+#    - nbodykit.source.catalog
 #    - nbodykit.tests
 
 about:
