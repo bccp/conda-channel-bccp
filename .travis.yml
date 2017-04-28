@@ -58,8 +58,8 @@ install:
     # so we can grab compiled packages for dependencies
     - conda config --add channels astropy
 
-    # update conda again to prevent downgrading to conda-forge
-    - conda update --quiet conda
+    # conda build all is incompatible with anaconda-client 1.6.3
+    - conda install anaconda-client=1.6.2
 
     # To ease debugging, list installed packages
     - conda info -a
