@@ -58,6 +58,9 @@ install:
     # so we can grab compiled packages for dependencies
     - conda config --add channels astropy
 
+    # update conda again to prevent downgrading to conda-forge
+    - conda update --quiet conda
+
     # To ease debugging, list installed packages
     - conda info -a
 
