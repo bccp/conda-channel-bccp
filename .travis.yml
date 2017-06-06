@@ -20,7 +20,7 @@ env:
         # python 2.6 and 3.3 for some packages.
         - PYTHON_BUILD_RESTRICTIONS="2.7*|>=3.4"
 
-        - NUMPY_BUILD_RESTRICTION="numpy <1.12"
+        - NUMPY_BUILD_RESTRICTION="numpy <1.13"
         # The value below needs to be set but will be ignored.
         - CONDA_NPY="1.11"
         - CONDA_VERSION=4.2*
