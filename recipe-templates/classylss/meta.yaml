@@ -11,13 +11,14 @@ source:
 
 build:
   number : 0
-  script : 
+  script :
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
       - python setup.py install --single-version-externally-managed --record rec.txt
 
 requirements:
   build:
     - python
+    - cython
     - setuptools
     - numpy
     - astropy
@@ -25,6 +26,7 @@ requirements:
 
   run:
     - python
+    - cython
     - numpy
     - astropy
     - libgcc
