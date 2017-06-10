@@ -20,9 +20,11 @@ requirements:
     - numpy
     - astropy
     - gcc
+    - cython
 
   run:
     - python
+    - cython
     - numpy
     - astropy
     - libgcc
