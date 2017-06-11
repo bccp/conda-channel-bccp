@@ -38,14 +38,6 @@ test:
   # Python imports
   imports:
     - nbodykit
-    - nbodykit.algorithms
-    - nbodykit.base
-    - nbodykit.cosmology
-    - nbodykit.extern
-    - nbodykit.io
-    - nbodykit.source
-    - nbodykit.source.mesh
-    - nbodykit.source.catalog
 
 about:
   home: http://github.com/bccp/nbodykit
