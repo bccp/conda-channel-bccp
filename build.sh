@@ -60,3 +60,6 @@ build ()
 build 3.6
 build 3.5
 build 2.7
+
+setfacl -R -m m::rwx /usr/common/contrib/bccp/anaconda3
+
