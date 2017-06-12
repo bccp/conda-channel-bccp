@@ -16,12 +16,12 @@ build:
 requirements:
   build:
     - python
-    - numpy
+    - numpy x.x
     - cython
 
   run:
     - python
-    - numpy
+    - numpy x.x
     - cython
 
 test:

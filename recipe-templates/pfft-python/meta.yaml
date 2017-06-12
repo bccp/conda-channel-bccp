@@ -16,14 +16,14 @@ requirements:
   build:
     - python
     - cython
-    - numpy
+    - numpy x.x
     - mpi4py
     - gcc
 
   run:
     - python
     - cython
-    - numpy
+    - numpy x.x
     - mpi4py
 
 test:

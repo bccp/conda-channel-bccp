@@ -15,13 +15,13 @@ build:
 requirements:
   build:
     - python
-    - numpy 
+    - numpy x.x
     - cython
     - mpi4py
 
   run:
     - python
-    - numpy
+    - numpy x.x
     - mpi4py
 
 test:

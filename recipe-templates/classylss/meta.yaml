@@ -17,7 +17,7 @@ requirements:
   build:
     - python
     - setuptools
-    - numpy
+    - numpy x.x
     - astropy
     - gcc
     - cython
@@ -25,7 +25,7 @@ requirements:
   run:
     - python
     - cython
-    - numpy
+    - numpy x.x
     - astropy
     - libgcc
 

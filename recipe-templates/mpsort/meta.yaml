@@ -17,12 +17,12 @@ requirements:
   build:
     - python
     - cython
-    - numpy
+    - numpy x.x
     - mpi4py
 
   run:
     - python
-    - numpy
+    - numpy x.x
     - mpi4py
 
 test:
