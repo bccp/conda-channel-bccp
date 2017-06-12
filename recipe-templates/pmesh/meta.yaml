@@ -19,7 +19,7 @@ requirements:
   build:
     - python
     - cython
-    - numpy
+    - numpy x.x
     - mpi4py
     - mpsort
     - pfft-python
@@ -27,7 +27,7 @@ requirements:
   run:
     - python
     - cython
-    - numpy
+    - numpy x.x
     - mpi4py
     - mpsort
     - pfft-python
