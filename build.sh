@@ -37,7 +37,9 @@ python extrude_recipes requirements.yml
 build_mpi4py ()
 {
     local PYTHON=$1
+    pushd recipes
     conda build --python $PYTHON mpi4py
+    popd
 }
 
 build ()
@@ -52,11 +54,13 @@ build ()
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
         fi
     done
+    popd
 }
 
 install ()
 {
     local PYTHON=$1
+    pushd recipes
 
     # install packages into this python version's environment
     source activate $PYTHON
