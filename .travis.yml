@@ -20,7 +20,7 @@ env:
         # python 2.6 and 3.3 for some packages.
         - PYTHON_BUILD_RESTRICTIONS="2.7*|>=3.4"
 
-        - NUMPY_BUILD_RESTRICTION="numpy>=1.10"
+        - NUMPY_BUILD_RESTRICTION="numpy >=1.11*"
         # The value below needs to be set but will be ignored.
         - CONDA_NPY="1.11"
         - CONDA_VERSION=4.2*
@@ -77,4 +77,4 @@ script:
     # Get ready to build.
     - python extrude_recipes requirements.yml
     # Packages are uploaded as they are built.
-    - if [[ -d recipes ]]; then conda build-all recipes --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  $INSPECT $UPLOAD; fi
+    - if [[ -d recipes ]]; then conda build-all recipes --matrix-max-n-minor-versions 3 --matrix-conditions "python $PYTHON_BUILD_RESTRICTIONS" "$NUMPY_BUILD_RESTRICTION"  $INSPECT $UPLOAD; fi
