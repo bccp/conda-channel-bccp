@@ -34,11 +34,17 @@ conda build purge
 # make the recipes
 python extrude_recipes requirements.yml
 
+build_mpi4py ()
+{
+    local PYTHON=$1
+    conda build --python $PYTHON mpi4py
+}
+
 build ()
 {
     local PYTHON=$1
     local NUMPY=$2
-    
+
     pushd recipes
     conda build --python $PYTHON mpi4py
     for f in *; do
@@ -46,20 +52,30 @@ build ()
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
         fi
     done
-    
+}
+
+install ()
+{
+    local PYTHON=$1
+
     # install packages into this python version's environment
     source activate $PYTHON
     conda install $INSTALL_FLAG --use-local --yes *
     conda update --use-local --yes *
+    conda update --all --use-local --yes
     popd
 
     # and tar the install
     bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX
-    
+
 }
 
-#build 3.5 1.13
-#build 3.5 1.12
+# build fresh mpi4py first
+build_mpi4py 2.7
+build_mpi4py 3.6
+build_mpi4py 3.5
+
+# build packages for each python, numpy version pair
 build 2.7 1.11
 build 3.6 1.11
 build 3.5 1.11
@@ -70,9 +86,14 @@ build 2.7 1.13
 build 3.6 1.13
 build 3.5 1.13
 
+# install
+install 2.7
+install 3.6
+install 3.5
+
+# set the permissions
 setfacl -R -m m::rwx \
            -m u:yfeng1:rwX \
            -m u:nhand:rwX \
     /usr/common/contrib/bccp/anaconda3 \
     /usr/common/contrib/bccp/conda-channel-bccp
-
