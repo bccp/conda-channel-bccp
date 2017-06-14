@@ -37,12 +37,13 @@ python extrude_recipes requirements.yml
 build ()
 {
     local PYTHON=$1
+    local NUMPY=$2
     
     pushd recipes
     conda build --python $PYTHON mpi4py
     for f in *; do
         if [ $f != "mpi4py" ]; then
-            conda build --python $PYTHON $BUILD_FLAG $f
+            conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
         fi
     done
     
@@ -57,12 +58,21 @@ build ()
     
 }
 
-build 3.6
-build 3.5
-build 2.7
+#build 3.5 1.13
+#build 3.5 1.12
+build 2.7 1.11
+build 3.6 1.11
+build 3.5 1.11
+build 2.7 1.12
+build 3.6 1.12
+build 3.5 1.12
+build 2.7 1.13
+build 3.6 1.13
+build 3.5 1.13
 
 setfacl -R -m m::rwx \
            -m u:yfeng1:rwX \
            -m u:nhand:rwX \
-    /usr/common/contrib/bccp/anaconda3
+    /usr/common/contrib/bccp/anaconda3 \
+    /usr/common/contrib/bccp/conda-channel-bccp
 
