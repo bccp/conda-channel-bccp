@@ -20,12 +20,12 @@ requirements:
     - python
     - numpy x.x
     - cython
-    - mpi4py
+    - mpi4py-cray
 
   run:
     - python
     - numpy x.x
-    - mpi4py
+    - mpi4py-cray
 
 test:
   # Python imports

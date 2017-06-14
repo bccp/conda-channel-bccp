@@ -20,7 +20,7 @@ requirements:
     - python
     - cython
     - numpy x.x
-    - mpi4py
+    - mpi4py-cray
     - mpsort
     - pfft-python
 
@@ -28,7 +28,7 @@ requirements:
     - python
     - cython
     - numpy x.x
-    - mpi4py
+    - mpi4py-cray
     - mpsort
     - pfft-python
 

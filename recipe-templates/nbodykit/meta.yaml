@@ -24,7 +24,7 @@ requirements:
     - numpy
     - scipy
     - astropy
-    - mpi4py
+    - mpi4py-cray
     - runtests
     - pmesh
     - kdcount

@@ -1,11 +1,7 @@
 {% set name = "mpi4py" %}
 
 package:
-  name: mpi4py
-  version: "2.0.0"
-
-package:
-  name: {{ name|lower }}
+  name: {{ name|lower }}-cray
   version: "{{version}}"
 
 source:

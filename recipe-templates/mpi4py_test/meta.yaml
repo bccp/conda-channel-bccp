@@ -20,12 +20,12 @@ requirements:
   build:
     - python
     - numpy
-    - mpi4py
+    - mpi4py-cray
 
   run:
     - python
     - numpy
-    - mpi4py
+    - mpi4py-cray
 
 # tests fail on NERSC login nodes due to MPI import
 # test:
