@@ -48,7 +48,6 @@ build ()
     local NUMPY=$2
 
     pushd recipes
-    conda build --python $PYTHON mpi4py
     for f in *; do
         if [ $f != "mpi4py" ]; then
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
