@@ -26,6 +26,8 @@
 
 - name: abopt
 
+- name: fastpm
+
 - name: cachey
 
 - name: fitsio
