@@ -59,13 +59,13 @@ build ()
 install ()
 {
     local PYTHON=$1
-    pushd recipes
+    pushd recipe-templates
 
     # install packages into this python version's environment
     source activate $PYTHON
     conda install $INSTALL_FLAG --use-local --yes *
-    conda update --use-local --yes *
-    conda update --all --use-local --yes
+    conda update --yes --use-local *
+    conda update --yes --use-local --all
     popd
 
     # and tar the install
