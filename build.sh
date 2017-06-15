@@ -64,7 +64,7 @@ install ()
     # install packages into this python version's environment
     source activate $PYTHON
     conda install $INSTALL_FLAG --use-local --yes *
-    conda update --yes --use-local *
+    conda update --yes --use-local -f *
     conda update --yes --use-local --all
     popd
 
