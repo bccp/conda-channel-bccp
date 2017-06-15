@@ -33,6 +33,7 @@ requirements:
     - cachey
     - h5py
     - halotools
+    - fitsio
 
 test:
   # Python imports
