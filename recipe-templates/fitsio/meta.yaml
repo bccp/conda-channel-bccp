@@ -17,10 +17,12 @@ requirements:
   build:
     - python
     - numpy x.x
+    - gcc
 
   run:
     - python
     - numpy x.x
+    - libgcc
 
 test:
   # Python imports
