@@ -24,6 +24,8 @@
 - name: nbodykit
   past_versions: [0.1.11]
 
+- name: abopt
+
 - name: cachey
 
 - name: fitsio
