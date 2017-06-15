@@ -17,7 +17,7 @@ if [ "$1" = "--clean" ]; then
 fi
 
 # cd to the conda-channel-bccp dir
-cd /usr/common/contrib/bccp/conda-channel-bccp
+#cd /usr/common/contrib/bccp/conda-channel-bccp
 
 # get the latest changes from github
 # git reset --hard
@@ -49,7 +49,8 @@ build ()
 
     pushd recipes
     for f in *; do
-        if [ $f != "mpi4py-cray" ]; then
+        echo Building for $f
+        if [ $f != mpi4py-cray* ]; then
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
         fi
     done
@@ -63,6 +64,7 @@ install ()
 
     # install packages into this python version's environment
     source activate $PYTHON
+    conda uninstall --yes mpich2
     conda install $INSTALL_FLAG --use-local --yes *
     conda update --yes --use-local -f *
     conda update --yes --use-local --all
