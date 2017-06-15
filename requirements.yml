@@ -21,3 +21,5 @@
 - name: cachey
 
 - name: fastpm
+
+- name: fitsio
