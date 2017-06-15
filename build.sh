@@ -38,7 +38,7 @@ build_mpi4py ()
 {
     local PYTHON=$1
     pushd recipes
-    conda build --python $PYTHON mpi4py
+    conda build --python $PYTHON mpi4py-cray
     popd
 }
 
@@ -49,7 +49,7 @@ build ()
 
     pushd recipes
     for f in *; do
-        if [ $f != "mpi4py" ]; then
+        if [ $f != "mpi4py-cray" ]; then
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
         fi
     done
