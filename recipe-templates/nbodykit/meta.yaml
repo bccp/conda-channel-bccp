@@ -35,6 +35,7 @@ requirements:
     - cachey
     - h5py
     - halotools
+    - fitsio
 
 # fail on NERSC login nodes due to MPI import
 #test:
