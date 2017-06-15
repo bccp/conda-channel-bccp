@@ -20,3 +20,5 @@
 - name: nbodykit
 
 - name: cachey
+
+- name: fitsio
