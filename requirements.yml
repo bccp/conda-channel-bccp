@@ -1,3 +1,7 @@
+# Build specific versions by specifying 'version'
+# If 'version' not specified, latest release from pypi is built
+# To build past versions in addition, specify a 'past_versions' list
+
 - name: mpi4py-cray
   pypi_name: mpi4py
 
@@ -18,6 +22,7 @@
 - name: pmesh
 
 - name: nbodykit
+  past_versions: [0.1.11]
 
 - name: cachey
 
