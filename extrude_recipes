@@ -27,7 +27,7 @@ def get_pypi_info(name):
     client = xmlrpclib.ServerProxy(PYPI_XMLRPC)
     pypi_stable = client.package_releases(name)
     try:
-        return pypi_stable[0]
+        return pypi_stable
     except IndexError:
         return None
 
@@ -302,9 +302,23 @@ def get_package_versions(requirements_path):
         excluded_platforms = p.get('excluded_platforms', [])
         include_extras = p.get('include_extras', False)
 
+        # find the versions
+        version = p.get('version', None)
+        if version is None:
+            releases = get_pypi_info(pypi_name)
+            versions = [releases[0]] # build the latest from pypi
+            past_versions = p.get('past_versions', [])
+            for past_ver in past_versions:
+                if past_ver not in versions:
+                    versions.append(past_ver)
+        else:
+            versions = [version]
+
+
         # TODO: Get supported platforms from requirements,
         #       not from recipe template.
-        packages.append(Package(p['name'],
+        for version in versions:
+            packages.append(Package(p['name'],
                                 pypi_name=pypi_name,
                                 version=version,
                                 setup_options=helpers,
@@ -315,7 +329,6 @@ def get_package_versions(requirements_path):
                                 include_extras=include_extras))
 
     return packages
-
 
 def render_template(package, template, folder=TEMPLATE_FOLDER):
     """
@@ -396,7 +409,7 @@ def main(args=None):
     # Write recipes from templates.
     for p in packages:
         print('Writing recipe for {}-{}.'.format(p.conda_name, p.version))
-        recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name)
+        recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name+'-'+p.version)
         template_path = os.path.join(template_dir, p.conda_name)
         try:
             os.mkdir(recipe_path)
