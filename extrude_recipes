@@ -50,13 +50,15 @@ class Package(object):
     # The class should only need one client for communicating with PyPI
     client = xmlrpclib.ServerProxy(PYPI_XMLRPC)
 
-    def __init__(self, pypi_name, version=None,
+    def __init__(self, conda_name, version=None,
+                 pypi_name=None,
                  numpy_compiled_extensions=False,
                  setup_options=None,
                  python_requirements=None,
                  numpy_requirements=None,
                  excluded_platforms=None,
                  include_extras=False):
+        self._conda_name = conda_name
         self._pypi_name = pypi_name
         if version is not None:
             self.required_version = version
@@ -69,6 +71,7 @@ class Package(object):
         self._build_platforms = None
         self._extra_meta = None
         self._build_pythons = None
+        self._pypi_name = pypi_name
         self._numpy_compiled_extensions = numpy_compiled_extensions
         self._setup_options = setup_options
         self._python_requirements = python_requirements
@@ -79,17 +82,17 @@ class Package(object):
     @property
     def pypi_name(self):
         """
-        Name of the package on PyPI.
+        Name of the package on PyPI; may differ from conda_name
         """
         return self._pypi_name
 
     @property
     def conda_name(self):
         """
-        Name of the package on binstar (conda), which requires lowercase
-        names.
+        Name of the package for conda-bld, which requires lowercase
+        names. This is set by the constructor.
         """
-        return self.pypi_name.lower()
+        return self._conda_name.lower()
 
     @property
     def required_version(self):
@@ -290,6 +293,7 @@ def get_package_versions(requirements_path):
 
     packages = []
     for p in package_list:
+        pypi_name = p.get('pypi_name', p['name'])
         helpers = p.get('setup_options', None)
         numpy_extensions = p.get('numpy_compiled_extensions', False)
         python_requirements = p.get('python', [])
@@ -301,6 +305,7 @@ def get_package_versions(requirements_path):
         # TODO: Get supported platforms from requirements,
         #       not from recipe template.
         packages.append(Package(p['name'],
+                                pypi_name=pypi_name,
                                 version=version,
                                 setup_options=helpers,
                                 numpy_compiled_extensions=numpy_extensions,
