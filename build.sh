@@ -6,6 +6,21 @@ if [ $# -eq 1 ] && [ "$1" != "--clean" ]; then
     exit 1
 fi
 
+if [[ -n $BASH_VERSION ]]; then
+    _SCRIPT_LOCATION=${BASH_SOURCE[0]}
+elif [[ -n $ZSH_VERSION ]]; then
+    _SCRIPT_LOCATION=${funcstack[1]}
+else
+    echo "Only bash and zsh are supported"
+    return 1
+fi
+
+_DIRNAME=`dirname ${_SCRIPT_LOCATION}`
+_DIRNAME=`readlink -f $_DIRNAME`
+
+# execute from the script's directory
+pushd _DIRNAME
+
 INSTALL_FLAG=""
 BUILD_FLAG="--skip-existing"
 
@@ -102,3 +117,5 @@ setfacl -R -m m::rwx \
            -m u:nhand:rwX \
     /usr/common/contrib/bccp/anaconda3 \
     /usr/common/contrib/bccp/conda-channel-bccp
+
+popd # return to start directory
