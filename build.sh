@@ -19,7 +19,7 @@ _DIRNAME=`dirname ${_SCRIPT_LOCATION}`
 _DIRNAME=`readlink -f $_DIRNAME`
 
 # execute from the script's directory
-pushd _DIRNAME
+pushd $_DIRNAME
 
 INSTALL_FLAG=""
 BUILD_FLAG="--skip-existing"
