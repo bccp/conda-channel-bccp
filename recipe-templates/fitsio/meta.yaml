@@ -10,12 +10,13 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 0
+  number : 1
 
 requirements:
   build:
     - python
     - numpy x.x
+    - bzip2
 
   run:
     - python

@@ -1,6 +1,10 @@
 #!/bin/bash
 
-export CC=clang
+if [ `uname` == Darwin ]; then
+    export LIBS="-Wl,-rpath,$CONDA_PREFIX/lib"
+    export CC=clang
+fi
+export LDFLAGS="-
 $PYTHON setup.py install
 
 # Add more build steps here, if they are necessary.
