@@ -1,0 +1,44 @@
+{% set name = "Corrfunc" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+build:
+  number : 0
+  script :
+    - make install
+    - python setup.py install
+
+requirements:
+  build:
+    - python
+    - numpy x.x
+    - gsl
+    - gcc
+
+  run:
+    - python
+    - numpy x.x
+    - gsl
+    - libgcc
+
+test:
+  # Python imports
+  imports:
+    - Corrfunc
+    - Corrfunc.tests
+
+about:
+  #home: The package home page
+  license: MIT
+  summary: 'Blazing fast correlation functions on the CPU'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
