@@ -19,6 +19,7 @@ requirements:
   build:
     - python
     - numpy x.x
+    - future
     - gsl
     - gcc
 
