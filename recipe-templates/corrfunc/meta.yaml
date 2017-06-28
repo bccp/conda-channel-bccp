@@ -12,8 +12,7 @@ source:
 build:
   number : 0
   script :
-    - export CC=gcc
-    - make install
+    - make install CC=gcc
     - python setup.py install
 
 requirements:
