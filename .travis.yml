@@ -49,7 +49,7 @@ install:
     - conda install ruamel_yaml
 
     # latest conda build
-    - conda install conda-build
+    - conda install "conda-build<3.0"
 
     # Install conda-build-all
     - conda install "conda-build-all>=1.0.4"
