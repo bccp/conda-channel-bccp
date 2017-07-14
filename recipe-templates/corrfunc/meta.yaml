@@ -1,0 +1,44 @@
+{% set name = "Corrfunc" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/nickhand/Corrfunc.git
+  git_tag: master
+
+build:
+  number : 0
+  script :
+    - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
+    - make install
+    - python setup.py install
+
+requirements:
+  build:
+    - python
+    - numpy x.x
+    - future
+    - gsl
+
+  run:
+    - python
+    - numpy x.x
+    - gsl
+    - future
+
+test:
+  # Python imports
+  imports:
+    - Corrfunc
+    - Corrfunc.tests
+
+about:
+  #home: The package home page
+  license: MIT
+  summary: 'Blazing fast correlation functions on the CPU'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
