@@ -23,7 +23,7 @@ env:
         - NUMPY_BUILD_RESTRICTION="numpy >=1.11*"
         # The value below needs to be set but will be ignored.
         - CONDA_NPY="1.11"
-        - CONDA_VERSION=4.3*
+        - CONDA_VERSION=4.2*
 
 # Matrix is fully specified (for now) by os versions
 
@@ -35,10 +35,7 @@ install:
     - export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
     - conda config --set always_yes true
 
-    # pin conda to version 4.3.22 to avoid conda-build-all issues
-    - conda install --quiet conda=4.3.22
-    - PIN_FILE_CONDA=${CONDA_INSTALL_LOCN}/conda-meta/pinned
-    - echo "conda ==${CONDA_VERSION}" >> $PIN_FILE_CONDA
+    - conda install --quiet conda
 
     # set the ordering of additional channels
     - conda config --prepend channels defaults
@@ -47,14 +44,14 @@ install:
     - conda config --append channels conda-forge # for conda-build-all (will be moved to defaults soon)
 
     # Install a couple of dependencies we need for sure.
-    - conda install --quiet --yes astropy anaconda-client jinja2 cython pycrypto
+    - conda install --quiet --yes astropy anaconda-client=1.6.2 jinja2 cython pycrypto
     - conda install ruamel_yaml
 
     # latest conda build
-    - conda install "conda-build<3.0"
+    - conda install conda-build=2
 
     # Install conda-build-all
-    - conda install "conda-build-all>=1.0.4"
+    - conda install -c conda-forge conda-build-all
 
     # To ease debugging, list installed packages
     - conda info -a
