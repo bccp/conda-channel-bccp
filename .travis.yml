@@ -38,7 +38,7 @@ install:
     # pin conda to version 4.3.22 to avoid conda-build-all issues
     - conda install --quiet conda=4.3.22
     - PIN_FILE_CONDA=${CONDA_INSTALL_LOCN}/conda-meta/pinned
-    - echo "conda ${CONDA_VERSION}" > $PIN_FILE_CONDA
+    - echo "conda ==${CONDA_VERSION}" >> $PIN_FILE_CONDA
 
     # set the ordering of additional channels
     - conda config --prepend channels defaults
