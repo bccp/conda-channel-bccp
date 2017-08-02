@@ -6,7 +6,7 @@ import os
 import re
 
 import requests
-
+from pkg_resources import parse_version
 import ruamel_yaml as yaml
 
 from conda import config
@@ -24,12 +24,8 @@ ALL_PLATFORMS = ['osx-64', 'linux-64', 'linux-32', 'win-32', 'win-64']
 CONDA_FORGE_RECIPE_BASE = 'https://raw.githubusercontent.com/conda-forge/{}-feedstock/master/recipe/meta.yaml'
 
 def get_pypi_info(name):
-    client = xmlrpclib.ServerProxy(PYPI_XMLRPC)
-    pypi_stable = client.package_releases(name)
-    try:
-        return pypi_stable
-    except IndexError:
-        return None
+    url = "https://pypi.python.org/pypi/{}/json".format(name)
+    return sorted(requests.get(url).json()["releases"], key=parse_version, reverse=True)
 
 
 class Package(object):
