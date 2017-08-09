@@ -1,0 +1,21 @@
+Setting up Cron Jobs on NERSC
+=============================
+
+The following steps should be followed to set up nightly cron job builds of all
+conda packages in this repository on NERSC:
+
+
+1. Log on to NERSC as the ``bccpuser`` user
+
+2. SSH on to the ``01`` login node via ``ssh edison01`` or ``ssh cori01``. This
+   ensures that the cron job is always on the same login node.
+
+3. Clear any previous cron jobs with ``crontab -r``.
+
+4. Add the cron job for the nightly builds using
+
+   .. code-block:: bash
+
+      $ bash nightly-build.cron
+
+5. Check to make sure that the job was added using ``crontab -l``.
