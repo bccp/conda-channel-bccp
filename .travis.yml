@@ -37,7 +37,7 @@ install:
 
     # pin conda verson to 4.3.22
     - conda config --set auto_update_conda False
-    - echo "conda ==4.3.22" >> $CONDA_PREFIX/conda-meta/pinned
+    - echo "conda ==4.3.22" >> ${CONDA_INSTALL_LOCN}/conda-meta/pinned
 
     - conda install --quiet conda
 
