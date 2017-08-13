@@ -50,7 +50,7 @@ build_mpi4py ()
 {
     local PYTHON=$1
     pushd recipes
-    conda build --python $PYTHON mpi4py-cray
+    conda build --python $PYTHON mpi4py-cray*
     popd
 }
 
@@ -109,10 +109,10 @@ install 3.6
 install 3.5
 
 # set the permissions
-setfacl -R -m m::rwx \
-           -m u:yfeng1:rwX \
-           -m u:nhand:rwX \
-    /usr/common/contrib/bccp/anaconda3 \
-    /usr/common/contrib/bccp/conda-channel-bccp
+# setfacl -R -m m::rwx \
+#            -m u:yfeng1:rwX \
+#            -m u:nhand:rwX \
+#     /usr/common/contrib/bccp/anaconda3 \
+#     /usr/common/contrib/bccp/conda-channel-bccp
 
 popd # return to start directory
