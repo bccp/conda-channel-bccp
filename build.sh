@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # only one argument allowed
-if [ $# -eq 1 ] && [ "$1" != "--clean" ]; then
-    echo "usage: build.sh [--clean]"
+if [ $# -eq 0 ] || [ $# -gt 2 ] || [ $# -eq 2 ] && [ "$2" != "--clean" ]; then
+    echo "usage: build.sh PYTHON [--clean]"
     exit 1
 fi
 
@@ -12,8 +12,12 @@ elif [[ -n $ZSH_VERSION ]]; then
     _SCRIPT_LOCATION=${funcstack[1]}
 else
     echo "Only bash and zsh are supported"
-    return 1
+    exit 1
 fi
+
+# the PYTHON version to build
+PYTHON=$1
+shift
 
 _DIRNAME=`dirname ${_SCRIPT_LOCATION}`
 _DIRNAME=`readlink -f $_DIRNAME`
@@ -31,11 +35,6 @@ if [ "$1" = "--clean" ]; then
     shift
 fi
 
-# get the latest changes from github
-# git reset --hard
-# git checkout nersc
-# git pull origin nersc
-
 # get the bundle-anaconda command
 source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 
@@ -44,13 +43,14 @@ source /usr/common/contrib/bccp/anaconda3/bin/activate root
 conda build purge
 
 # make the recipes
-python extrude_recipes requirements.yml
+python extrude_recipes requirements.yml || { echo "extrude_recipes failed"; exit 1; }
 
 build_mpi4py ()
 {
     local PYTHON=$1
     pushd recipes
-    conda build --python $PYTHON mpi4py-cray*
+    conda build --python $PYTHON mpi4py-cray* ||
+    { echo "conda build of mpi4py-cray failed"; exit 1; }
     popd
 }
 
@@ -63,7 +63,8 @@ build ()
     for f in *; do
         echo Building for $f
         if [ $f != mpi4py-cray* ]; then
-            conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f
+            conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f ||
+            { echo "conda build of $f failed"; exit 1; }
         fi
     done
     popd
@@ -77,42 +78,26 @@ install ()
     # install packages into this python version's environment
     source activate $PYTHON
     conda uninstall --yes mpich2
-    conda install $INSTALL_FLAG --use-local --yes *
-    conda update --yes --use-local -f *
-    conda update --yes --use-local --all
+    conda install $INSTALL_FLAG --use-local --yes * ||
+    { echo "conda install of packages failed"; exit 1; }
+    conda update --yes --use-local -f * || { echo "forced conda update failed"; exit 1; }
+    conda update --yes --use-local --all || { echo "conda update all failed"; exit 1; }
     popd
 
     # and tar the install
-    bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX
-
+    bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX ||
+    { echo "bundle-anaconda failed"; exit 1; }
 }
 
 # build fresh mpi4py first
-build_mpi4py 2.7
-build_mpi4py 3.6
-build_mpi4py 3.5
+build_mpi4py $PYTHON
 
-# build packages for each python, numpy version pair
-build 2.7 1.11
-build 3.6 1.11
-build 3.5 1.11
-build 2.7 1.12
-build 3.6 1.12
-build 3.5 1.12
-build 2.7 1.13
-build 3.6 1.13
-build 3.5 1.13
+# build packages for all numpy versions
+for NUMPY_VERSION in "1.11" "1.12" "1.13"; do
+    build $PYTHON $NUMPY_VERSION
+done
 
 # install
-install 2.7
-install 3.6
-install 3.5
-
-# set the permissions
-# setfacl -R -m m::rwx \
-#            -m u:yfeng1:rwX \
-#            -m u:nhand:rwX \
-#     /usr/common/contrib/bccp/anaconda3 \
-#     /usr/common/contrib/bccp/conda-channel-bccp
+install $PYTHON
 
 popd # return to start directory
