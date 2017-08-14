@@ -1,4 +1,4 @@
-USER=yfeng1
+USER=bccpuser
 
 set +x
 set +e
