@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # full path of the nightly build script
-script_path=$(readlink -f build.sh)
+#script_path=$(readlink -f build.sh)
+script_path=build.sh
 
 # log directory
 log_dir=/usr/common/contrib/bccp/build-logs
@@ -11,7 +12,7 @@ mailto="MAILTO=\"\""
 (echo "$mailto"; ) | crontab -
 
 for PYTHON in "2.7" "3.5" "3.6"; do
-    filename=$log_dir/conda-build-$PYTHON-`date +\%Y-\%m-\%d`-cron.log
+    filename="${log_dir}/conda-build-${PYTHON}-\`date +\%Y-\%m-\%d\`-cron.log"
     job="00 00 * * * bash -l $script_path $PYTHON > $filename 2>&1"
     ( crontab -l; echo "${job}"; ) | crontab -
 done
