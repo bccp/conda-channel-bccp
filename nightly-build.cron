@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # full path of the nightly build script
-#script_path=$(readlink -f build.sh)
-script_path=build.sh
+script_path=$(readlink -f build.sh)
 
 # log directory
 log_dir=/usr/common/contrib/bccp/build-logs
