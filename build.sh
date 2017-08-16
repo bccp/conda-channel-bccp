@@ -67,7 +67,7 @@ build ()
     local NUMPY=$2
 
     pushd recipes
-    for f in "${BUILD_ORDER[@]}"; do
+    for f in $BUILD_ORDER; do
         echo Building for $f
         if [ $f != mpi4py-cray* ]; then
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f ||
