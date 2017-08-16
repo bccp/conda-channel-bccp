@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 import os
 from conda_build.metadata import MetaData
 
+import functools
 import sys
 import contextlib
 
@@ -34,7 +35,7 @@ def toposort(data):
     for k, v in data.items():
         v.discard(k)
     # Find all items that don't depend on anything.
-    extra_items_in_deps = reduce(
+    extra_items_in_deps = functools.reduce(
         set.union, data.values(), set()) - set(data.keys())
     # Add empty dependences where needed
     data.update({item: set() for item in extra_items_in_deps})
