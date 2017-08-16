@@ -46,7 +46,11 @@ conda build purge
 python extrude_recipes requirements.yml || { echo "extrude_recipes failed"; exit 1; }
 
 # determine the build order (ordered by dependencies)
-BUILD_ORDER=$(python sort_recipes recipe/* || { echo "sort_recipes failed"; exit 1; })
+BUILD_ORDER=$(python sort_recipes recipes/*)
+if [ -z "$BUILD_ORDER" ]; then
+    echo "sort_recipes failed"
+    exit 1
+fi
 
 build_mpi4py ()
 {
