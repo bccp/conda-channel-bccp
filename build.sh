@@ -45,6 +45,9 @@ conda build purge
 # make the recipes
 python extrude_recipes requirements.yml || { echo "extrude_recipes failed"; exit 1; }
 
+# determine the build order (ordered by dependencies)
+BUILD_ORDER=$(python sort_recipes recipe/* || { echo "sort_recipes failed"; exit 1; })
+
 build_mpi4py ()
 {
     local PYTHON=$1
@@ -60,7 +63,7 @@ build ()
     local NUMPY=$2
 
     pushd recipes
-    for f in *; do
+    for f in "${BUILD_ORDER[@]}"; do
         echo Building for $f
         if [ $f != mpi4py-cray* ]; then
             conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f ||

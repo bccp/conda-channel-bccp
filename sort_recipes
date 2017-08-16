@@ -1,0 +1,135 @@
+from __future__ import (division, print_function, absolute_import)
+from argparse import ArgumentParser
+import os
+from conda_build.metadata import MetaData
+
+import sys
+import contextlib
+
+@contextlib.contextmanager
+def smart_open(filename=None):
+    if filename and filename != '-':
+        fh = open(filename, 'w')
+    else:
+        fh = sys.stdout
+
+    try:
+        yield fh
+    finally:
+        if fh is not sys.stdout:
+            fh.close()
+
+def toposort(data):
+    """
+    Topological sort.
+
+    The expected input is a dictionary whose keys are items, and whose
+    values are a set of the dependent items.
+
+    The output is a genenerator over the items in topological order.
+    """
+    # http://code.activestate.com/recipes/578272-topological-sort/
+
+    # Ignore self dependencies.
+    for k, v in data.items():
+        v.discard(k)
+    # Find all items that don't depend on anything.
+    extra_items_in_deps = reduce(
+        set.union, data.values(), set()) - set(data.keys())
+    # Add empty dependences where needed
+    data.update({item: set() for item in extra_items_in_deps})
+    while True:
+        ordered = set(item for item, dep in data.items() if not dep)
+        if not ordered:
+            break
+        for item in ordered:
+            yield item
+        data = {item: (dep - ordered) for item, dep in data.items()
+                if item not in ordered}
+    if data:
+        raise ValueError(
+            "Cyclic dependencies exist among these items"
+            ":\n%s" % '\n'.join(repr(x) for x in data.items()))
+
+def sort_recipes(recipe_paths):
+    """
+    Sort the recipes according to their build dependencies.
+
+    See: https://github.com/omnia-md/conda-recipes/blob/master/conda-build-all
+    """
+    name2m = {}
+    metadatas = []
+    for r in recipe_paths:
+        try:
+            if os.path.isdir(r):
+                # Skip if no meta.yaml
+                meta_yaml_filename = os.path.join(r, 'meta.yaml')
+                if not os.path.exists(meta_yaml_filename):
+                    print("Skipping '%s' because no meta.yaml file found..." % r)
+                    continue
+
+                try:
+                    m = MetaData(r)
+                except (RuntimeError, IOError):
+                    print('Failed to load %s' % r)
+                    raise
+                metadatas.append(m)
+                name2m[m.get_value('package/name')] = m
+        except SystemExit as e:
+            # Log the error
+            print("ERROR: Recipe '%s' has a fatal error that prevents processing" % r)
+            print(str(e))
+            # Keep going
+            pass
+
+    names = set(name2m.keys())
+
+    graph = {}
+    for m in metadatas:
+        all_requirements = set(m.get_value('requirements/build', []))
+        all_requirements.update(m.get_value('requirements/run', []))
+        all_requirements.update(m.get_value('test/requires', []))
+
+        our_requirements = set()
+        for r in all_requirements:
+            # remove any version specified in the requirements
+            # (e.g. numpy >= 1.6) or something -- we just want the "numpy"
+            if ' ' in r:
+                r = r.split()[0]
+            if r in names:
+                our_requirements.add(r)
+
+        graph[m.get_value('package/name')] = our_requirements
+
+    return [os.path.split(name2m[name].path)[-1] for name in toposort(graph)]
+
+def main(args=None):
+    """
+    Sort the input recipes by the dependencies, such that they can be built
+    in the determined order without dependency conflicts
+    """
+    if args is None:
+
+        desc = 'determine the correct build order of recipes, based on dependencies'
+        parser = ArgumentParser(description=desc)
+
+        h = 'the paths of the recipes to build'
+        parser.add_argument('recipes', nargs='+', type=str, help=h)
+
+        h = 'the name of the file to write the ordered recipe names to; '
+        h += 'stdout is used if not providedd'
+        parser.add_argument('-o', '--output', type=str, help=h)
+
+        args = parser.parse_args()
+
+        # sort recipes
+        recipes = sort_recipes(args.recipes)
+        if not len(recipes):
+            raise ValueError("no valid recipes found; input paths should contain meta.yaml files!")
+
+        with smart_open(args.output) as ff:
+            for recipe in recipes:
+                ff.write("%s\n" %recipe)
+
+if __name__ == '__main__':
+    main()
