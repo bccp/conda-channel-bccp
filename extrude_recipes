@@ -385,8 +385,11 @@ def main(args=None):
         parser.add_argument('--template-dir', default=TEMPLATE_FOLDER,
                             help="Path the folder of recipe templates, if "
                                  "any. Default: '{}'".format(TEMPLATE_FOLDER))
+        parser.add_argument('--recipe-dir', default=RECIPE_FOLDER,
+                            help="the path to write recipes too. Default: '%s'" %RECIPE_FOLDER)
         args = parser.parse_args()
         template_dir = args.template_dir
+        recipe_folder = args.recipe_dir
 
     packages = get_package_versions(args.requirements)
 
@@ -399,19 +402,19 @@ def main(args=None):
 
     # remove existing directory
     try:
-        shutil.rmtree(RECIPE_FOLDER)
+        shutil.rmtree(recipe_folder)
     except:
         pass
 
     try:
-        os.mkdir(RECIPE_FOLDER)
+        os.mkdir(recipe_folder)
     except OSError:
         pass
 
     # Write recipes from templates.
     for p in packages:
         print('Writing recipe for {}-{}.'.format(p.conda_name, p.version))
-        recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name+'-'+p.version)
+        recipe_path = os.path.join(recipe_folder, p.conda_name+'-'+p.version)
         template_path = os.path.join(template_dir, p.conda_name)
         try:
             os.mkdir(recipe_path)
