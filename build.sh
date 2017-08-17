@@ -42,11 +42,14 @@ source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 source /usr/common/contrib/bccp/anaconda3/bin/activate root
 conda build purge
 
+# directory where recipes will be written
+RECIPE_DIR=recipes-$PYTHON
+
 # make the recipes
-python extrude_recipes requirements.yml || { echo "extrude_recipes failed"; exit 1; }
+python extrude_recipes requirements.yml --recipe-dir $RECIPE_DIR || { echo "extrude_recipes failed"; exit 1; }
 
 # determine the build order (ordered by dependencies)
-BUILD_ORDER=$(python sort_recipes recipes/*)
+BUILD_ORDER=$(python sort_recipes $RECIPE_DIR/*)
 if [ -z "$BUILD_ORDER" ]; then
     echo "sort_recipes failed"
     exit 1
@@ -55,7 +58,7 @@ fi
 build_mpi4py ()
 {
     local PYTHON=$1
-    pushd recipes
+    pushd $RECIPE_DIR
     conda build --python $PYTHON mpi4py-cray* ||
     { echo "conda build of mpi4py-cray failed"; exit 1; }
     popd
@@ -66,7 +69,7 @@ build ()
     local PYTHON=$1
     local NUMPY=$2
 
-    pushd recipes
+    pushd $RECIPE_DIR
     for f in $BUILD_ORDER; do
         echo Building for $f
         if [ $f != mpi4py-cray* ]; then
