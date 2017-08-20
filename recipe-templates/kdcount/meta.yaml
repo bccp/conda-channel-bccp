@@ -18,12 +18,12 @@ build:
 requirements:
   build:
     - python
-    - numpy {{ numpy }}
+    - numpy {{ '{{ numpy }}' }}
     - cython
 
   run:
     - python
-    - numpy {{ numpy }}
+    - numpy {{ '{{ numpy }}' }}
     - cython
 
 test:

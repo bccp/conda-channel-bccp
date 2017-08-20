@@ -18,13 +18,13 @@ build:
 requirements:
   build:
     - python
-    - numpy {{ numpy }}
+    - numpy {{ '{{ numpy }}' }}
     - future
     - gsl
 
   run:
     - python
-    - numpy {{ numpy }}
+    - numpy {{ '{{ numpy }}' }}
     - gsl
     - future
 

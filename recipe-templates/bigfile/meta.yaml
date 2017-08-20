@@ -18,13 +18,13 @@ build:
 requirements:
   build:
     - python
-    - numpy {{ numpy }}
+    - numpy {{ '{{ numpy }}' }}
     - cython
     - mpi4py-cray
 
   run:
     - python
-    - numpy {{ numpy }}
+    - numpy {{ '{{ numpy }}' }}
     - mpi4py-cray
 
 test:
