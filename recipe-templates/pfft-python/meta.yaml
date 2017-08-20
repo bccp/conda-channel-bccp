@@ -23,7 +23,7 @@ requirements:
   run:
     - python
     - cython
-    - numpy {{ '{{ numpy }}' }}
+    - numpy 
     - mpi4py-cray
 
 # fails on NERSC login nodes due to MPI import

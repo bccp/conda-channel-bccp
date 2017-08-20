@@ -24,7 +24,7 @@ requirements:
 
   run:
     - python
-    - numpy {{ '{{ numpy }}' }}
+    - numpy
     - mpi4py-cray
 
 test:

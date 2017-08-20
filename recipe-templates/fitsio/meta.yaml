@@ -22,7 +22,7 @@ requirements:
 
   run:
     - python
-    - numpy {{ '{{ numpy }}' }}
+    - numpy 
 
 test:
   # Python imports

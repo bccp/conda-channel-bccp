@@ -28,7 +28,7 @@ requirements:
   run:
     - python
     - cython
-    - numpy {{ '{{ numpy }}' }}
+    - numpy 
     - astropy
     - libgcc
 

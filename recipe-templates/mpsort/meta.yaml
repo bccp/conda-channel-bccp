@@ -24,7 +24,7 @@ requirements:
 
   run:
     - python
-    - numpy {{ '{{ numpy }}' }}
+    - numpy 
     - mpi4py-cray
 
 # tests will fail on NERSC login nodes due to MPI import

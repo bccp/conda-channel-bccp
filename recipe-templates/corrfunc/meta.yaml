@@ -24,7 +24,7 @@ requirements:
 
   run:
     - python
-    - numpy {{ '{{ numpy }}' }}
+    - numpy 
     - gsl
     - future
 
