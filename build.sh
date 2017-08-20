@@ -40,7 +40,12 @@ source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 
 # activate our root anaconda install to start
 source /usr/common/contrib/bccp/anaconda3/bin/activate root
+
+# purge intermediate results
 conda build purge
+
+# keep conda and conda-build up to date
+conda update --yes conda conda-build
 
 # directory where recipes will be written
 RECIPE_DIR=recipes-$PYTHON
