@@ -67,14 +67,13 @@ build_mpi4py ()
 build ()
 {
     local PYTHON=$1
-    local NUMPY=$2
 
     pushd $RECIPE_DIR
     for f in $BUILD_ORDER; do
         echo Building for $f
         if [ $f != mpi4py-cray* ]; then
-            conda build --python $PYTHON --numpy $2 $BUILD_FLAG $f ||
-            { echo "conda build of $f failed"; exit 1; }
+            conda build --python $PYTHON $BUILD_FLAG $f ||
+            { echo "command 'conda build --python ${PYTHON} ${BUILD_FLAG} ${f}' failed"; exit 1; }
         fi
     done
     popd
@@ -102,10 +101,8 @@ install ()
 # build fresh mpi4py first
 build_mpi4py $PYTHON
 
-# build packages for all numpy versions
-for NUMPY_VERSION in "1.11" "1.12" "1.13"; do
-    build $PYTHON $NUMPY_VERSION
-done
+# build packages for specific python version
+build $PYTHON
 
 # install
 install $PYTHON

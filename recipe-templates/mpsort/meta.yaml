@@ -11,7 +11,7 @@ source:
 
 build:
   number : 1
-  script : 
+  script :
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
       - python setup.py install
 
@@ -19,12 +19,12 @@ requirements:
   build:
     - python
     - cython
-    - numpy x.x
+    - numpy {{ numpy }}
     - mpi4py-cray
 
   run:
     - python
-    - numpy x.x
+    - numpy {{ numpy }}
     - mpi4py-cray
 
 # tests will fail on NERSC login nodes due to MPI import

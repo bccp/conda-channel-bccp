@@ -21,14 +21,14 @@ requirements:
     - python
     - cython
     - setuptools
-    - numpy x.x
+    - numpy {{ numpy }}
     - astropy
     - gcc
 
   run:
     - python
     - cython
-    - numpy x.x
+    - numpy {{ numpy }}
     - astropy
     - libgcc
 

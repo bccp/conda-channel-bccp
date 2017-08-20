@@ -18,11 +18,11 @@ build:
 requirements:
   build:
     - python
-    - numpy x.x
+    - numpy {{ numpy }}
 
   run:
     - python
-    - numpy x.x
+    - numpy {{ numpy }}
 
 test:
   # Python imports

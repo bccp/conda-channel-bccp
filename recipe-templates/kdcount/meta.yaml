@@ -11,19 +11,19 @@ source:
 
 build:
   number : 0
-  script : 
+  script :
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
       - python setup.py install
 
 requirements:
   build:
     - python
-    - numpy x.x
+    - numpy {{ numpy }}
     - cython
 
   run:
     - python
-    - numpy x.x
+    - numpy {{ numpy }}
     - cython
 
 test:

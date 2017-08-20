@@ -16,17 +16,17 @@ requirements:
   build:
     - python
     - cython
-    - numpy x.x
+    - numpy {{ numpy }}
     - mpi4py-cray
     - gcc
 
   run:
     - python
     - cython
-    - numpy x.x
+    - numpy {{ numpy }}
     - mpi4py-cray
 
-# fails on NERSC login nodes due to MPI import 
+# fails on NERSC login nodes due to MPI import
 #test:
 #  imports:
 #    - pfft

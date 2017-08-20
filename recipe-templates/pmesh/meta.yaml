@@ -11,7 +11,7 @@ source:
 
 build:
   number : 0
-  script : 
+  script :
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
       - python setup.py install
 
@@ -19,7 +19,7 @@ requirements:
   build:
     - python
     - cython
-    - numpy x.x
+    - numpy {{ numpy }}
     - mpi4py-cray
     - mpsort
     - pfft-python
@@ -27,7 +27,7 @@ requirements:
   run:
     - python
     - cython
-    - numpy x.x
+    - numpy {{ numpy }}
     - mpi4py-cray
     - mpsort
     - pfft-python
