@@ -21,15 +21,14 @@ requirements:
     - python
     - cython
     - setuptools
+    - six # only needed to download class, if needed
     - numpy {{ '{{ numpy }}' }}
-    - astropy
     - gcc
 
   run:
     - python
     - cython
-    - numpy 
-    - astropy
+    - numpy
     - libgcc
 
 test:
