@@ -10,7 +10,7 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 0
+  number : 3
   script : python setup.py install
 
 requirements:
@@ -29,13 +29,9 @@ requirements:
     - mpsort
     - bigfile
     - pandas
-    - dask>=0.13
-    - cachey
+    - dask
     - h5py
     - halotools
-    - fitsio
-    - classylss>=0.2
-    - mcfit
 
 #test:
   # Python imports
