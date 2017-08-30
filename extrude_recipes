@@ -422,7 +422,20 @@ def main(args=None):
             pass
         templates = [d for d in os.listdir(template_path) if
                      not d.startswith('.')]
+
+        # render the meta data
+        meta_path = os.path.join(template_path, 'meta-%s.yaml' %p.version)
+        if not os.path.exists(meta_path):
+            meta_path = os.path.join(template_path, 'meta.yaml')
+        if not os.path.exists(meta_path):
+            raise ValueError("no meta.yaml found for package '%s'" %p.conda_name)
+
+        rendered = render_template(p, os.path.split(meta_path)[-1], folder=template_dir)
+        with open(os.path.join(recipe_path, 'meta.yaml'), 'wt') as f:
+            f.write(rendered)
+
         for template in templates:
+            if 'meta' in template: continue
             rendered = render_template(p, template, folder=template_dir)
             with open(os.path.join(recipe_path, template), 'wt') as f:
                 f.write(rendered)
