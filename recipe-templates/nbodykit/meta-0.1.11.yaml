@@ -29,7 +29,7 @@ requirements:
     - mpsort
     - bigfile
     - pandas
-    - dask
+    - dask >=0.13
     - h5py
     - halotools
 
