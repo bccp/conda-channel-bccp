@@ -10,7 +10,7 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 0
+  number : 1
   script : python setup.py install
 
 requirements:
@@ -36,6 +36,9 @@ requirements:
     - fitsio
     - classylss >=0.2
     - mcfit
+    - sympy
+    - numexpr
+    - Corrfunc
 
 test:
   # Python imports
