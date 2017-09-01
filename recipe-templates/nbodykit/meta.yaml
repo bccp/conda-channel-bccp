@@ -38,7 +38,7 @@ requirements:
     - mcfit
     - sympy
     - numexpr
-    - Corrfunc
+    - corrfunc
 
 #test:
   # Python imports
