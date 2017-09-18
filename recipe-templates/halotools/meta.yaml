@@ -13,20 +13,20 @@ build:
   number : 0
   script :
       - source /usr/common/contrib/bccp/conda-channel-bccp/nersc_profile.sh
-      - python setup.py install --offline
+      - python setup.py install --offline --single-version-externally-managed --record=record.txt
 
 requirements:
   build:
     - python
     - setuptools
-    - astropy >=1
-    - scipy
-    - beautifulsoup4
-    - requests
+    - numpy {{ '{{ numpy }}' }}
+    - toolchain
+    - cython
 
   run:
     - python
     - astropy >=1
+    - numpy
     - scipy
     - beautifulsoup4
     - requests
