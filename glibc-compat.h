@@ -2,14 +2,29 @@
 #define __GLIBC_COMPAT_SYMBOL_H__ 1
 
 /**
- * add other architecures below
+ * This file provides compatibility to GLIBC 2.12.
+ * included it on all C source code with -include glibc-compat.h
+ * It currently does not work with C++; but fixing it should be
+ * trivial
  */
+
 #define GLIBC_COMPAT_SYMBOL(FFF, GGG, VER) \
     __asm__(".symver " #FFF "," #GGG "@GLIBC_" # VER);
 
-#include <math.h>
+/**
+ * Pin down the version of libc functions
+ * */
 
 GLIBC_COMPAT_SYMBOL(memcpy, memcpy, 2.2.5)
+
+/**
+ *
+ * Pin down the version of math functions.
+ *
+ * */
+
+
+#include <math.h>
 
 #define CREATE_COMPAT_FUNC1(name, oldname, version) \
 extern double oldname ## _compat (double); \
