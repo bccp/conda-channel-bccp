@@ -9,5 +9,5 @@ fi
 $PYTHON setup.py install
 
 if [[ $OSTYPE != darwin* ]]; then
-    bash check-glibc.sh $SP_DIR/$PKG_NAME/*.so || exit 1
+    bash check-glibc.sh $SP_DIR/$PKG_NAME || exit 1
 fi
