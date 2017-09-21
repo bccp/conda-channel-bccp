@@ -6,6 +6,9 @@ else
      export CFLAGS="-include $PWD/glibc-compat.h"
 fi
 
+cp $RECIPE_DIR/../../glibc-compat.h .
+cp $RECIPE_DIR/../../check-glibc.sh .
+
 $PYTHON setup.py install
 
 if [[ $OSTYPE != darwin* ]]; then

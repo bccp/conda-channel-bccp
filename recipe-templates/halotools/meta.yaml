@@ -5,14 +5,14 @@ package:
   version: "{{version}}"
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  md5: {{ md5 }}
+  - fn: {{ name }}-{{ version }}.tar.gz
+    url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    md5: {{ md5 }}
+  - path: ../../glibc-compat.h
+  - path: ../../check-glibc.sh
 
 build:
-  number : 0
-  script :
-      - python setup.py install --offline
+  number : 1
 
 requirements:
   build:

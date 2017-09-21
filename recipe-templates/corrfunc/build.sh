@@ -8,6 +8,9 @@ else
     sed --in-place 's;CFLAGS:=;CFLAGS?=;' common.mk
 fi
 
+cp $RECIPE_DIR/../../glibc-compat.h .
+cp $RECIPE_DIR/../../check-glibc.sh .
+
 make install
 $PYTHON setup.py install --single-version-externally-managed --record rec.txt
 

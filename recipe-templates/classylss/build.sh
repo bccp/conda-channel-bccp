@@ -12,6 +12,9 @@ fi
 # this uses CFLAGS for CCFLAG
 cp $RECIPE_DIR/class.cfg depends/class.cfg
 
+cp $RECIPE_DIR/../../glibc-compat.h .
+cp $RECIPE_DIR/../../check-glibc.sh .
+
 $PYTHON setup.py install --single-version-externally-managed --record rec.txt
 
 if [[ $OSTYPE != darwin* ]]; then
