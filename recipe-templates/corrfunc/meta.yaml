@@ -9,10 +9,7 @@ source:
   git_tag: master
 
 build:
-  number : 0
-  script :
-    - make install
-    - python setup.py install
+  number : 1
 
 requirements:
   build:

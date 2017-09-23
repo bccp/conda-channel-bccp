@@ -10,8 +10,7 @@ source:
   md5: {{ md5}}
 
 build:
-  number : 1
-  script : python setup.py install
+  number : 2
 
 requirements:
   build:
