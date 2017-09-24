@@ -19,6 +19,7 @@ requirements:
     - astropy >=1
     - scipy
     - beautifulsoup4
+    - astropy-helpers
     - requests
 
   run:
