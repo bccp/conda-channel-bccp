@@ -23,24 +23,50 @@ GLIBC_COMPAT_SYMBOL(memcpy, memcpy, 2.2.5)
  *
  * */
 
-
+#ifdef __cplusplus
+#include <cmath>
+#else
 #include <math.h>
+#endif
 
-#define CREATE_COMPAT_FUNC1(name, oldname, version) \
-extern double oldname ## _compat (double); \
-GLIBC_COMPAT_SYMBOL(oldname ## _compat, oldname, version) \
-static inline double name(double a) { return oldname ## _compat (a); }
+#ifdef __cplusplus
+
+    #define CREATE_COMPAT_FUNC1(name, oldname, version) \
+    extern double oldname ## _compat (double); \
+    GLIBC_COMPAT_SYMBOL(oldname ## _compat, oldname, version) \
+    static inline double name(double a) { return oldname ## _compat (a); } \
+    namespace std { \
+        static inline double name(double a) { return oldname ## _compat (a); } \
+    }
+#else
+
+    #define CREATE_COMPAT_FUNC1(name, oldname, version) \
+    extern double oldname ## _compat (double); \
+    GLIBC_COMPAT_SYMBOL(oldname ## _compat, oldname, version) \
+    static inline double name(double a) { return oldname ## _compat (a); }
+
+#endif
 
 static int signgam_;
 extern double lgamma_r_compat(double, int *);
 GLIBC_COMPAT_SYMBOL(lgamma_r_compat, lgamma_r, 2.2.5)
 static inline double lgamma_(double a) { return lgamma_r_compat(a, &signgam_); }
+#ifdef __cplusplus
+namespace std {
+static inline double lgamma_(double a) { return lgamma_r_compat(a, &signgam_); }
+}
+#endif
 #define lgamma lgamma_
 #define signgam signgam_
 
 extern double pow_compat(double, double);
 GLIBC_COMPAT_SYMBOL(pow_compat, pow, 2.2.5)
 static inline double pow_(double a, double b) { return pow_compat(a, b); }
+#ifdef __cplusplus
+namespace std {
+static inline double pow_(double a, double b) { return pow_compat(a, b); }
+}
+#endif
 #define pow pow_
 
 CREATE_COMPAT_FUNC1(acosh_, acosh, 2.2.5)
@@ -66,5 +92,6 @@ CREATE_COMPAT_FUNC1(exp_, exp, 2.2.5)
 
 CREATE_COMPAT_FUNC1(atanh_, atanh, 2.2.5)
 #define atanh atanh_
+
 #endif /*__GLIBC_COMPAT_SYMBOL_H__*/
 
