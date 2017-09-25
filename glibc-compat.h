@@ -3,9 +3,8 @@
 
 /**
  * This file provides compatibility to GLIBC 2.12.
- * included it on all C source code with -include glibc-compat.h
- * It currently does not work with C++; but fixing it should be
- * trivial
+ * included it on all C / C++ source code with -include glibc-compat.h
+ *
  */
 
 #define GLIBC_COMPAT_SYMBOL(FFF, GGG, VER) \
