@@ -16,20 +16,20 @@ build:
 requirements:
   build:
     - python
+    - nbodykit
     - cython
     - numpy
     - scipy
     - pmesh
-    - abopt
     - runtests
 
   run:
     - python
+    - nbodykit
     - cython
     - numpy
     - scipy
     - pmesh
-    - abopt
     - runtests
 
 test:
