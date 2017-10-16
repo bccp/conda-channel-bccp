@@ -8,9 +8,7 @@ jobs:
       - checkout
       - run:
           name: Check conda
-          command: 
-            - conda info
-            - conda install -c bccp bigfile
+          command: conda info
       - run:
           name: Print the Current Time
           command: date
