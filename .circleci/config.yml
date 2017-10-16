@@ -3,12 +3,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: centos:centos6.9
+      - image: docker pull continuumio/conda_builder_linux:5.11-5.2-1-4
     steps:
       - checkout
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: Check conda
+          command: 
+            - conda info
+            - conda install -c bccp bigfile
       - run:
           name: Print the Current Time
           command: date
