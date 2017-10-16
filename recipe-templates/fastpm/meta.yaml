@@ -38,7 +38,7 @@ test:
   # Python imports
   imports:
     - fastpm
-    - fastpm.tests
+#    - fastpm.tests
 
   # commands:
     # You can put test commands to be run here.  Use this to test that the
