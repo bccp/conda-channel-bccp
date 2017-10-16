@@ -7,7 +7,7 @@ script_path=$(readlink -f build.sh)
 log_dir=/usr/common/contrib/bccp/build-logs
 
 # do the nightly build (only add cron job if not present)
-mailto="MAILTO=\"\""
+mailto="MAILTO=\"nhand@berkeley.edu,yfeng1@berkeley.edu\""
 (echo "$mailto"; ) | crontab -
 
 # scatter times so we don't run into file collisions
@@ -16,7 +16,7 @@ times=("00" "15" "30")
 i=0
 for PYTHON in "2.7" "3.5" "3.6"; do
     filename="${log_dir}/conda-build-${PYTHON}-\`date +\%Y-\%m-\%d\`-cron.log"
-    job="${times[i]} 00 * * * bash -l $script_path $PYTHON > $filename 2>&1"
+    job="${times[i]} 00 * * * bash -l $script_path $PYTHON > $filename 2>&1 || cat $filename"
     ( crontab -l; echo "${job}"; ) | crontab -
     i=$((i+1))
 done
