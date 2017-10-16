@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: centos:centos6.9
     steps:
       - checkout
       - run:
