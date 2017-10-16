@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Check conda
-          command: conda info
+          command: ls /opt/*
       - run:
           name: Print the Current Time
           command: date
