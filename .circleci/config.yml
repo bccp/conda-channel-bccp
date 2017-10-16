@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker pull continuumio/conda_builder_linux:5.11-5.2-1-4
+      - image: continuumio/conda_builder_linux:5.11-5.2-1-4
     steps:
       - checkout
       - run:
