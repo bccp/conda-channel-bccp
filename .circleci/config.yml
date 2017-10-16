@@ -8,7 +8,10 @@ jobs:
       - checkout
       - run:
           name: Check conda
-          command: ls /opt/*
+          command: |
+            source /opt/miniconda/bin/activate
+            conda info
+            conda install
       - run:
           name: Print the Current Time
           command: date
