@@ -11,7 +11,10 @@ jobs:
           command: |
             source /opt/miniconda/bin/activate
             conda info
-            conda install
+      - run:
+          name: Build
+          command: |
+            bash .circleci/rebuild.sh
       - run:
           name: Print the Current Time
           command: date
