@@ -35,6 +35,8 @@ if [ "$1" = "--clean" ]; then
     shift
 fi
 
+ENVNAME=$PYTHON
+
 # get the bundle-anaconda command
 source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 
@@ -48,7 +50,7 @@ conda build purge
 conda update --yes conda conda-build
 
 # directory where recipes will be written
-RECIPE_DIR=recipes-$PYTHON
+RECIPE_DIR=recipes-$ENVNAME
 
 # make the recipes
 python extrude_recipes requirements.yml --recipe-dir $RECIPE_DIR || { echo "extrude_recipes failed"; exit 1; }
@@ -90,7 +92,7 @@ install ()
     pushd recipe-templates
 
     # install packages into this python version's environment
-    source activate $PYTHON
+    source activate $ENVNAME
     conda uninstall --yes mpich2
     conda install $INSTALL_FLAG --use-local --yes * ||
     { echo "conda install of packages failed"; exit 1; }
@@ -110,6 +112,6 @@ build_mpi4py $PYTHON
 build $PYTHON
 
 # install
-install $PYTHON
+install $ENVNAME
 
 popd # return to start directory
