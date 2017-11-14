@@ -9,13 +9,12 @@ else
     export PYTHON_CONFIG_EXE=python-config
 fi
 
-sed --in-place \
-    -e "s;@CC@;$CC;" \
+sed -e "s;@CC@;$CC;" \
     -e "s;@CFLAGS@;$CFLAGS;" \
     -e "s;@CLINK@;$LDFLAGS;" \
     -e "s;@PYTHON@;$PYTHON;" \
     -e "s;@PYTHON_CONFIG_EXE@;$CPYTHON_CONFIG_EXE;" \
-    common.mk
+    common.mk.in > common.mk
 
 make install
 
