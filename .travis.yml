@@ -15,16 +15,6 @@ env:
         # Defines BINSTAR_TOKEN for your binstar channel
         - secure: "0fIuL2KuDNRVWFERTa3Z6oVyFSc01CISoJWEui+oLCjkSceN68UsHbOQ/o5lv2SA6JFCOGwqkTlcf+51ewPG4kt7mqYUS+2snNeSxA+2/fYfI/pjgbePVsN6uhke0UHUOgljEvy9qUlfZ7Ai2q2/Z/ijPFn01dd7vw0fItZZJ1vnQtq7L1bYOkK5jh1T0ns3FW0MG8KnT1j+m89ZIT4fsdQw/l8vnu5mEev4bvUUqXQ2dRDHR+/ZLme1wj/HHXbiSR7+i+l3N1OJpc2fWZKiZrnM+Tyl3xwG17FvSZ6qHoay5wwyW/hy2foce4uBSbVHmQQVcgBzLSKxB0JvPNadnsi3Vs2ktgKT1eigxQEak1W6YO6qZa7272AvlVkhTIqMzQ6YA/Skr+1kv5xYMxKWKhzTRKOlirrBtku02+dKZ3mgNxlTzxjFBPbZrixqz3eNsOGhKvNFzGn1vdtwSe5uKODK1nB+CWWdCX4AwmfmE06grmGmgkuTRL0WqbDuM8f0L5ulyGIwB06KpUtpG/duwtxC/2puZGwkvXbjb0R8SrR1+6JB9d7D0dLcdxXgw/35OFn0CDB9NodQ23K8MxbzBbPaBXrvqMQ3IU7kWoguqjSK7yjDw6AQTX7691VFMUhgqjjOL36bhrF+f3FeJlII3zO3SJi1qmwK3uVFAsHPkZY="
 
-        # The python build restriction MUST be set at the moment, though it
-        # can have any value. The setting below avoids known-bad builds on
-        # python 2.6 and 3.3 for some packages.
-        - PYTHON_BUILD_RESTRICTIONS="2.7*|>3.4"
-
-        - NUMPY_BUILD_RESTRICTION="numpy >=1.11*"
-        # The value below needs to be set but will be ignored.
-        - CONDA_NPY="1.11"
-        - CONDA_VERSION=4.2*
-
 # Matrix is fully specified (for now) by os versions
 
 install:
@@ -56,17 +46,20 @@ install:
     # To ease debugging, list installed packages
     - conda info -a
     - conda list
-
+    - |
+      if [ "$TRAVIS_PULL_REQUEST" = "false" ] && \
+         [ $TRAVIS_REPO_SLUG = "bccp/conda-channel-bccp" ] && \
+         [ "$TRAVIS_BRANCH" == "master" ]; then
+          UPLOAD="--user $DESTINATION_CONDA_CHANNEL --token $BINSTAR_TOKEN";
+          conda config --set anaconda_upload
+          echo "Uploading enabled";
+      else
+          echo "Uplading disabled";
+          UPLOAD="";
+      fi
 script:
     # Only upload if this is NOT a pull request.
     - INSPECT="--skip-existing -c bccp"
-    - UPLOAD="";
-    - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-        if [ $TRAVIS_REPO_SLUG = "bccp/conda-channel-bccp" ]; then
-          echo "Uploading enabled";
-          UPLOAD="--user $DESTINATION_CONDA_CHANNEL --token $BINSTAR_TOKEN";
-        fi;
-      fi
     # Get ready to build.
     - python extrude_recipes.py requirements.yml
     # Packages are uploaded as they are built.
