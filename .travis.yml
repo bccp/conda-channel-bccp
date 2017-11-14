@@ -51,7 +51,7 @@ install:
          [ $TRAVIS_REPO_SLUG = "bccp/conda-channel-bccp" ] && \
          [ "$TRAVIS_BRANCH" == "master" ]; then
           UPLOAD="--user $DESTINATION_CONDA_CHANNEL --token $BINSTAR_TOKEN";
-          conda config --set anaconda_upload
+          conda config --set anaconda_upload true
           echo "Uploading enabled";
       else
           echo "Uplading disabled";
