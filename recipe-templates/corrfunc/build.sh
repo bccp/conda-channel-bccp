@@ -1,8 +1,5 @@
 #!/bin/bash
 
-cp $RECIPE_DIR/common.mk .
-
-
 if [ r"$PY3K" == r"1" ]; then
     export PYTHON_CONFIG_EXE=python3-config
 else
