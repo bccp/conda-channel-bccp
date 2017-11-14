@@ -1,0 +1,14 @@
+numpy:
+  #- 1.11
+  #- 1.12
+  - 1.13
+
+python:
+  - 3.6
+  #- 3.5
+  #- 2.7
+
+mpi:
+  - openmpi # [osx]
+  - mpich2 #   [linux]
+

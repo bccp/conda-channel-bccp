@@ -14,15 +14,18 @@ build:
 
 requirements:
   build:
-    - python
+    - python {{ python }}
+    - numpy {{ numpy }}
     - cython
-    - numpy x.x
     - mpi4py
+    - '{{ compiler("c") }}'
+    - '{{ mpi }}'
 
   run:
-    - python
-    - numpy x.x
+    - python {{ python }}.*
+    - numpy {{ numpy }}.*
     - mpi4py
+    - '{{ mpi }}'
 
 test:
   # Python imports

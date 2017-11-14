@@ -10,18 +10,19 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 2
+  number : 3
 
 requirements:
   build:
-    - python
-    - numpy x.x
+    - python {{ python }}
+    - numpy {{ numpy }}
     - cython
     - mpi4py
+    - '{{ compiler("c") }}'
 
   run:
-    - python
-    - numpy x.x
+    - python {{ python }}.*
+    - numpy {{ numpy }}.*
     - mpi4py
 
 test:

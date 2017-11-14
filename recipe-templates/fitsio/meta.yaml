@@ -10,17 +10,18 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 2
+  number : 3
 
 requirements:
   build:
-    - python
-    - numpy x.x
+    - python {{ python }}
+    - numpy {{ numpy }}
     - bzip2
+    - '{{ compiler("c") }}'
 
   run:
-    - python
-    - numpy x.x
+    - python {{ python }}.*
+    - numpy {{ numpy }}.*
 
 test:
   # Python imports

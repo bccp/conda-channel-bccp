@@ -9,18 +9,19 @@ source:
   git_tag: master
 
 build:
-  number : 1
+  number : 2
 
 requirements:
   build:
-    - python
-    - numpy x.x
+    - python {{ python }}
+    - numpy {{ numpy }}
     - future
     - gsl
+    - '{{ compiler("c") }}'
 
   run:
-    - python
-    - numpy x.x
+    - python {{ python }}.*
+    - numpy {{ numpy }}.*
     - gsl
     - future
 
