@@ -14,7 +14,7 @@ sed -e "s;@CC@;$CC;" \
     -e "s;@CLINK@;$LDFLAGS;" \
     -e "s;@PYTHON@;$PYTHON;" \
     -e "s;@PYTHON_CONFIG_EXE@;$CPYTHON_CONFIG_EXE;" \
-    common.mk.in > common.mk
+    $RECIPE_DIR/common.mk.in > common.mk
 
 make install
 
