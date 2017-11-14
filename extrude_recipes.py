@@ -341,7 +341,7 @@ def render_template(package, template, folder=TEMPLATE_FOLDER):
         Path to folder containing template.
     """
     full_template_path = os.path.abspath(folder)
-    jinja_env = Environment(loader=FileSystemLoader(full_template_path))
+    jinja_env = Environment(loader=FileSystemLoader(full_template_path), undefined=PassThroughUndefined)
     tpl = jinja_env.get_template('/'.join([package.conda_name, template]))
     rendered = tpl.render(version=package.version, md5=package.md5)
     return rendered
@@ -430,6 +430,15 @@ def main(args=None):
             with open(os.path.join(recipe_path, template), 'wt') as f:
                 f.write(rendered)
         inject_requirements(p, recipe_path)
+
+from jinja2.runtime import Undefined
+
+class PassThroughUndefined(Undefined):
+    def __str__(self):
+        return u'{{ %s }}' % self._undefined_name
+
+    def __call__(self, arg):
+        return u'{{ %s("%s") }}' % (self._undefined_name, arg)
 
 if __name__ == '__main__':
     main()
