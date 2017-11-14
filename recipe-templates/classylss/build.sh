@@ -1,14 +1,5 @@
 #!/bin/bash
 
-pwd
-
-if [[ $OSTYPE == darwin* ]]; then
-     export CFLAGS="-headerpad_max_install_names"
-     export CXXFLAGS=$CFLAGS
-else
-     export CFLAGS="$CFLAGS -g -fPIC"
-fi
-
 # this uses CFLAGS for CCFLAG
 cp $RECIPE_DIR/class.cfg depends/class.cfg
 

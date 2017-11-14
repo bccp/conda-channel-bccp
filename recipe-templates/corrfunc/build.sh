@@ -9,11 +9,6 @@ else
     export PYTHON_CONFIG_EXE=python-config
 fi
 
-#if [[ $OSTYPE == darwin* ]]; then
-#    export CFLAGS="-headerpad_max_install_names"
-#    export CXXFLAGS=$CFLAGS
-#fi
-
 sed --in-place \
     -e "s;@CC@;$CC;" \
     -e "s;@CFLAGS@;$CFLAGS;" \

@@ -1,11 +1,6 @@
 #!/bin/bash
 
-if [ `uname` == Darwin ]; then
-	export LIBS="-Wl,-rpath,$CONDA_PREFIX/lib"
-#    export CXXFLAGS=$CFLAGS
-fi
-
-#export LIBS="$LIBS -lm" # because the compat fails fftw3's -lm check
+# workaround mpich/openmpi not built with the new toolchain
 
 export OMPI_CPPFLAGS=$CPPFLAGS
 export OMPI_LDFLAGS=$LDFLAGS

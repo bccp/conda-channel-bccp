@@ -1,8 +1,6 @@
 #!/bin/bash
-if [[ $OSTYPE == darwin* ]]; then
-     export CFLAGS="-headerpad_max_install_names"
-     export CXXFLAGS=$CFLAGS
-fi
+
+# workaround mpich/openmpi not built with the new toolchain
 
 export OMPI_CPPFLAGS=$CPPFLAGS
 export OMPI_LDFLAGS=$LDFLAGS

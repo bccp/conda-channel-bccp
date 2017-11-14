@@ -34,7 +34,8 @@ PYTHON_CONFIG_EXE:=@PYTHON_CONFIG_EXE@
 ## to work.
 
 ## Set OpenMP for both theory and mocks
-OPT += -DUSE_OMP
+# do not use OpenMP; it doesn't talk well with Python/multiprocessing yet.
+#OPT += -DUSE_OMP
 
 
 ### You should NOT edit below this line
