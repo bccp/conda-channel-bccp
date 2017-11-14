@@ -10,27 +10,28 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 4
+  number : 5
 
 requirements:
   build:
-    - python
+    - python {{ python }}
+    - numpy {{ numpy }}
     - setuptools
-    - numpy x.x
     - six # only needed to download class, if needed
-    - gcc
+    - '{{ compiler("c") }}'
+    - '{{ compiler("fortran") }}'
     - cython
 
   run:
-    - python
+    - python {{ python }}.*
+    - numpy {{ numpy }}.*
     - cython
-    - numpy x.x
-    - libgcc
 
 test:
   # Python imports
   imports:
     - classylss
+    - classylss.binding
 
 about:
   home: http://github.com/nickhand/classylss

@@ -1,19 +1,23 @@
 #!/bin/bash
-if [[ $OSTYPE == darwin* ]]; then
-    export CFLAGS="-headerpad_max_install_names"
-    export CXXFLAGS=$CFLAGS
+
+if [ r"$PY3K" == r"1" ]; then
+    export PYTHON_CONFIG_EXE=python3-config
 else
-    export CFLAGS="-include $PWD/glibc-compat.h"
-    # corrfunc makefile purges CFLAGS; fix it here.
-    sed --in-place 's;CFLAGS:=;CFLAGS?=;' common.mk
+    export PYTHON_CONFIG_EXE=python-config
 fi
 
-cp $RECIPE_DIR/../../glibc-compat.h .
-cp $RECIPE_DIR/../../check-glibc.sh .
+sed -e "s;@CC@;$CC;" \
+    -e "s;@CFLAGS@;$CFLAGS;" \
+    -e "s;@CLINK@;$LDFLAGS;" \
+    -e "s;@PYTHON@;$PYTHON;" \
+    -e "s;@PYTHON_CONFIG_EXE@;$CPYTHON_CONFIG_EXE;" \
+    $RECIPE_DIR/common.mk.in > common.mk
 
 make install
+
 $PYTHON setup.py install --single-version-externally-managed --record rec.txt
 
 if [[ $OSTYPE != darwin* ]]; then
+    cp $RECIPE_DIR/../../check-glibc.sh .
     bash check-glibc.sh $SP_DIR/Corrfunc || exit 1
 fi
