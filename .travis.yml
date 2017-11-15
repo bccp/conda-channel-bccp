@@ -63,4 +63,4 @@ script:
     # Get ready to build.
     - python extrude_recipes.py requirements.yml
     # Packages are uploaded as they are built.
-    - ( cd recipes; conda build -m ../conda_build_config.yaml $INSPECT $UPLOAD * )
+    - ( cd recipes; for i in *; do conda build -m ../conda_build_config.yaml $INSPECT $UPLOAD $i; done )
