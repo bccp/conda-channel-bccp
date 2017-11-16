@@ -18,7 +18,7 @@ in this repository do:
 The packages maintained here are: 
 
 * `abopt`_: ABstract OPTimizer: optimization of generic numerical models
-* `bigfile`_: A reproducible massively parallel IO library for hierarchical data
+* `bigfile`_: A reproducible massively parallel IO library for hierarchical data |bigfile_doi|
 * `cachey`_: Caching based on computation time and storage space
 * `classylss`_: A Python binding of CLASS for large-scale structure calculations |classylss_doi|
 * `Corrfunc`_: Blazing fast correlation functions on the CPU |Corrfunc_doi|
@@ -50,6 +50,9 @@ The packages maintained here are:
 .. _`fitsio`: https://github.com/esheldon/fitsio
 .. _`halotools`: https://github.com/astropy/halotools
 .. _`mcfit`: https://github.com/eelregit/mcfit
+
+.. |bigfile_doi| image:: https://zenodo.org/badge/21016779.svg
+   :target: https://zenodo.org/badge/latestdoi/21016779
 
 .. |classylss_doi| image:: https://zenodo.org/badge/61589760.svg
    :target: https://zenodo.org/badge/latestdoi/61589760
