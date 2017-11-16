@@ -17,7 +17,7 @@ in this repository do:
     
 The packages maintained here are: 
 
-* `abopt`_: ABstract OPTimizer: optimization of generic numerical models
+* `abopt`_: ABstract OPTimizer: optimization of generic numerical models |abopt_doi|
 * `bigfile`_: A reproducible massively parallel IO library for hierarchical data |bigfile_doi|
 * `cachey`_: Caching based on computation time and storage space
 * `classylss`_: A Python binding of CLASS for large-scale structure calculations |classylss_doi|
@@ -42,7 +42,7 @@ The packages maintained here are:
 .. _`nbodykit`: https://github.com/bccp/nbodykit
 .. _`pfft-python` : https://github.com/rainwoodman/pfft-python
 .. _`pmesh`: https://github.com/rainwoodman/pmesh
-.. _`runtests`: https://github.com/rainwoodman/runtests
+.. _`runtests`: https://github.com/bccp/runtests
 .. _`abopt`: https://github.com/bccp/abopt
 .. _`cachey`: https://github.com/dask/cachey
 .. _`Corrfunc`: https://github.com/manodeep/Corrfunc
@@ -51,6 +51,9 @@ The packages maintained here are:
 .. _`halotools`: https://github.com/astropy/halotools
 .. _`mcfit`: https://github.com/eelregit/mcfit
 
+.. |abopt_doi| image:: https://zenodo.org/badge/74931755.svg
+   :target: https://zenodo.org/badge/latestdoi/74931755
+   
 .. |bigfile_doi| image:: https://zenodo.org/badge/21016779.svg
    :target: https://zenodo.org/badge/latestdoi/21016779
 
