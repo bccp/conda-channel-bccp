@@ -20,29 +20,17 @@ The packages maintained here are:
 * `abopt`_: ABstract OPTimizer: optimization of generic numerical models
 * `bigfile`_: A reproducible massively parallel IO library for hierarchical data
 * `cachey`_: Caching based on computation time and storage space
-* `classylss`_: A Python binding of CLASS for large-scale structure calculations 
-.. image:: https://zenodo.org/badge/61589760.svg
-   :target: https://zenodo.org/badge/latestdoi/61589760
-* `Corrfunc`_: Blazing fast correlation functions on the CPU.
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.594351.svg
-   :target: https://doi.org/10.5281/zenodo.594351
+* `classylss`_: A Python binding of CLASS for large-scale structure calculations |classylss_doi|
+* `Corrfunc`_: Blazing fast correlation functions on the CPU |Corrfunc_doi|
 * `fastpm-python`_: quasi N-body simulations using the FastPM scheme in Python
 * `fitsio`_: A python package for FITS input/output wrapping cfitsio
-* `halotools`_: Python package for studying large scale structure, cosmology, and galaxy evolution using N-body simulations and halo models
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.835895.svg
-   :target: https://doi.org/10.5281/zenodo.835894
-* `kdcount`_: A KDTree pair counter
-.. image:: https://zenodo.org/badge/34348490.svg
-   :target: https://zenodo.org/badge/latestdoi/34348490
+* `halotools`_: Python package for studying large scale structure, cosmology, and galaxy evolution using N-body simulations and halo models |halotools_doi|
+* `kdcount`_: A KDTree pair counter |kdcount_doi|
 * `mpsort`_: A Python binding of MP-sort, a peta scale sorting routine
 * `mcfit`_: multiplicatively convolutional fast integral transforms in Python
-* `nbodykit`_: Analysis kit for large-scale structure datasets, the massively parallel way
-.. image:: https://zenodo.org/badge/34348490.svg
-   :target: https://zenodo.org/badge/latestdoi/34348490
+* `nbodykit`_: Analysis kit for large-scale structure datasets, the massively parallel way |nbodykit_doi|
 * `pfft-python`_: A Python binding of PFFT, a massively parallel FFT library
-* `pmesh`_: Particle Mesh in Python
-.. image:: https://zenodo.org/badge/28099917.svg
-   :target: https://zenodo.org/badge/latestdoi/28099917
+* `pmesh`_: Particle Mesh in Python |pmesh_doi|
 * `runtests`_: Testing pytest based Python projects with optional support to variable MPI sizes.
 
 .. _`Berkeley Center for Cosmological Physics` : http://bccp.berkeley.edu
@@ -62,6 +50,24 @@ The packages maintained here are:
 .. _`fitsio`: https://github.com/esheldon/fitsio
 .. _`halotools`: https://github.com/astropy/halotools
 .. _`mcfit`: https://github.com/eelregit/mcfit
+
+.. |classylss_doi| image:: https://zenodo.org/badge/61589760.svg
+   :target: https://zenodo.org/badge/latestdoi/61589760
+
+.. |Corrfunc_doi| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.594351.svg
+   :target: https://doi.org/10.5281/zenodo.594351
+
+.. |halotools_doi| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.835895.svg
+   :target: https://doi.org/10.5281/zenodo.835894
+
+.. |kdcount_doi| image:: https://zenodo.org/badge/34348490.svg
+   :target: https://zenodo.org/badge/latestdoi/34348490
+
+.. |nbodykit_doi| image:: https://zenodo.org/badge/34348490.svg
+   :target: https://zenodo.org/badge/latestdoi/34348490
+
+.. |pmesh_doi| image:: https://zenodo.org/badge/28099917.svg
+   :target: https://zenodo.org/badge/latestdoi/28099917
 
 The Anaconda channel of BCCP can be found at: http://anaconda.org/bccp/
 
