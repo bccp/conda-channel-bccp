@@ -17,16 +17,25 @@ in this repository do:
     
 The packages maintained here are: 
 
+* `abopt`_: ABstract OPTimizer: optimization of generic numerical models
 * `bigfile`_: A reproducible massively parallel IO library for hierarchical data
-
+* `cachey`_: Caching based on computation time and storage space
 * `classylss`_: A Python binding of CLASS for large-scale structure calculations 
 .. image:: https://zenodo.org/badge/61589760.svg
    :target: https://zenodo.org/badge/latestdoi/61589760
-   
+* `Corrfunc`_: Blazing fast correlation functions on the CPU.
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.594351.svg
+   :target: https://doi.org/10.5281/zenodo.594351
+* `fastpm-python`_: quasi N-body simulations using the FastPM scheme in Python
+* `fitsio`_: A python package for FITS input/output wrapping cfitsio
+* `halotools`_: Python package for studying large scale structure, cosmology, and galaxy evolution using N-body simulations and halo models
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.835895.svg
+   :target: https://doi.org/10.5281/zenodo.835894
 * `kdcount`_: A KDTree pair counter
 .. image:: https://zenodo.org/badge/34348490.svg
    :target: https://zenodo.org/badge/latestdoi/34348490
 * `mpsort`_: A Python binding of MP-sort, a peta scale sorting routine
+* `mcfit`_: multiplicatively convolutional fast integral transforms in Python
 * `nbodykit`_: Analysis kit for large-scale structure datasets, the massively parallel way
 .. image:: https://zenodo.org/badge/34348490.svg
    :target: https://zenodo.org/badge/latestdoi/34348490
@@ -45,6 +54,14 @@ The packages maintained here are:
 .. _`nbodykit`: https://github.com/bccp/nbodykit
 .. _`pfft-python` : https://github.com/rainwoodman/pfft-python
 .. _`pmesh`: https://github.com/rainwoodman/pmesh
+.. _`runtests`: https://github.com/rainwoodman/runtests
+.. _`abopt`: https://github.com/bccp/abopt
+.. _`cachey`: https://github.com/dask/cachey
+.. _`Corrfunc`: https://github.com/manodeep/Corrfunc
+.. _`fastpm-python`: https://github.com/rainwoodman/fastpm-python
+.. _`fitsio`: https://github.com/esheldon/fitsio
+.. _`halotools`: https://github.com/astropy/halotools
+.. _`mcfit`: https://github.com/eelregit/mcfit
 
 The Anaconda channel of BCCP can be found at: http://anaconda.org/bccp/
 
