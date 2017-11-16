@@ -29,9 +29,9 @@ The packages maintained here are:
 * `mpsort`_: A Python binding of MP-sort, a peta scale sorting routine
 * `mcfit`_: multiplicatively convolutional fast integral transforms in Python
 * `nbodykit`_: Analysis kit for large-scale structure datasets, the massively parallel way |nbodykit_doi|
-* `pfft-python`_: A Python binding of PFFT, a massively parallel FFT library
+* `pfft-python`_: A Python binding of PFFT, a massively parallel FFT library |pfft-python_doi|
 * `pmesh`_: Particle Mesh in Python |pmesh_doi|
-* `runtests`_: Testing pytest based Python projects with optional support to variable MPI sizes.
+* `runtests`_: Testing pytest based Python projects with optional support to variable MPI sizes. |runtests_doi|
 
 .. _`Berkeley Center for Cosmological Physics` : http://bccp.berkeley.edu
 .. _`bigfile` : https://github.com/rainwoodman/bigfile
@@ -74,6 +74,12 @@ The packages maintained here are:
 
 .. |pmesh_doi| image:: https://zenodo.org/badge/28099917.svg
    :target: https://zenodo.org/badge/latestdoi/28099917
+   
+.. |runtests_doi| image:: https://zenodo.org/badge/64977808.svg
+   :target: https://zenodo.org/badge/latestdoi/64977808
+   
+.. |pfft-python_doi| image:: https://zenodo.org/badge/26140163.svg
+   :target: https://zenodo.org/badge/latestdoi/26140163
 
 The Anaconda channel of BCCP can be found at: http://anaconda.org/bccp/
 
