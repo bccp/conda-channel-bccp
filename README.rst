@@ -18,13 +18,23 @@ in this repository do:
 The packages maintained here are: 
 
 * `bigfile`_: A reproducible massively parallel IO library for hierarchical data
-* `classylss`_: A Python binding of CLASS for large-scale structure calculations
+
+* `classylss`_: A Python binding of CLASS for large-scale structure calculations 
+.. image:: https://zenodo.org/badge/61589760.svg
+   :target: https://zenodo.org/badge/latestdoi/61589760
+   
 * `kdcount`_: A KDTree pair counter
-* `runtests`_: Testing pytest based Python projects with optional support to variable MPI sizes.
+.. image:: https://zenodo.org/badge/34348490.svg
+   :target: https://zenodo.org/badge/latestdoi/34348490
 * `mpsort`_: A Python binding of MP-sort, a peta scale sorting routine
 * `nbodykit`_: Analysis kit for large-scale structure datasets, the massively parallel way
+.. image:: https://zenodo.org/badge/34348490.svg
+   :target: https://zenodo.org/badge/latestdoi/34348490
 * `pfft-python`_: A Python binding of PFFT, a massively parallel FFT library
 * `pmesh`_: Particle Mesh in Python
+.. image:: https://zenodo.org/badge/28099917.svg
+   :target: https://zenodo.org/badge/latestdoi/28099917
+* `runtests`_: Testing pytest based Python projects with optional support to variable MPI sizes.
 
 .. _`Berkeley Center for Cosmological Physics` : http://bccp.berkeley.edu
 .. _`bigfile` : https://github.com/rainwoodman/bigfile
