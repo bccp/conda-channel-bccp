@@ -22,7 +22,7 @@ The packages maintained here are:
 * `cachey`_: Caching based on computation time and storage space
 * `classylss`_: A Python binding of CLASS for large-scale structure calculations |classylss_doi|
 * `Corrfunc`_: Blazing fast correlation functions on the CPU |Corrfunc_doi|
-* `fastpm-python`_: quasi N-body simulations using the FastPM scheme in Python
+* `fastpm-python`_: quasi N-body simulations using the FastPM scheme in Python |fastpm-python_doi|
 * `fitsio`_: A python package for FITS input/output wrapping cfitsio
 * `halotools`_: Python package for studying large scale structure, cosmology, and galaxy evolution using N-body simulations and halo models |halotools_doi|
 * `kdcount`_: A KDTree pair counter |kdcount_doi|
@@ -80,6 +80,9 @@ The packages maintained here are:
    
 .. |pfft-python_doi| image:: https://zenodo.org/badge/26140163.svg
    :target: https://zenodo.org/badge/latestdoi/26140163
+   
+.. |fastpm-python_doi| image:: https://zenodo.org/badge/81290989.svg
+   :target: https://zenodo.org/badge/latestdoi/81290989
 
 The Anaconda channel of BCCP can be found at: http://anaconda.org/bccp/
 
