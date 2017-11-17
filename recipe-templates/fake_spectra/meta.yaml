@@ -15,7 +15,7 @@ build:
 requirements:
   host:
     - '{{ compiler("c") }}'
-    - '{{ compiler("c++") }}'
+    - '{{ compiler("cxx") }}'
 
   build:
     - python
