@@ -74,8 +74,10 @@ script:
     # Packages are uploaded as they are built.
     - |
       ( cd recipes;
+        trap 'err=1' ERR; 
         while read package ; do 
             echo conda build -m ../$VARIANT $INSPECT $UPLOAD $package-*;
             conda build -m ../$VARIANT $INSPECT $UPLOAD $package-*;
         done < ../build-order;
+        exit $err
       )
