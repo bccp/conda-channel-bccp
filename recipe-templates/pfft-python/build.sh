@@ -18,6 +18,7 @@ if [[ $OSTYPE != darwin* ]]; then
     export OMPI_CXXFLAGS=$CXXFLAGS
     export OMPI_FCFLAGS=$FCFLAGS
 else
+    export LIBS="-Wl,-rpath,$CONDA_PREFIX/lib"
     export CFLAGS="-headerpad_max_install_names"
     export CXXFLAGS=$CFLAGS
 fi
