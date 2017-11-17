@@ -47,6 +47,10 @@ install:
     # latest conda build
     - conda install 'conda-build'
 
+    # to get fallback openmpi/mpich2
+    # trying to work around https://github.com/conda/conda-build/issues/2510
+    - conda install mpi4py
+
     # To ease debugging, list installed packages
     - conda info -a
     - conda list
