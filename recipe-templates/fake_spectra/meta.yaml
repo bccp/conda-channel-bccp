@@ -13,11 +13,11 @@ build:
   number : 0
 
 requirements:
-  host:
+  build:
     - '{{ compiler("c") }}'
     - '{{ compiler("cxx") }}'
 
-  build:
+  host:
     - python
     - numpy
     - cython

@@ -15,6 +15,8 @@ export OMPI_FC=$FC
 export MPICH_FC=$FC
 export OMPI_FCFLAGS=$FCFLAGS
 
+export MPICC=mpicc
+
 $PYTHON setup.py install 
 
 if [[ $OSTYPE != darwin* ]]; then

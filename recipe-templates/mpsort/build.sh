@@ -5,22 +5,24 @@
 export OMPI_CPPFLAGS="$CPPFLAGS -I$CONDA_PREFIX/include"
 export OMPI_LDFLAGS="$LDFLAGS -L$CONDA_PREFIX/lib"
 export OMPI_LIBS=$LIBS
-export OMPI_CC=$CC
-export MPICH_CC=$CC
 export OMPI_CFLAGS="$CFLAGS -I$CONDA_PREFIX/include"
-export OMPI_CXX=$CXX
-export MPICH_CXX=$CXX
 export OMPI_CXXFLAGS=$CXXFLAGS
-export OMPI_FC=$FC
-export MPICH_FC=$FC
 export OMPI_FCFLAGS=$FCFLAGS
+
+if [[ $OSTYPE != darwin* ]]; then
+    # for MAC use system compilers
+    # because cross complilation doesn't work
+    export OMPI_CC=$CC
+    export MPICH_CC=$CC
+    export OMPI_CXX=$CXX
+    export MPICH_CXX=$CXX
+    export OMPI_FC=$FC
+    export MPICH_FC=$FC
+fi
 
 echo --------------------
 which mpicc
 env
-ls $CONDA_PREFIX/include/
-ls $CONDA_PREFIX/include/*
-
 echo -------------------
 
 
