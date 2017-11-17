@@ -7,6 +7,11 @@ os:
   - osx
 
 env:
+    matrix:
+        - PYTHON_VERSION=3.6
+        - PYTHON_VERSION=2.7
+        - PYTHON_VERSION=3.5
+
     global:
         - DESTINATION_CONDA_CHANNEL="bccp"
         - TARGET_ARCH="x64"
@@ -14,7 +19,6 @@ env:
 
         # Defines BINSTAR_TOKEN for your binstar channel
         - secure: "0fIuL2KuDNRVWFERTa3Z6oVyFSc01CISoJWEui+oLCjkSceN68UsHbOQ/o5lv2SA6JFCOGwqkTlcf+51ewPG4kt7mqYUS+2snNeSxA+2/fYfI/pjgbePVsN6uhke0UHUOgljEvy9qUlfZ7Ai2q2/Z/ijPFn01dd7vw0fItZZJ1vnQtq7L1bYOkK5jh1T0ns3FW0MG8KnT1j+m89ZIT4fsdQw/l8vnu5mEev4bvUUqXQ2dRDHR+/ZLme1wj/HHXbiSR7+i+l3N1OJpc2fWZKiZrnM+Tyl3xwG17FvSZ6qHoay5wwyW/hy2foce4uBSbVHmQQVcgBzLSKxB0JvPNadnsi3Vs2ktgKT1eigxQEak1W6YO6qZa7272AvlVkhTIqMzQ6YA/Skr+1kv5xYMxKWKhzTRKOlirrBtku02+dKZ3mgNxlTzxjFBPbZrixqz3eNsOGhKvNFzGn1vdtwSe5uKODK1nB+CWWdCX4AwmfmE06grmGmgkuTRL0WqbDuM8f0L5ulyGIwB06KpUtpG/duwtxC/2puZGwkvXbjb0R8SrR1+6JB9d7D0dLcdxXgw/35OFn0CDB9NodQ23K8MxbzBbPaBXrvqMQ3IU7kWoguqjSK7yjDw6AQTX7691VFMUhgqjjOL36bhrF+f3FeJlII3zO3SJi1qmwK3uVFAsHPkZY="
-
 # Matrix is fully specified (for now) by os versions
 
 install:
@@ -61,13 +65,13 @@ script:
     # Only upload if this is NOT a pull request.
     - INSPECT="--skip-existing -c bccp"
     # Get ready to build.
+    - VARIANT=variants/python-${PYTHON_VERSION}.yaml
     - python extrude_recipes.py requirements.yml
     # Packages are uploaded as they are built.
     - |
       ( cd recipes;
-        for v in ../variants/*.yaml; do 
-            for i in *; do 
-             conda build -m $v $INSPECT $UPLOAD $i;
-            done;
-        done
+        while read package ; do 
+            echo conda build -m ../$VARIANT $INSPECT $UPLOAD $package-*;
+            conda build -m ../$VARIANT $INSPECT $UPLOAD $package-*;
+        done < ../build-order;
       )

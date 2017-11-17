@@ -1,0 +1,45 @@
+{% set name = "fake_spectra" %}
+
+package:
+  name: {{ name|lower }}
+  version: "{{version}}"
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+build:
+  number : 0
+
+requirements:
+  host:
+    - '{{ compiler("c") }}'
+    - '{{ compiler("c++") }}'
+
+  build:
+    - python
+    - numpy
+    - cython
+
+  run:
+    - python
+    - '{{ pin_compatible("numpy") }}'
+    - h5py
+    - scipy
+
+test:
+  # Python imports
+  imports:
+    - fake_spectra
+    - fake_spectra.tests
+
+about:
+  home: http://github.com/sbird/fake_spectra
+  license: MIT
+  summary: 'A code for generating fake spectra from a cosmological simulation'
+  license_family: MIT
+
+extra:
+  recipe-maintainers:
+    - rainwoodman

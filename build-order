@@ -1,0 +1,17 @@
+runtests
+mpsort
+pfft-python
+pmesh
+abopt
+bigfile
+cachey
+classylss
+corrfunc
+fake_spectra
+fastpm
+fitsio
+halotools
+kdcount
+mcfit
+mpi4py_test
+nbodykit/
