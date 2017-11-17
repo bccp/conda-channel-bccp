@@ -2,11 +2,6 @@
 
 # workaround mpich/openmpi not built with the new toolchain
 
-echo --------------------
-which mpicc
-env
-echo -------------------
-
 export OMPI_CPPFLAGS=$CPPFLAGS
 export OMPI_LDFLAGS=$LDFLAGS
 export OMPI_LIBS=$LIBS
@@ -19,6 +14,15 @@ export OMPI_CXXFLAGS=$CXXFLAGS
 export OMPI_FC=$FC
 export MPICH_FC=$FC
 export OMPI_FCFLAGS=$FCFLAGS
+
+echo --------------------
+which mpicc
+env
+ls $CONDA_PREFIX/include/
+ls $CONDA_PREFIX/include/*
+
+echo -------------------
+
 
 $PYTHON setup.py install
 
