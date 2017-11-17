@@ -14,17 +14,19 @@ build:
 
 requirements:
   build:
-    - python {{ python }}
-    - numpy {{ numpy }}
-    - setuptools
-    - six # only needed to download class, if needed
     - '{{ compiler("c") }}'
     - '{{ compiler("fortran") }}'
+
+  host:
+    - python
+    - numpy
+    - setuptools
+    - six # only needed to download class, if needed
     - cython
 
   run:
-    - python {{ python }}.*
-    - numpy {{ numpy }}.*
+    - python
+    - '{{ pin_compatible("numpy") }}'
     - cython
 
 test:

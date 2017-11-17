@@ -14,14 +14,16 @@ build:
 
 requirements:
   build:
-    - python {{ python }}
-    - numpy {{ numpy }}
-    - bzip2
     - '{{ compiler("c") }}'
 
+  host:
+    - python
+    - numpy
+    - bzip2
+
   run:
-    - python {{ python }}.*
-    - numpy {{ numpy }}.*
+    - python
+    - '{{ pin_compatible("numpy") }}'
 
 test:
   # Python imports

@@ -14,15 +14,17 @@ build:
 
 requirements:
   build:
-    - python {{ python }}
-    - numpy {{ numpy }}
-    - cython
-    - mpi4py
     - '{{ compiler("c") }}'
 
+  host:
+    - python
+    - numpy
+    - cython
+    - mpi4py
+
   run:
-    - python {{ python }}.*
-    - numpy {{ numpy }}.*
+    - python
+    - '{{ pin_compatible("numpy") }}'
     - mpi4py
 
 test:

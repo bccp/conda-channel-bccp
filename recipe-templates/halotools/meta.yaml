@@ -14,10 +14,12 @@ build:
 
 requirements:
   build:
-    - python {{ python }}
-    - numpy {{ numpy }}
     - '{{ compiler("c") }}'
     - '{{ compiler("cxx") }}'
+
+  host:
+    - python
+    - numpy
     - setuptools
     - astropy >=1
     - scipy
@@ -26,8 +28,8 @@ requirements:
     - requests
 
   run:
-    - python {{ python }}.*
-    - numpy {{ numpy }}.*
+    - python
+    - '{{ pin_compatible("numpy") }}'
     - astropy >=1
     - scipy
     - beautifulsoup4

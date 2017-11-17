@@ -13,15 +13,17 @@ build:
 
 requirements:
   build:
-    - python {{ python }}
-    - numpy {{ numpy }}
-    - future
-    - gsl
     - '{{ compiler("c") }}'
 
+  host:
+    - python
+    - numpy
+    - future
+    - gsl
+
   run:
-    - python {{ python }}.*
-    - numpy {{ numpy }}.*
+    - python
+    - '{{ pin_compatible("numpy") }}'
     - gsl
     - future
 

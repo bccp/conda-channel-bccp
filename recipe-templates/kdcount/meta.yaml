@@ -14,15 +14,16 @@ build:
 
 requirements:
   build:
-    - python {{ python }}
-    - numpy {{ numpy }}
     - '{{ compiler("c") }}'
+
+  host:
+    - python
+    - numpy
     - cython
 
   run:
-    - python {{ python }}.*
-    - numpy {{ numpy }}.*
-    - cython
+    - python
+    - '{{ pin_compatible("numpy") }}'
 
 test:
   # Python imports
