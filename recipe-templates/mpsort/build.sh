@@ -2,6 +2,11 @@
 
 # workaround mpich/openmpi not built with the new toolchain
 
+echo --------------------
+which mpicc
+env
+echo -------------------
+
 export OMPI_CPPFLAGS=$CPPFLAGS
 export OMPI_LDFLAGS=$LDFLAGS
 export OMPI_LIBS=$LIBS
