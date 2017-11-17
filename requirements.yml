@@ -34,3 +34,5 @@
 - name: Corrfunc
 
 - name: mcfit
+
+- name: fake_spectra

@@ -14,4 +14,4 @@ halotools
 kdcount
 mcfit
 mpi4py_test
-nbodykit/
+nbodykit
