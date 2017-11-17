@@ -2,12 +2,12 @@
 
 # workaround mpich/openmpi not built with the new toolchain
 
-export OMPI_CPPFLAGS=$CPPFLAGS
-export OMPI_LDFLAGS=$LDFLAGS
+export OMPI_CPPFLAGS="$CPPFLAGS -I$CONDA_PREFIX/include"
+export OMPI_LDFLAGS="$LDFLAGS -L$CONDA_PREFIX/lib"
 export OMPI_LIBS=$LIBS
 export OMPI_CC=$CC
 export MPICH_CC=$CC
-export OMPI_CFLAGS=$CFLAGS
+export OMPI_CFLAGS="$CFLAGS -I$CONDA_PREFIX/include"
 export OMPI_CXX=$CXX
 export MPICH_CXX=$CXX
 export OMPI_CXXFLAGS=$CXXFLAGS
