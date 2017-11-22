@@ -11,10 +11,10 @@ recipes/cachey-*
 recipes/classylss-*
 recipes/corrfunc-*
 recipes/fake_spectra-*
-recipes/fastpm-*
 recipes/fitsio-*
 recipes/halotools-*
 recipes/kdcount-*
 recipes/mcfit-*
 recipes/mpi4py_test-*
 recipes/nbodykit-*
+recipes/fastpm-*
