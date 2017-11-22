@@ -1,0 +1,62 @@
+{% set build = 0 %}
+{% set version = '3.0.0' %}
+{% set sha256 = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7' %}
+{% set major = version.rpartition('.')[0] %}
+
+package:
+    name: openmpi
+    version: {{ version }}
+
+source:
+    fn: openmpi-{{ version }}.tar.bz2
+    url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
+    sha256: {{ sha256 }}
+
+build:
+    number: {{ build }}
+    skip: True  # [win]
+    skip: True  # [linux]
+
+requirements:
+    build:
+        - {{ compiler("c") }} # [not win]
+        - {{ compiler("cxx") }} # [not win]
+        - {{ compiler("fortran") }} # [not win]
+        - perl
+
+test:
+    requires:
+        - {{ compiler("c") }} # [not win]
+        - {{ compiler("cxx") }} # [not win]
+        - {{ compiler("fortran") }} # [not win]
+    files:
+        - tests/helloworld.c
+        - tests/helloworld.cxx
+        - tests/helloworld.f
+        - tests/helloworld.f90
+    commands:
+        - conda inspect objects  openmpi  # [osx]
+        - conda inspect linkages openmpi  # [not win]
+
+about:
+    home: https://www.open-mpi.org/
+    license: BSD 3-Clause
+    license_family: BSD
+    license_file: LICENSE
+    summary: 'An open source Message Passing Interface implementation.'
+    description: |
+        The Open MPI Project is an open source Message Passing Interface
+        implementation that is developed and maintained by a consortium of academic,
+        research, and industry partners.
+    doc_url: https://www.open-mpi.org/doc/
+    dev_url: https://github.com/open-mpi/ompi
+
+extra:
+    recipe-maintainers:
+        - astrofrog
+        - bekozi
+        - dalcinl
+        - minrk
+        - msarahan
+        - ocefpaf
+        - rainwoodman

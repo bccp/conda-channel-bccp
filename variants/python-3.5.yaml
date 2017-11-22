@@ -7,6 +7,6 @@ python:
   #- 2.7
 
 mpi:
-  - openmpi # [osx]
-  - mpich2 #   [linux]
+  - openmpi  # [osx]
+  - mpich  #   [linux]
 

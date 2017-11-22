@@ -86,20 +86,40 @@ The packages maintained here are:
 
 The Anaconda channel of BCCP can be found at: http://anaconda.org/bccp/
 
-GLIBC 2.12 compatibility
-========================
+General Plan
+============
 
-The packages are built on a relatively recent system provided by Travis-CI for free. The GLIBC version
-on the travis system is likely > 2.20. 
+We use the cross-compilation toolchain introduced in anaconda 5.0 to build
+the packages on Linux and OSX. 
 
-On linux-like platforms we use GCC voodoo to pin down the version of GLIBC API required by
-the binary object to earlier than GLIBC 2.12, ensuring these binary packages can work on systems deployed
-as early as 2010. (e.g. CentOS 6.x) The magic is in glibc-compat.h, which is prefixed to every C/C++ source
-code file. 
 
-Alternatively (the more mainstream way) one can build these binaries on systems with an earlier version of GLIBC by,
-for example creating a docker image or a virtual machine that runs a CentOS 6.x userland.
-The mainstream way is less fun than actually figuring out how the API version is contolled in an ELF file by `ld.so`.
-That being said,
-we shall explore the docker image / virtual machine approach in the future because it is much easier than
-the GCC voodoo we use here, and has the potential to work for Fortran and other exotic programming languages.
+platform directory
+++++++++++++++++++
+The current version of openmpi and mpich
+on default anaconda channels are not properly set up to use the cross
+compilation toolchain for the compiler wrappers. We therefore
+build openmpi3, mpich3 and a mpi4py that depends on them. The plan is to add
+openmpi3, mpich3 and mpi4py to the default anaconda channel eventually,
+and stop including these packages.
+
+
+build-order
++++++++++++
+
+all packages must be listed in build-order in order to build them.
+This is our poor man's version to resolve dependency. We loop
+over the packages to get around
+
+https://github.com/conda/conda-build/issues/2503
+
+
+requirements.yaml
++++++++++++++++++
+
+All packages also must be listed in requirements.yaml; except those
+hard coded in platform directory. A python script, `extrude_recipes.py`
+will find the latest version on pypi, generate a correctly versioned
+recipe for the package in recipes directory.
+
+
+

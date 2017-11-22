@@ -14,9 +14,8 @@ build:
 
 requirements:
   build:
-    - '{{ compiler("c") }}' # [linux]
+    - '{{ compiler("c") }}'
     - '{{ mpi }}'
-    - gcc # [osx]
 
   host:
     - python
@@ -30,7 +29,7 @@ requirements:
     - '{{ pin_compatible("numpy") }}'
     - mpi4py
     - '{{ mpi }}'
-    - libgcc # [osx]
+
 test:
   imports:
     - pfft
