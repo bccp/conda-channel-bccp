@@ -50,7 +50,6 @@ requirements:
 
   run:
     - python
-    - '{{ mpi }}'
     - mpich3         [linux]
     - openmpi3        [osx]
 
