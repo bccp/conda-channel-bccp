@@ -1,7 +1,7 @@
 {% set version = "3.2" %}
 
 package:
-    name: mpich
+    name: mpich3
     version: {{ version }}
 
 source:
@@ -31,8 +31,8 @@ test:
         - tests/helloworld.f90
         - tests/no-nonblock.py
     commands:
-        - conda inspect objects mpich  # [osx]
-        - conda inspect linkages mpich  # [not win]
+        - conda inspect objects mpich3  # [osx]
+        - conda inspect linkages mpich3  # [not win]
 
 about:
     home: http://www.mpich.org/
