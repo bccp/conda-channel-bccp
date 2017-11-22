@@ -4,7 +4,7 @@
 {% set major = version.rpartition('.')[0] %}
 
 package:
-    name: openmpi3
+    name: openmpi
     version: {{ version }}
 
 source:
@@ -35,8 +35,8 @@ test:
         - tests/helloworld.f
         - tests/helloworld.f90
     commands:
-        - conda inspect objects  openmpi3  # [osx]
-        - conda inspect linkages openmpi3  # [not win]
+        - conda inspect objects  openmpi  # [osx]
+        - conda inspect linkages openmpi  # [not win]
 
 about:
     home: https://www.open-mpi.org/

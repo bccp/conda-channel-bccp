@@ -45,13 +45,13 @@ requirements:
   build:
     - python
     - '{{ compiler("c") }}'
-    - mpich3         [linux]
-    - openmpi3        [osx]
+    - mpich         [linux]
+    - openmpi        [osx]
 
   run:
     - python
-    - mpich3         [linux]
-    - openmpi3        [osx]
+    - mpich         [linux]
+    - openmpi        [osx]
 
 test:
   imports:
