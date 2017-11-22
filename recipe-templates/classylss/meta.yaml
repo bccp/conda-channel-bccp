@@ -14,9 +14,8 @@ build:
 
 requirements:
   build:
-    - '{{ compiler("c") }}' # [linux]
-    - '{{ compiler("fortran") }}' # [linux]
-    - gcc # [osx]
+    - '{{ compiler("c") }}'
+    - '{{ compiler("fortran") }}'
 
   host:
     - python
@@ -29,7 +28,6 @@ requirements:
     - python
     - '{{ pin_compatible("numpy") }}'
     - cython
-    - libgcc # [osx]
 
 test:
   # Python imports
