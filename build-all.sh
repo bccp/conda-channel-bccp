@@ -1,5 +1,11 @@
 VARIANT=$1
 
+pushd platform
+
+conda build mpich3
+conda build openmpi3
+conda build mpi4py
+
 pushd recipes;
 
 err=0
