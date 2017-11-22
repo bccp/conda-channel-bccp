@@ -73,4 +73,4 @@ script:
     - VARIANT=variants/python-${PYTHON_VERSION}.yaml
     - python extrude_recipes.py requirements.yml
     # Packages are uploaded as they are built.
-    - bash build-all.sh $VARIANT
+    - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
