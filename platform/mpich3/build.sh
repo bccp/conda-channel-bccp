@@ -13,13 +13,7 @@ export FCFLAGS="$FFLAGS"
             --disable-dependency-tracking \
             --enable-cxx \
             --enable-f77 \
-            --enable-fc #\
-#            --with-cross=$RECIPE_DIR/cross.conf
+            --enable-fc
 
 make -j$CPU_COUNT
 make install
-
-if [[ $OSTYPE != darwin* ]]; then
-    cp $RECIPE_DIR/../check-glibc.sh .
-    bash check-glibc.sh $PREFIX/lib/ || exit 1
-fi
