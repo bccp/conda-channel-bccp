@@ -1,5 +1,5 @@
-platform/openmpi3
-platform/mpich3
+platform/openmpi
+platform/mpich
 platform/mpi4py
 recipes/runtests-*
 recipes/mpsort-*
