@@ -15,6 +15,7 @@ source:
 build:
     number: {{ build }}
     skip: True  # [win]
+    skip: True  # [linux]
 
 requirements:
     build:
