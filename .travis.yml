@@ -57,6 +57,7 @@ install:
     - conda info -a
     - conda list
     - |
+      # Only upload if this is NOT a pull request.
       if [ "$TRAVIS_PULL_REQUEST" = "false" ] && \
          [ $TRAVIS_REPO_SLUG = "bccp/conda-channel-bccp" ] && \
          [ "$TRAVIS_BRANCH" == "master" ]; then
@@ -68,20 +69,8 @@ install:
           UPLOAD="";
       fi
 script:
-    # Only upload if this is NOT a pull request.
     - INSPECT="--skip-existing -c bccp"
-    # Get ready to build.
     - VARIANT=variants/python-${PYTHON_VERSION}.yaml
     - python extrude_recipes.py requirements.yml
     # Packages are uploaded as they are built.
-    - |
-      ( cd recipes;
-        err=0
-        trap 'err=1' ERR; 
-        while read package ; do 
-            echo Running ---- conda build -m ../$VARIANT $INSPECT $UPLOAD $package-*;
-            conda build -m ../$VARIANT $INSPECT $UPLOAD $package-*;
-            echo Result ----- $err
-        done < ../build-order;
-        exit $err
-      )
+    - bash build-all.sh $VARIANT

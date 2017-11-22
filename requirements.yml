@@ -2,13 +2,6 @@
 # If 'version' not specified, latest release from pypi is built
 # To build past versions in addition, specify a 'past_versions' list
 
-- name: openmpi3
-  version: 3
-
-- name: mpich3
-  version: 3
-- name: mpi4py
-
 - name: mpi4py_test
 
 - name: runtests
