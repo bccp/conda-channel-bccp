@@ -98,8 +98,8 @@ platform directory
 The current version of openmpi and mpich
 on default anaconda channels are not properly set up to use the cross
 compilation toolchain for the compiler wrappers. We therefore
-build openmpi3, mpich3 and a mpi4py that depends on them. The plan is to add
-openmpi3, mpich3 and mpi4py to the default anaconda channel eventually,
+build openmpi, mpich and a mpi4py that depends on them. The plan is to add
+updated openmpi, mpich and mpi4py to the default anaconda channel eventually,
 and stop including these packages.
 
 
@@ -120,6 +120,22 @@ All packages also must be listed in requirements.yaml; except those
 hard coded in platform directory. A python script, `extrude_recipes.py`
 will find the latest version on pypi, generate a correctly versioned
 recipe for the package in recipes directory.
+
+
+variants/ directory
++++++++++++++++++++
+We use a travis-ci matrix to determine the version of Python for conda-build.
+This helps us to shrink the time to build the packages to within the travis time-limit.
+
+OSX gfortran weirdness
+++++++++++++++++++++++
+
+We sometimes need to add LDFLAGS to make the gfortran compiler on OSX happy.
+
+https://github.com/ContinuumIO/anaconda-issues/issues/739#issuecomment-238101203
+
+Currrently this still applies to the cross-compilation toolchain. Hopefully this
+will be fixed soon.
 
 
 
