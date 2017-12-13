@@ -15,13 +15,11 @@ requirements:
   build:
     - python
     - '{{ compiler("c") }}'
-    - mpich >=3.0        # [linux]
-    - openmpi >=3.0      # [osx]
+    - '{{ mpi }}'
 
   run:
     - python
-    - mpich >=3.0        # [linux]
-    - openmpi >=3.0      # [osx]
+    - '{{ mpi }}'
 
 test:
   imports:

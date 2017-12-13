@@ -9,4 +9,5 @@ python:
 mpi:
   - openmpi  # [osx]
   - mpich  #   [linux]
+  - mpich2  #   [linux]
 
