@@ -1,0 +1,20 @@
+numpy:
+  - 1.9 # [unix]
+
+python:
+  - 3.6
+  #- 3.5
+  #- 2.7
+
+nerschost:
+  - edison
+
+mpi:
+  - edison-prgenv-gnu_linux-64
+
+c_compiler :
+  - edison-prgenv-gnu
+cxx_compiler :
+  - edison-prgenv-gnu
+ftn_compiler :
+  - edison-prgenv-gnu
