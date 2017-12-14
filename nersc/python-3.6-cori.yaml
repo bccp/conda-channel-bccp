@@ -1,0 +1,20 @@
+numpy:
+  - 1.9 # [unix]
+
+python:
+  - 3.6
+  #- 3.5
+  #- 2.7
+
+nerschost:
+  - cori
+
+mpi:
+  - cori-prgenv-gnu_linux-64
+
+c_compiler :
+  - cori-prgenv-gnu
+cxx_compiler :
+  - cori-prgenv-gnu
+ftn_compiler :
+  - cori-prgenv-gnu
