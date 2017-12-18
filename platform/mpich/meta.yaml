@@ -19,6 +19,8 @@ requirements:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("fortran") }}
+        - libgcc-ng # needed for -lgomp
+
 test:
     requires:
         - {{ compiler("c") }}
