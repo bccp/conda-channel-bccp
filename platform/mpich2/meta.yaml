@@ -1,0 +1,35 @@
+package:
+  name: mpich2
+  version: 1.4.1p1
+
+source:
+  fn: mpich2-1.4.1p1.tar.gz
+  md5: b470666749bcb4a0449a072a18e2c204
+  url: http://www.mpich.org/static/downloads/1.4.1p1/mpich2-1.4.1p1.tar.gz
+
+build:
+  detect_binary_files_with_prefix : True
+  number: 2
+  skip: True  # [win]
+  skip: True  # [osx]
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - libgcc-ng
+
+about:
+  home: http://www.mpich.org/
+  license: BSD
+  license_file: COPYRIGHT
+  summary: A high performance widely portable implementation of the MPI standard
+  description: |
+    MPICH goals are 1.to provide an MPI implementation that efficiently supports
+    different computation and communication platforms including commodity clusters
+    ,high-speed networks2. to enable cutting-edge research in MPI through an easy-to-extend modular
+    framework for other derived implementations.
+  doc_url: http://www.mpich.org/documentation/guides/
+  doc_source_url: https://github.com/pmodels/mpich/tree/master/doc
+  dev_url: https://wiki.mpich.org/mpich/index.php/Main_Page
