@@ -4,10 +4,8 @@ trap 'exit 1' ERR;
 
 while read package ; do 
     echo Running ---- conda build $* $package;
-    buildlog=`mktemp XXXXXX`
-    conda build $* $package 2>&1 > $buildlog
+    conda build $* $package 2>&1 | tail -f
     echo Result ----- $err
-    tail $buildlog
 done < build-order;
 
 exit $err
