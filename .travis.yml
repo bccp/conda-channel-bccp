@@ -73,24 +73,8 @@ script:
     - python extrude_recipes.py requirements.yml
 
     # Packages are uploaded as they are built.
-#    Do not build mpich on linux due to conflict with mpich2
-#    - |
-#      if [ $TRAVIS_OS_NAME == "linux" ];  then
-#         VARIANT=variants/mpich/python-${PYTHON_VERSION}.yaml
-#         bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
-
-#    our mpich2 has a higher build number so it will replace the one
-#    from anaconda
     - |
-      if [ $TRAVIS_OS_NAME == "linux" ];  then
-         VARIANT=variants/mpich2/python-${PYTHON_VERSION}.yaml
-      fi
+      VARIANT=variants/pc/python-${PYTHON_VERSION}.yaml
 
-#    our openmpi has a higher version number so it will replace the one
-#    from anaconda
-    - |
-      if [ $TRAVIS_OS_NAME == "osx" ];  then
-          VARIANT=variants/openmpi/python-${PYTHON_VERSION}.yaml
-      fi
     - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
 
