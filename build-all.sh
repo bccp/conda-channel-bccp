@@ -4,7 +4,7 @@ trap 'exit 1' ERR;
 
 while read package ; do 
     echo Running ---- conda build $* $package;
-    buildlog=`mktemp`
+    buildlog=`mktemp XXXXXX`
     conda build $* $package 2>&1 > $buildlog
     echo Result ----- $err
     tail $buildlog
