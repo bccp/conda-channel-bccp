@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$PYTHON setup.py install --quiet --single-version-externally-managed --record rec.txt --offline
+python setup.py install --quiet --single-version-externally-managed --record rec.txt --offline
 
 if [[ $OSTYPE != darwin* ]]; then
     cp $RECIPE_DIR/../../check-glibc.sh .

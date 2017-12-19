@@ -15,7 +15,7 @@ sed -e "s;@CC@;$CC;" \
 
 make install
 
-$PYTHON setup.py install --single-version-externally-managed --record rec.txt
+python setup.py install --single-version-externally-managed --record rec.txt
 
 if [[ $OSTYPE != darwin* ]]; then
     cp $RECIPE_DIR/../../check-glibc.sh .

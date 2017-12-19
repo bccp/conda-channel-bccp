@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$PYTHON setup.py install
+python setup.py install
 
 if [[ $OSTYPE != darwin* ]]; then
     cp $RECIPE_DIR/../../check-glibc.sh .

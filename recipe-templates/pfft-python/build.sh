@@ -32,7 +32,7 @@ fi
 # don't know if this is useful.
 export FCFLAGS="$FFLAGS"
 
-$PYTHON setup.py install 
+python setup.py install
 
 if [[ $OSTYPE != darwin* ]]; then
     cp $RECIPE_DIR/../../check-glibc.sh .
