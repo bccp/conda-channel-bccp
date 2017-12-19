@@ -8,8 +8,10 @@ source:
   md5: bfe19f20cef5e92f6e49e50fb627ee70  #[unix]
 
 build:
-  number: 3          # [linux]
+  number: 4
   detect_binary_files_with_prefix: true
+  features:
+     - '{{ mpi }}'
 
 requirements:
   build:

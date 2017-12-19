@@ -9,9 +9,11 @@ source:
 
 build:
   detect_binary_files_with_prefix : True
-  number: 2
+  number: 3
   skip: True  # [win]
   skip: True  # [osx]
+  track_features:
+    - mpich2
 
 requirements:
   build:

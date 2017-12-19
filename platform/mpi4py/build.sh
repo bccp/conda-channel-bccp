@@ -1,3 +1,3 @@
 #!/bin/bash
 
-$PYTHON setup.py install
+python setup.py install --single-version-externally-managed --record rec.txt

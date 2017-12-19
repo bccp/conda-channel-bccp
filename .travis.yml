@@ -70,7 +70,14 @@ install:
       fi
 script:
     - INSPECT="--skip-existing -c bccp"
-    - VARIANT=variants/python-${PYTHON_VERSION}.yaml
     - python extrude_recipes.py requirements.yml
+
     # Packages are uploaded as they are built.
+    - VARIANT=variants/mpich/python-${PYTHON_VERSION}.yaml
+    - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+
+    - VARIANT=variants/mpich2/python-${PYTHON_VERSION}.yaml
+    - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+
+    - VARIANT=variants/openmpi/python-${PYTHON_VERSION}.yaml
     - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
