@@ -73,11 +73,17 @@ script:
     - python extrude_recipes.py requirements.yml
 
     # Packages are uploaded as they are built.
-    - VARIANT=variants/mpich/python-${PYTHON_VERSION}.yaml
-    - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+    - |
+      if [ $TRAVIS_OS_NAME == "linux" ];  then
+         bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+         VARIANT=variants/mpich/python-${PYTHON_VERSION}.yaml
+         bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
 
-    - VARIANT=variants/mpich2/python-${PYTHON_VERSION}.yaml
-    - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
-
-    - VARIANT=variants/openmpi/python-${PYTHON_VERSION}.yaml
-    - bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+         VARIANT=variants/mpich2/python-${PYTHON_VERSION}.yaml
+         bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+      fi
+    - |
+      if [ $TRAVIS_OS_NAME == "osx" ];  then
+          VARIANT=variants/openmpi/python-${PYTHON_VERSION}.yaml
+        bash build-all.sh -m $VARIANT $INSPECT $UPLOAD
+      fi
