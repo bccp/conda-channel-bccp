@@ -8,8 +8,6 @@ python:
 
 mpi:
   - openmpi # [osx]
-  - mpich  #   [linux]
-  - mpich2  #   [linux]
 
 pin_run_as_build:
     openmpi:
