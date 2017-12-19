@@ -19,6 +19,9 @@ requirements:
     - '{{ compiler("c") }}'
     - '{{ mpi }}'
 
+  host:
+    - python
+
   run:
     - python
     - '{{ mpi }}'
