@@ -13,6 +13,7 @@ build:
     number: 7
     skip: True  # [win]
     skip: True  # [osx]
+    skip: True  # [linux]
     track_features:
       - mpich
 
