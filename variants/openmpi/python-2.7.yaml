@@ -7,7 +7,7 @@ python:
   - 2.7
 
 mpi:
-  - openmpi # [osx]
+  - openmpi
 
 pin_run_as_build:
     openmpi:
