@@ -10,7 +10,7 @@ source:
     sha256: 0778679a6b693d7b7caff37ff9d2856dc2bfc51318bf8373859bfa74253da3dc
 
 build:
-    number: 7
+    number: 8
     skip: True  # [win]
     skip: True  # [osx]
     skip: True  # [linux]
@@ -18,6 +18,11 @@ build:
       - mpich
 
 requirements:
+    build:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
+        - {{ compiler("fortran") }}
+        - libgcc-ng # needed for -lgomp
     build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}

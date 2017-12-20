@@ -9,7 +9,7 @@ source:
 
 build:
   detect_binary_files_with_prefix : True
-  number: 3
+  number: 4
   skip: True  # [win]
   skip: True  # [osx]
   track_features:
@@ -17,6 +17,11 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+    - libgcc-ng
+  host:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - {{ compiler('fortran') }}
