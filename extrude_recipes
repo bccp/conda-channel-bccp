@@ -9,7 +9,7 @@ import requests
 from pkg_resources import parse_version
 import ruamel_yaml as yaml
 
-from conda import config
+from conda import export as config
 
 from six.moves import xmlrpc_client as xmlrpclib
 
