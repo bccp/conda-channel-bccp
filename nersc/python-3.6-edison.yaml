@@ -6,15 +6,15 @@ python:
   #- 3.5
   #- 2.7
 
-nerschost:
+crayhost:
   - edison
 
 mpi:
   - edison-prgenv-gnu_linux-64
 
-c_compiler :
+c_compiler:
   - edison-prgenv-gnu
-cxx_compiler :
+cxx_compiler:
   - edison-prgenv-gnu
-ftn_compiler :
+ftn_compiler:
   - edison-prgenv-gnu

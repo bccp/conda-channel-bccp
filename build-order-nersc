@@ -1,4 +1,5 @@
-nersc/prgenv-gnu_linux-64
+nersc/edison-prgenv-gnu_linux-64
+nersc/cori-prgenv-gnu_linux-64
 platform/mpi4py
 recipes/runtests-*
 recipes/mpsort-*

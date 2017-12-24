@@ -7,9 +7,11 @@ source /etc/bash.bashrc.local
 
 module unload PrgEnv-intel
 module load PrgEnv-gnu
-
+# because the glibc on nersc is buggy
+module swap gcc gcc/5.3.0
 module list
 
+export CFLAGS=-fPIC
 export CC=cc
 export CXX=CC
 export FC=ftn

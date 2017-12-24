@@ -3,20 +3,26 @@
 {% set major = version.rpartition('.')[0] %}
 
 package:
-    name: {{ nerschost }}-prgenv-gnu_linux-64
+    name: prgenv-gnu-impl_linux-64
     version: {{ version }}
 
 build:
     number: {{ build }}
     skip: True  # [win]
     skip: True  # [osx]
+    features:
+      - host.{{ crayhost }}
 
 test:
     files:
-        - tests/helloworld.c
-        - tests/helloworld.cxx
-        - tests/helloworld.f
-        - tests/helloworld.f90
+      - tests/helloworld.c
+      - tests/helloworld.cxx
+      - tests/helloworld.f
+      - tests/helloworld.f90
+
+#run_exports:
+#  strong:
+#    - prgenv-gnu_linux-64[host.{{ crayhost }}]
 
 extra:
     recipe-maintainers:
