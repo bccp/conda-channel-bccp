@@ -9,7 +9,7 @@ import requests
 
 import ruamel_yaml as yaml
 
-from conda import config
+from conda import exports as conda_exports
 
 from six.moves import xmlrpc_client as xmlrpclib
 
@@ -265,7 +265,7 @@ class Package(object):
         True if the current build platform is supported by the package, False
         otherwise.
         """
-        return config.subdir in self.build_platforms
+        return conda_exports.subdir in self.build_platforms
 
 
 def get_package_versions(requirements_path):
