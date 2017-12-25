@@ -1,0 +1,5 @@
+#! /bin/bash
+
+LDFLAGS=-L@PREFIX@/lib
+CFLAGS=-I@PREFIX@/include
+LIBS=

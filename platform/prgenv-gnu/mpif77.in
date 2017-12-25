@@ -1,0 +1,4 @@
+#! /bin/bash
+
+source @PREFIX@/etc/mpi.conf
+exec ftn $CFLAGS $LDFLAGS $* $LIBS
