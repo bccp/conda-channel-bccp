@@ -16,8 +16,3 @@ sed -e "s;@CC@;$CC;" \
 make install
 
 python setup.py install --single-version-externally-managed --record rec.txt
-
-if [[ $OSTYPE != darwin* ]]; then
-    cp $RECIPE_DIR/../../check-glibc.sh .
-    bash check-glibc.sh $SP_DIR/Corrfunc || exit 1
-fi
