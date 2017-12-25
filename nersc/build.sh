@@ -38,6 +38,7 @@ if [ "$1" = "--clean" ]; then
 fi
 
 ENVNAME=$PYTHON
+MPI=${NERSC_HOST}.prgenv.gnu.mpi 
 
 # get the bundle-anaconda command
 source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
@@ -76,7 +77,7 @@ install ()
     # install packages into this python version's environment
     source activate $ENVNAME
 
-    conda install $INSTALL_FLAG --use-local --yes * ||
+    conda install $INSTALL_FLAG --use-local --yes ${MPI} * ||
     { echo "conda install of packages failed"; exit 1; }
     conda update --yes --use-local -f * || { echo "forced conda update failed"; exit 1; }
     conda update --yes --use-local --all || { echo "conda update all failed"; exit 1; }
