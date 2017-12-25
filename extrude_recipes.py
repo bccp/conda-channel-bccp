@@ -18,8 +18,8 @@ from jinja2.exceptions import TemplateNotFound
 
 PYPI_XMLRPC = 'https://pypi.python.org/pypi'
 TEMPLATE_FOLDER = 'recipe-templates'
-RECIPE_FOLDER = 'recipes'
 ALL_PLATFORMS = ['osx-64', 'linux-64', 'linux-32', 'win-32', 'win-64']
+RECIPE_FOLDER = 'recipes'
 
 CONDA_FORGE_RECIPE_BASE = 'https://raw.githubusercontent.com/conda-forge/{}-feedstock/master/recipe/meta.yaml'
 
@@ -384,8 +384,12 @@ def main(args=None):
         parser.add_argument('--template-dir', default=TEMPLATE_FOLDER,
                             help="Path the folder of recipe templates, if "
                                  "any. Default: '{}'".format(TEMPLATE_FOLDER))
+        parser.add_argument('--recipe-dir', default=RECIPE_FOLDER,
+                            help="Path the folder of recipes , if "
+                                 "any. Default: '{}'".format(RECIPE_FOLDER))
         args = parser.parse_args()
         template_dir = args.template_dir
+        recipe_dir = args.recipe_dir
 
     packages = get_package_versions(args.requirements)
 
@@ -397,13 +401,13 @@ def main(args=None):
         needs_recipe = []
 
     try:
-        os.mkdir(RECIPE_FOLDER)
+        os.mkdir(recipe_dir)
     except OSError:
         pass
 
     # Write recipes from templates.
     for p in packages:
-        recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name+'-'+p.version)
+        recipe_path = os.path.join(recipe_dir, p.conda_name+'-'+p.version)
         template_path = os.path.join(template_dir, p.conda_name)
 
         print('Writing recipe for {}-{} at {}'.format(p.conda_name, p.version, recipe_path))
