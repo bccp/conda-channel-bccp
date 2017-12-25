@@ -55,6 +55,8 @@ conda update --yes conda conda-build
 RECIPE_DIR=recipes-$ENVNAME
 
 # make the recipes
+rm -rf $RECIPE_DIR
+mkdir -p $RECIPE_DIR
 python extrude_recipes.py requirements.yml --recipe-dir $RECIPE_DIR || { echo "extrude_recipes failed"; exit 1; }
 
 build ()
