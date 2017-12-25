@@ -10,11 +10,11 @@ crayhost:
   - edison
 
 mpi:
-  - edison-prgenv-gnu_linux-64
+  - edison-prgenv-gnu.mpi
 
 c_compiler:
-  - edison-prgenv-gnu
+  - edison.prgenv.gnu
 cxx_compiler:
-  - edison-prgenv-gnu
+  - edison.prgenv.gnu
 ftn_compiler:
-  - edison-prgenv-gnu
+  - edison.prgenv.gnu
