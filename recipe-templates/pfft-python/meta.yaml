@@ -25,6 +25,7 @@ requirements:
     - cython
     - mpi4py
     - '{{ mpi }}'
+    - '{{ compiler("c") }}'
 
   run:
     - python
