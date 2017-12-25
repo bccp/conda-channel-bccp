@@ -8,7 +8,7 @@ source:
   md5: bfe19f20cef5e92f6e49e50fb627ee70  #[unix]
 
 build:
-  number: 4
+  number: 5
   detect_binary_files_with_prefix: true
   features:
      - '{{ mpi }}'
@@ -21,6 +21,8 @@ requirements:
 
   host:
     - python
+    - '{{ compiler("c") }}'
+    - '{{ mpi }}'
 
   run:
     - python
