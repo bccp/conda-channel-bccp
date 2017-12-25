@@ -10,7 +10,7 @@ crayhost:
   - cori
 
 mpi:
-  - cori-prgenv-gnu_linux-64
+  - host.cori
 
 c_compiler :
   - cori-prgenv-gnu

@@ -1,5 +1,7 @@
-nersc/edison-prgenv-gnu_linux-64
-nersc/cori-prgenv-gnu_linux-64
+#comment
+nersc/features
+nersc/prgenv-gnu-impl
+nersc/prgenv-gnu
 platform/mpi4py
 recipes/runtests-*
 recipes/mpsort-*
@@ -11,7 +13,7 @@ recipes/cachey-*
 recipes/classylss-*
 recipes/corrfunc-*
 recipes/fake_spectra-*
-recipes/fitsio-*
+ecipes/fitsio-*
 recipes/halotools-*
 recipes/kdcount-*
 recipes/mcfit-*

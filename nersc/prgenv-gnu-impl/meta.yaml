@@ -13,6 +13,14 @@ build:
     features:
       - host.{{ crayhost }}
 
+requirements:
+    build:
+      - host.{{ crayhost }}
+    host:
+      - host.{{ crayhost }}
+    run:
+      - host.{{ crayhost }}
+
 test:
     files:
       - tests/helloworld.c
