@@ -1,0 +1,32 @@
+package:
+  name: python-mpi-bcast
+  version: 0.1.0
+
+source:
+  fn: python-mpi-bcast-0.1.0.tar.gz # [unix]
+  url: https://github.com/rainwoodman/python-mpi-bcast/archive/0.1.0.tar.gz
+
+build:
+  number: 1
+  detect_binary_files_with_prefix: true
+  features:
+     - '{{ mpi }}'
+
+requirements:
+  build:
+    - '{{ compiler("c") }}'
+    - '{{ mpi }}'
+    - bzip2
+    - zlib
+
+#  host:
+#    - bzip2
+#    - zlib
+
+about:
+  home: https://github.com/rainwoodman/python-mpi-bcast
+  license: BSD
+  summary: Launching Python Applications with MPI Broadcast
+  description: |
+        Tools for fast launching of python application on clusters with MPI.
+        A new Python distribution is deployed to computing nodes at job launch.
