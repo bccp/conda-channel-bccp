@@ -12,7 +12,7 @@ recipes/cachey-*
 recipes/classylss-*
 recipes/corrfunc-*
 recipes/fake_spectra-*
-ecipes/fitsio-*
+recipes/fitsio-*
 recipes/halotools-*
 recipes/kdcount-*
 recipes/mcfit-*
