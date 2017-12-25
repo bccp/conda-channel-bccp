@@ -403,9 +403,10 @@ def main(args=None):
 
     # Write recipes from templates.
     for p in packages:
-        print('Writing recipe for {}-{}.'.format(p.conda_name, p.version))
         recipe_path = os.path.join(RECIPE_FOLDER, p.conda_name+'-'+p.version)
         template_path = os.path.join(template_dir, p.conda_name)
+
+        print('Writing recipe for {}-{} at {}'.format(p.conda_name, p.version, recipe_path))
         try:
             os.mkdir(recipe_path)
         except OSError:
@@ -437,8 +438,11 @@ class PassThroughUndefined(Undefined):
     def __str__(self):
         return u'{{ %s }}' % self._undefined_name
 
-    def __call__(self, arg):
-        return u'{{ %s("%s") }}' % (self._undefined_name, arg)
+    def __call__(self, *args, **kwargs):
+        sargs = ', '.join(['"%s"' % a for a in args])
+        skwargs = ', '.join(['%s="%s"' % (k, a) for k, a in kwargs.items()])
+
+        return u'{{ %s(%s) }}' % (self._undefined_name, ','.join([sargs, skwargs]))
 
 if __name__ == '__main__':
     main()
