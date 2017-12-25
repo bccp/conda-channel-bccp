@@ -16,5 +16,5 @@ c_compiler :
   - cori.prgenv.gnu
 cxx_compiler :
   - cori.prgenv.gnu
-ftn_compiler :
+fortran_compiler :
   - cori.prgenv.gnu

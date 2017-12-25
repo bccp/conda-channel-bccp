@@ -16,5 +16,5 @@ c_compiler:
   - edison.prgenv.gnu
 cxx_compiler:
   - edison.prgenv.gnu
-ftn_compiler:
+fortran_compiler:
   - edison.prgenv.gnu
