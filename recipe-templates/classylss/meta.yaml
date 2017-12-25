@@ -26,7 +26,7 @@ requirements:
 
   run:
     - python
-    - '{{ pin_compatible("numpy") }}'
+    - '{{ pin_compatible("numpy", lower_bound="1.9") }}'
     - cython
 
 test:
