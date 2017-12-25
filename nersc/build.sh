@@ -75,7 +75,7 @@ install ()
 
     # install packages into this python version's environment
     source activate $ENVNAME
-    conda uninstall --yes mpich2
+
     conda install $INSTALL_FLAG --use-local --yes * ||
     { echo "conda install of packages failed"; exit 1; }
     conda update --yes --use-local -f * || { echo "forced conda update failed"; exit 1; }
