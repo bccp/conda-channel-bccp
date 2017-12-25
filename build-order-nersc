@@ -1,7 +1,6 @@
 #comment
-nersc/features
-nersc/prgenv-gnu-impl
 nersc/prgenv-gnu
+nersc/prgenv-gnu-mpi
 platform/mpi4py
 recipes/runtests-*
 recipes/mpsort-*

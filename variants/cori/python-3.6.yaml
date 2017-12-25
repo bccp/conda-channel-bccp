@@ -10,11 +10,11 @@ crayhost:
   - cori
 
 mpi:
-  - host.cori
+  - cori.prgenv.gnu.mpi
 
 c_compiler :
-  - cori-prgenv-gnu
+  - cori.prgenv.gnu
 cxx_compiler :
-  - cori-prgenv-gnu
+  - cori.prgenv.gnu
 ftn_compiler :
-  - cori-prgenv-gnu
+  - cori.prgenv.gnu
