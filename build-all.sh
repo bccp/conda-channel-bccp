@@ -17,13 +17,8 @@ log2dots ()
     logfile=`mktemp XXXXX`
     trap "rm $logfile;" EXIT
     trap "err=1" ERR
-    if $* 2>&1 | tee $logfile | \
+    $* 2>&1 | tee $logfile | \
        awk "{printf(\".\")} NR % 40 == 0 {printf(\"\n\")} END {printf(\"\n\")}"; \
-    then
-       err=1;
-    else
-       err=0;
-    fi
     tail $logfile
     exit $err
     )
