@@ -21,11 +21,12 @@ shift
 
 # start build from the parent of nersc directory, where these scripts are.
 
-_DIRNAME=`dirname ${_SCRIPT_LOCATION}`/..
-_DIRNAME=`readlink -f $_DIRNAME`
+_DIRNAME=`dirname ${_SCRIPT_LOCATION}`
+_PARENTDIR=`readlink -f ${_DIRNAME}/..`
+_DIRNAME=`readlink -f ${_DIRNAME}`
 
-# execute from the script's directory
-pushd $_DIRNAME
+# execute from the script's parent directory
+pushd $_PARENTDIR
 
 INSTALL_FLAG=""
 BUILD_FLAG="--skip-existing"
@@ -101,6 +102,13 @@ bundle ()
     { echo "bundle-anaconda failed"; exit 1; }
 }
 
+install_script()
+{
+    local ENVNAME=bcast-anaconda-$1
+    source $CONDA_PREFIX/envs/$ENVNAME/libexec/python-mpi-bcast/activate.sh    
+    cp $_DIRNAME/activate-bcast $CONDA_PREFIX/envs/$ENVNAME/bin
+}
+
 # build packages for specific python version
 build $PYTHON
 
@@ -110,4 +118,5 @@ install $PYTHON
 # install
 bundle $PYTHON
 
+install_script $PYTHON
 popd # return to start directory

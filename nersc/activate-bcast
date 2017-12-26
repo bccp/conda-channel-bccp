@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Determine the directory containing this script
+if [[ -n $BASH_VERSION ]]; then
+    _SCRIPT_LOCATION=${BASH_SOURCE[0]}
+    _SHELL="bash"
+elif [[ -n $ZSH_VERSION ]]; then
+    _SCRIPT_LOCATION=${funcstack[1]}
+    _SHELL="zsh"
+else
+    echo "Only bash and zsh are supported"
+    return 1
+fi
+
+_DIRNAME=`dirname ${_SCRIPT_LOCATION}`/..
+_DIRNAME=`readlink -f $_DIRNAME`
+
+source $_DIRNAME/../../bin/activate $_DIRNAME
+source $CONDA_PREFIX/libexec/python-mpi-bcast/activate.sh \
+       /dev/shm/local "srun -n $SLURM_JOB_NUM_NODES"
+
+bcast ${CONDA_PREFIX}.tar.gz
+
+#$_BCCP_DIR/python-mpi-bcast/nersc/${NERSC_HOST}/system-libraries.tar.gz \
+
