@@ -1,0 +1,20 @@
+numpy:
+  - 1.9 # [unix]
+
+python:
+  #- 3.6
+  - 3.5
+  #- 2.7
+
+crayhost:
+  - edison
+
+mpi:
+  - edison.prgenv.gnu.mpi
+
+c_compiler:
+  - edison.prgenv.gnu
+cxx_compiler:
+  - edison.prgenv.gnu
+fortran_compiler:
+  - edison.prgenv.gnu
