@@ -10,21 +10,31 @@ pkglist=$2
 shift
 shift
 
-err=0
-#trap 'err=1' ERR;
-trap 'exit 1' ERR;
+log2dots ()
+{
+    (
+    echo ----- Running "$*"
+    logfile=`mktemp XXXXX`
+    trap "rm $logfile;" EXIT
+    trap "err=1" ERR
+    if $* 2>&1 | tee $logfile | \
+       awk "{printf(\".\")} NR % 40 == 0 {printf(\"\n\")} END {printf(\"\n\")}"; \
+    then
+       err=1;
+    else
+       err=0;
+    fi
+    tail $logfile
+    exit $err
+    )
+}
 
 while read package ; do 
     if [[ $package == '#'* ]]; then
-        echo bypassing comment $package
         continue
     fi
-    echo Running ---- conda build $* $pkgroot/$package;
-    logfile=`mktemp XXXXX`
-    conda build $* $pkgroot/$package 2>&1 | tee $logfile | awk "{printf(\".\")} NR % 40 == 0 {printf(\"\n\")} END {printf(\"\n\")}"
-    echo Result ----- $err
-    tail $logfile
-    rm -f $logfile
+    log2dots conda build $* $pkgroot/$package || {
+        echo "----- Failed -----"
+        exit 1
+    }
 done < $pkglist
-
-exit $err
