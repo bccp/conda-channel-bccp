@@ -1,0 +1,20 @@
+numpy:
+  - 1.9 # [unix]
+
+python:
+  #- 3.6
+  #- 3.5
+  - 2.7
+
+crayhost:
+  - cori
+
+mpi:
+  - cori.prgenv.gnu.mpi
+
+c_compiler :
+  - cori.prgenv.gnu
+cxx_compiler :
+  - cori.prgenv.gnu
+fortran_compiler :
+  - cori.prgenv.gnu
