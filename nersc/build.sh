@@ -37,11 +37,7 @@ if [ "$1" = "--clean" ]; then
     shift
 fi
 
-ENVNAME=$PYTHON
 MPI=${NERSC_HOST}.prgenv.gnu.mpi 
-
-# get the bundle-anaconda command
-source /usr/common/contrib/bccp/python-mpi-bcast/activate.sh
 
 # activate our root anaconda install to start
 source /usr/common/contrib/bccp/anaconda3/bin/activate root
@@ -52,17 +48,17 @@ conda build purge
 # keep conda and conda-build up to date
 conda update --yes conda conda-build
 
-# directory where recipes will be written
-RECIPE_DIR=recipes-$ENVNAME
-
-# make the recipes
-rm -rf $RECIPE_DIR
-mkdir -p $RECIPE_DIR
-python extrude_recipes.py requirements.yml --recipe-dir $RECIPE_DIR || { echo "extrude_recipes failed"; exit 1; }
-
 build ()
 {
     local PYTHON=$1
+    # directory where recipes will be written
+    RECIPE_DIR=recipes-$PYTHON
+    
+    # make the recipes
+    rm -rf $RECIPE_DIR
+    mkdir -p $RECIPE_DIR
+    python extrude_recipes.py requirements.yml --recipe-dir $RECIPE_DIR || { echo "extrude_recipes failed"; exit 1; }
+
     local BUILD_ARGS="-m variants/${NERSC_HOST}/python-${PYTHON}.yaml $BUILD_FLAG --no-test -c astropy"
     bash build-all.sh platform pkglist-nersc-platform $BUILD_ARGS
     bash build-all.sh $RECIPE_DIR pkglist $BUILD_ARGS
@@ -70,21 +66,38 @@ build ()
 
 install ()
 {
+    # undocumented feature 
+    # https://github.com/conda/conda/pull/6413
+    # since we will bcast the bundle to /dev/shm/local
+    # set it here.
+    
+    export CONDA_TARGET_PREFIX_OVERRIDE=/dev/shm/local
     local PYTHON=$1
+    local ENVNAME=bcast-anaconda-$1
+
+    conda env remove -y -n $ENVNAME
+    conda create -y -n $ENVNAME python=$PYTHON matplotlib
+
     # dirty way to get a list of recipe names
     pushd recipe-templates
 
-    # install packages into this python version's environment
-    source activate $ENVNAME
-
-    conda install $INSTALL_FLAG --use-local --yes ${MPI} * ||
+    conda install -n $ENVNAME $INSTALL_FLAG --use-local --yes ${MPI} python-mpi-bcast * ||
     { echo "conda install of packages failed"; exit 1; }
-    conda update --yes --use-local -f * || { echo "forced conda update failed"; exit 1; }
-    conda update --yes --use-local --all || { echo "conda update all failed"; exit 1; }
+    conda update -n $ENVNAME --yes --use-local -f * || { echo "forced conda update failed"; exit 1; }
+    conda update -n $ENVNAME --yes --use-local --all || { echo "conda update all failed"; exit 1; }
     popd
 
+}
+
+bundle ()
+{
+    local ENVNAME=bcast-anaconda-$1
+
+    # enable python-mpi-bcast
+    source $CONDA_PREFIX/envs/$ENVNAME/libexec/python-mpi-bcast/activate.sh    
+
     # and tar the install
-    bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/bccp-anaconda-$PYTHON.tar.gz $CONDA_PREFIX ||
+    bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz $CONDA_PREFIX/envs/$ENVNAME ||
     { echo "bundle-anaconda failed"; exit 1; }
 }
 
@@ -92,6 +105,9 @@ install ()
 build $PYTHON
 
 # install
-install $ENVNAME
+install $PYTHON
+
+# install
+bundle $PYTHON
 
 popd # return to start directory

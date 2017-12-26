@@ -32,8 +32,9 @@ case $1 in
 esac 
 
 source $_BCCP_DIR/anaconda3/bin/activate $1
-source $_BCCP_DIR/python-mpi-bcast/activate.sh /dev/shm/local "srun -n $SLURM_JOB_NUM_NODES"
+source $CONDA_PREFIX/libexec/python-mpi-bcast/activate.sh /dev/shm/local "srun -n $SLURM_JOB_NUM_NODES"
 
-bcast $_BCCP_DIR/python-mpi-bcast/nersc/${NERSC_HOST}/system-libraries.tar.gz \
-      $_BCCP_DIR/anaconda3/envs/bccp-anaconda-$1.tar.gz
+bcast $_BCCP_DIR/anaconda3/envs/bccp-anaconda-$1.tar.gz
+
+#$_BCCP_DIR/python-mpi-bcast/nersc/${NERSC_HOST}/system-libraries.tar.gz \
 
