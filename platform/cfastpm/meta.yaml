@@ -1,0 +1,38 @@
+{% set build = 2 %}
+{% set version = '0.0.0_git8442714' %}
+{% set major = version.rpartition('.')[0] %}
+
+package:
+    name: cfastpm
+    version: {{ version }}
+
+source:
+  git_url: https://github.com/rainwoodman/fastpm.git
+  git_rev: 8442714
+
+build:
+    number: {{ build }}
+    skip: True  # [win]
+
+requirements:
+    build:
+        - {{ compiler("c") }} # [not win]
+        - {{ mpi }} # [not win]
+
+    host :
+        - {{ compiler("c") }} # [not win]
+        - {{ mpi }} # [not win]
+        - gsl
+
+about:
+    home: https://github.com/rainwoodman/fastpm
+    license: GPL3
+    license_family: GPL
+    license_file: LICENSE
+    summary: 'FastPM'
+    description: |
+         quasi-nbody simulation with particle mesh
+
+extra:
+    recipe-maintainers:
+        - rainwoodman
