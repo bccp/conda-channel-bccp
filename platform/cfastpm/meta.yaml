@@ -24,6 +24,10 @@ requirements:
         - {{ mpi }} # [not win]
         - gsl
 
+    run :
+        - {{ mpi}}
+        - gsl
+
 about:
     home: https://github.com/rainwoodman/fastpm
     license: GPL3

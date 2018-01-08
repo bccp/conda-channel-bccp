@@ -1,7 +1,7 @@
 CC=mpicc -std=gnu99
 OPENMP = #-fopenmp
 CPPFLAGS = -DFASTPM_FFT_PRECISION=64 -DHAS_BACKTRACE
-LDFLAGS =
+LDFLAGS = $(LDFLAGS)
 OPTIMIZE ?= -O3 -Ofast -g
 #OPTIMIZE ?= -O0 -g -fno-builtin -Wall -Werror -Werror=uninitialized -Wno-unknown-pragmas
 
