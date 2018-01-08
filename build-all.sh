@@ -18,7 +18,7 @@ log2dots ()
     trap "rm $logfile;" EXIT
     trap "err=1" ERR
     $* 2>&1 | tee $logfile | \
-       awk "{printf(\".\")} NR % 40 == 0 {printf(\"\n\")} END {printf(\"\n\")}"; \
+       awk "{printf(\".\");fflush();} NR % 40 == 0 {printf(\"\n\");fflush()} END {printf(\"\n\")}"; \
     tail $logfile
     exit $err
     )
