@@ -103,8 +103,8 @@ updated openmpi, mpich and mpi4py to the default anaconda channel eventually,
 and stop including these packages.
 
 
-build-order
-+++++++++++
+pkglist
++++++++
 
 all packages must be listed in build-order in order to build them.
 This is our poor man's version to resolve dependency. We loop
@@ -138,4 +138,9 @@ Currrently this still applies to the cross-compilation toolchain. Hopefully this
 will be fixed soon.
 
 
+nersc/ directory
+++++++++++++++++
+
+contains scripts to setup the environment to work with python-mpi-bcast on NERSC
+computers. The environments can be rebuilt nightly with a cronjob.
 

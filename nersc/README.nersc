@@ -19,3 +19,11 @@ conda packages in this repository on NERSC:
       $ bash nightly-build.cron
 
 5. Check to make sure that the job was added using ``crontab -l``.
+
+
+Assumptions
+-----------
+
+nersc/conda-activate.sh shall be symlinked to $root
+$root/anaconda3 contains a python3x based anaconda base environment
+
