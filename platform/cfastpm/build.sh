@@ -11,7 +11,7 @@ export FCFLAGS="$FFLAGS"
 
 cp $RECIPE_DIR/Makefile.local .
 
-make
+make "LDFLAGS=$LDFLAGS"
 
 cp src/fastpm $PREFIX/bin/
 cp src/fastpm-lua $PREFIX/bin/
