@@ -144,3 +144,8 @@ nersc/ directory
 contains scripts to setup the environment to work with python-mpi-bcast on NERSC
 computers. The environments can be rebuilt nightly with a cronjob.
 
+really old GDB
+++++++++++++++
+
+On a system with a really old gdb that cannot interpret the debugging info 
+generated from newer GCC. add -gdrawf-2 to make sure the debugging info is old enough.
