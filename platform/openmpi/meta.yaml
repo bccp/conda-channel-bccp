@@ -1,4 +1,4 @@
-{% set build = 2 %}
+{% set build = 3 %}
 {% set version = '3.0.0' %}
 {% set sha256 = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7' %}
 {% set major = version.rpartition('.')[0] %}
