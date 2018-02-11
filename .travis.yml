@@ -49,7 +49,7 @@ install:
     - conda install ruamel_yaml
 
     # latest conda build
-    - conda install 'conda-build<3.1'
+    - conda install conda-build # 'conda-build<3.1'
 
     # to get fallback openmpi/mpich2
     # trying to work around https://github.com/conda/conda-build/issues/2510
