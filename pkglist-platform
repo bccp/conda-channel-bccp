@@ -1,6 +1,5 @@
 openmpi
 mpich
 mpich2
-mpi4py
-python-mpi-bcast
 cfastpm
+python-mpi-bcast

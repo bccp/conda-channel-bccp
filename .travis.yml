@@ -78,6 +78,12 @@ script:
     - |
       VARIANT=variants/pc/python-${PYTHON_VERSION}.yaml
 
-    - bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
+    - |
+      if [ ${PYTHON_VERSION} == 3.6 ]; then
+         bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
+      else
+         bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT  # no upload for other builds.
+      fi
+    - bash build-all.sh platform pkglist-platform-py -m $VARIANT $INSPECT $UPLOAD
     - bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
 
