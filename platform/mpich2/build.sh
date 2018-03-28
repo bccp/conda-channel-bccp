@@ -9,3 +9,6 @@ make install
 
 rm -rf $PREFIX/share
 rm -rf $PREFIX/sbin
+if grep '/usr/local/src/conda-prefix' $PREFIX/bin/mpi*; then
+    exit 1
+fi
