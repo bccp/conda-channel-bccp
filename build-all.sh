@@ -15,12 +15,10 @@ log2dots ()
     (
     echo ----- Running "$*"
     logfile=`mktemp XXXXX`
-    trap "rm $logfile;" EXIT
-    trap "err=1" ERR
+    trap "tail $logfile; rm $logfile;" EXIT
     $* 2>&1 | tee $logfile | \
        awk "{printf(\".\");fflush();} NR % 40 == 0 {printf(\"\n\");fflush()} END {printf(\"\n\")}"; \
-    tail $logfile
-    exit $err
+    exit ${PIPESTATUS[0]}
     )
 }
 
