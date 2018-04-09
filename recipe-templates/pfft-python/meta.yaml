@@ -18,6 +18,7 @@ requirements:
   build:
     - '{{ compiler("c") }}'
     - '{{ mpi }}'
+    - mpi4py
 
   host:
     - python
