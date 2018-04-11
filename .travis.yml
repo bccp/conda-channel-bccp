@@ -86,4 +86,5 @@ script:
       fi
     - bash build-all.sh platform pkglist-platform-py -m $VARIANT $INSPECT $UPLOAD
     - bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
+    - sleep 10 # https://github.com/travis-ci/travis-ci/issues/6018
 
