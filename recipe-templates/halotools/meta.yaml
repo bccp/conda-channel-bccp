@@ -10,12 +10,12 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 3
+  number : 4
 
 requirements:
   build:
-    - '{{ compiler("c") }}' # [linux]
-    - '{{ compiler("cxx") }}' # [linux]
+    - '{{ compiler("c") }}'
+    - '{{ compiler("cxx") }}'
 
   host:
     - python
