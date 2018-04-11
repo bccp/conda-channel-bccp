@@ -32,5 +32,8 @@ fi
 # don't know if this is useful.
 export FCFLAGS="$FFLAGS"
 
-python setup.py install
+# important to use $PYTHON because python is
+# installed in both envs.
+
+$PYTHON setup.py install
 

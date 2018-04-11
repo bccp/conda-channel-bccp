@@ -9,4 +9,4 @@ fi
 # this uses CFLAGS for CCFLAG
 cp $RECIPE_DIR/class.cfg depends/class.cfg
 
-python setup.py install --single-version-externally-managed --record rec.txt
+$PYTHON setup.py install --single-version-externally-managed --record rec.txt

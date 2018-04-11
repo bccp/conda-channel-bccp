@@ -19,6 +19,9 @@ requirements:
     - '{{ compiler("c") }}'
     - '{{ mpi }}'
     - mpi4py
+    - numpy
+    - cython
+    - mpi4py
 
   host:
     - python
