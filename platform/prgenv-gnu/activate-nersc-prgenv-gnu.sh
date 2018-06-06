@@ -16,3 +16,6 @@ export CC=cc
 export CXX=CC
 export FC=ftn
 export F77=ftn
+# set a reasonable number for number of threads,
+# to avoid 'pthreads_create: Resource temporarily unavailable' error.
+export OMP_NUM_THREADS=2
