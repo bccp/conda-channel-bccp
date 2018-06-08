@@ -28,6 +28,8 @@ _DIRNAME=`readlink -f ${_DIRNAME}`
 # execute from the script's parent directory
 pushd $_PARENTDIR
 
+git pull
+
 INSTALL_FLAG=""
 BUILD_FLAG="--skip-existing"
 
