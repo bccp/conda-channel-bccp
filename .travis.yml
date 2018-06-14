@@ -10,6 +10,8 @@ os:
 
 osx_image: xcode6.4
 
+sudo: true
+
 env:
     matrix:
         - PYTHON_VERSION=3.6
