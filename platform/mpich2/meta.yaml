@@ -9,7 +9,7 @@ source:
 
 build:
   detect_binary_files_with_prefix : True
-  number: 6
+  number: 7
   skip: True  # [win]
   skip: True  # [osx]
   track_features:
