@@ -18,3 +18,9 @@ cxx_compiler :
   - cori.prgenv.gnu
 fortran_compiler :
   - cori.prgenv.gnu
+
+pin_run_as_build:
+    cori.prgenv.gnu.mpi:
+      max_pin: x.x.x
+    cori.prgenv.gnu_linux64:
+      max_pin: x.x.x

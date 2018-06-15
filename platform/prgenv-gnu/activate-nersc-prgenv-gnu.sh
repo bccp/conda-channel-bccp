@@ -20,3 +20,6 @@ export F77=ftn
 # set a reasonable number for number of threads,
 # to avoid 'pthreads_create: Resource temporarily unavailable' error.
 export OMP_NUM_THREADS=2
+
+export _OLD_CONDA_PYTHON_SYSCONFIGDATA_NAME=${_CONDA_PYTHON_SYSCONFIGDATA_NAME}
+export _CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_nersc_prgenv_gnu

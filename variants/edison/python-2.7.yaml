@@ -18,3 +18,11 @@ cxx_compiler:
   - edison.prgenv.gnu
 fortran_compiler:
   - edison.prgenv.gnu
+
+
+pin_run_as_build:
+    edison.prgenv.gnu.mpi:
+      max_pin: x.x.x
+    edison.prgenv.gnu_linux64:
+      max_pin: x.x.x
+
