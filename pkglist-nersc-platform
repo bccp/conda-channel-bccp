@@ -3,3 +3,4 @@ prgenv-gnu
 prgenv-gnu-mpi
 mpi4py
 python-mpi-bcast
+pytorch-cpu
