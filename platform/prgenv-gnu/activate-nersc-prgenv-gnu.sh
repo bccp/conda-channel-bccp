@@ -1,5 +1,4 @@
 set +e
-export USER=bccpuser
 source /etc/profile.d/nerschost.sh
 source /etc/profile.d/modules.sh
 source /etc/profile.d/mpi-selector.sh
