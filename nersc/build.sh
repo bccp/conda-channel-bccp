@@ -79,17 +79,11 @@ install ()
     local ENVNAME=bcast-anaconda-$1
 
     conda env remove -y -n $ENVNAME
-    conda create -y -n $ENVNAME python=$PYTHON matplotlib
-
-    # dirty way to get a list of recipe names
-    pushd recipe-templates
-
-    conda install -n $ENVNAME $INSTALL_FLAG --use-local --yes ${MPI} python-mpi-bcast * ||
-    { echo "conda install of packages failed"; exit 1; }
-    conda update -n $ENVNAME --yes --use-local -f * || { echo "forced conda update failed"; exit 1; }
-    conda update -n $ENVNAME --yes --use-local --all || { echo "conda update all failed"; exit 1; }
-    popd
-
+    conda create -y -n $ENVNAME
+    conda install -y -n $ENVNAME $INSTALL_FLAG --use-local \
+	python=$PYTHON \
+	${MPI} \
+	--file nersc/environment.txt
 }
 
 bundle ()
