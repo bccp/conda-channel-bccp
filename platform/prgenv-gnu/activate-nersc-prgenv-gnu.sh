@@ -22,14 +22,20 @@ export F77=ftn
 # to avoid 'pthreads_create: Resource temporarily unavailable' error.
 export OMP_NUM_THREADS=2
 
-export _OLD_CONDA_PYTHON_SYSCONFIGDATA_NAME=${_CONDA_PYTHON_SYSCONFIGDATA_NAME}
-export _CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_nersc_prgenv_gnu
+# see https://github.com/ContinuumIO/anaconda-issues/issues/9621
+# do not use SYSCONFIG:
+# it sounded like a good idea
+# but it requires installing prgenv.gnu in the host section
+# which makes no sense.
 
-# due to https://github.com/ContinuumIO/anaconda-issues/issues/9621
-# the above line doesn't override LDSHARED in PYTHON,
+#export _OLD_CONDA_PYTHON_SYSCONFIGDATA_NAME=${_CONDA_PYTHON_SYSCONFIGDATA_NAME}
+#export _CONDA_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata_x86_64_conda_nersc_prgenv_gnu
+
+# Therefore, we prefer overriding LDSHARED with the environment variable
 # causing linking failures
 # therefore, we set LDSHARED explicitly here
 export LDSHARED="cc -pthread -shared"
+
 export MPICH_MAX_THREAD_SAFETY=multiple
 
 # recommended by Stephen Bailey for better multiprocessing support.
