@@ -1,5 +1,5 @@
 set +e
-if [ "x$USER" == "x"]; then
+if [ "x$USER" == "x" ]; then
 	# need to set a fake user name for modules.sh
 	export USER=condabuild
 fi
