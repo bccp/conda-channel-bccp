@@ -1,5 +1,8 @@
 set +e
-export USER=${USER?conda-build}
+if [ "x$USER" == "x"]; then
+	# need to set a fake user name for modules.sh
+	export USER=condabuild
+fi
 source /etc/profile.d/nerschost.sh
 source /etc/profile.d/modules.sh
 source /etc/profile.d/mpi-selector.sh
