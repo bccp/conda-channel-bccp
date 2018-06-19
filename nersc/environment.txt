@@ -17,3 +17,4 @@ nbodykit
 pfft-python
 pmesh
 runtests
+pytorch-cpu
