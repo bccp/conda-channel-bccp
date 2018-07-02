@@ -41,8 +41,8 @@ PYTHON_CONFIG_EXE:=@PYTHON_CONFIG_EXE@
 ### You should NOT edit below this line
 DISTNAME:=Corrfunc
 MAJOR:=2
-MINOR:=0
-PATCHLEVEL:=1
+MINOR:=1
+PATCHLEVEL:=0
 VERSION:=$(MAJOR).$(MINOR).$(PATCHLEVEL)
 ABI_COMPAT_VERSION:=$(MAJOR).0
 # Whenever conda needs to be checked again
@@ -121,7 +121,7 @@ ifeq ($(DO_CHECKS), 1)
       CC := gcc
     endif
   else
-    export CMDLINE_CC_INFO_PRINTED := 0
+    export CMDLINE_CC_INFO_PRINTED ?= 0
     ifeq ($(CMDLINE_CC_INFO_PRINTED), 0)    
       $(info If you want to permanently set the default compiler to $(ccmagenta)$(CC)$(ccreset) for all future compilations, please update the $(ccblue)"CC"$(ccreset) variable in $(ccmagenta)"common.mk"$(ccreset))
       export CMDLINE_CC_INFO_PRINTED := 1
@@ -162,7 +162,7 @@ ifeq ($(DO_CHECKS), 1)
   ## This entire AVX section is now commented out because the code has runtime-dispatch based on the CPU capabilities and picks the latest instruction set by default
 
   # Now check if gcc is set to be the compiler but if clang is really under the hood.
-  export CC_IS_CLANG := -1
+  export CC_IS_CLANG ?= -1
   ifeq ($(CC_IS_CLANG), -1)
     CC_VERSION := $(shell $(CC) --version 2>/dev/null)
     ifndef CC_VERSION
@@ -184,7 +184,7 @@ ifeq ($(DO_CHECKS), 1)
   # print an info message saying what to do in case of an error
   ifeq ($(UNAME), Darwin)
     ifneq ($(CC_IS_CLANG), 1)
-      export CLANG_COMPILER_WARNING_PRINTED := 0
+      export CLANG_COMPILER_WARNING_PRINTED ?= 0
       ifeq ($(CLANG_COMPILER_WARNING_PRINTED), 0)
         $(warning Looks like $(ccmagenta)clang$(ccreset) (on Mac) is not set as the compiler. If you run into errors like $(ccred)"no such instruction: `vxorpd %xmm1, %xmm1,%xmm1'"$(ccreset), then please use $(ccmagenta)clang$(ccreset) as the compiler (directly invoke $(ccmagenta)"make"$(ccmagenta), NOT $(ccred)"make CC=gcc"$(ccreset)))
         export CLANG_COMPILER_WARNING_PRINTED := 1
@@ -213,7 +213,7 @@ ifeq ($(DO_CHECKS), 1)
     CFLAGS += -Werror -Wno-unknown-warning-option
   endif
 
-  GSL_FOUND := $(shell gsl-config --version)
+  GSL_FOUND := $(shell gsl-config --version 2>/dev/null)
   ifndef GSL_FOUND
     $(error $(ccred)Error:$(ccreset) GSL not found in path - please install GSL before installing $(DISTNAME).$(VERSION) $(ccreset))
   endif
@@ -279,7 +279,7 @@ ifeq ($(DO_CHECKS), 1)
         # Use the clang assembler on Mac.
         ifeq ($(UNAME), Darwin)
           CFLAGS += -Wa,-q
-          export CLANG_ASM_WARNING_PRINTED := 0
+          export CLANG_ASM_WARNING_PRINTED ?= 0
           ifeq ($(CLANG_ASM_WARNING_PRINTED), 0)
             $(warning $(ccmagenta) WARNING: gcc on Mac does not support intrinsics. Attempting to use the clang assembler $(ccreset))
             $(warning $(ccmagenta) If you see the error message $(ccred) "/opt/local/bin/as: assembler (/opt/local/bin/clang) not installed" $(ccmagenta) then try the following fix $(ccreset))
@@ -330,7 +330,7 @@ ifeq ($(DO_CHECKS), 1)
         ifeq ($(CLANG_OMP_AVAIL),true)
           ifeq ($(APPLE_CLANG),0)
             ifeq ($(UNAME), Darwin)
-              export CLANG_LD_WARNING_PRINTED := 0
+              export CLANG_LD_WARNING_PRINTED ?= 0
               ifeq ($(CLANG_LD_WARNING_PRINTED), 0)
                 $(info $(ccmagenta)Enabling OpenMP with clang.$(ccreset))
                 CLANG_LD_ERROR := "dyld: Library not loaded: @rpath/libLLVM.dylib\nReferenced from: /opt/local/libexec/llvm-3.8/lib/libLTO.dylib\nReason: image not found\n"
@@ -346,7 +346,7 @@ ifeq ($(DO_CHECKS), 1)
         else
           # I dislike being warned multiple times but the compiler warning will not
           # be visible if the entire codebase is being compiled. 
-          # export WARNING_PRINTED := 0
+          # export WARNING_PRINTED ?= 0
 	        # ifeq ($(WARNING_PRINTED), 0)
           $(warning $(ccmagenta) $$CC = ${CC} does not support OpenMP - please use gcc/icc for compiling with openmp. Removing $(ccblue)"USE_OMP"$(ccmagenta) from compile options. $(ccreset))
           infovar := "OPT:=$$(filter-out -DUSE_OMP,$$(OPT))"
@@ -375,7 +375,8 @@ ifeq ($(DO_CHECKS), 1)
 
 
   # All of the python/numpy checks follow
-  export PYTHON_CHECKED := 0
+  export PYTHON_CHECKED ?= 0
+  export NUMPY_CHECKED ?= 0
   ifeq ($(PYTHON_CHECKED), 0)
     export COMPILE_PYTHON_EXT := 1
     export PYTHON_VERSION_FULL := $(wordlist 2,4,$(subst ., ,$(shell $(PYTHON) --version 2>&1)))
@@ -429,17 +430,34 @@ ifeq ($(DO_CHECKS), 1)
       endif
       PYTHON_CONFIG_INCL := $(shell $(PYTHON_CONFIG_EXE) --includes 2>/dev/null)
       ifndef PYTHON_CONFIG_INCL
-        $(error $(ccred)python-config$(ccreset) ($(ccblue)$(PYTHON_CONFIG_EXE)$(ccreset)) not found. Please set $(ccgreen)PYTHON_CONFIG_EXE$(ccreset) in $(ccgreen)"common.mk"$(ccreset) to appropriate $(ccblue)python-config$(ccreset) before installing $(DISTNAME).$(VERSION) $(ccreset))
+        $(error $(ccred)python-config$(ccreset) ($(ccblue)$(PYTHON_CONFIG_EXE)$(ccreset)) not found. Please set $(ccgreen)PYTHON_CONFIG_EXE$(ccreset) in $(ccgreen)"common.mk"$(ccreset) to appropriate $(ccblue)python-config$(ccreset) before installing $(DISTNAME).$(VERSION). Installing $(ccblue)python-devel$(ccreset) might fix this issue $(ccreset))
       endif
       PYTHON_CONFIG_INCL:=$(patsubst -I%,-isystem%, $(PYTHON_CONFIG_INCL))
 
-      export PYTHON_CFLAGS := $(PYTHON_CONFIG_INCL) $(shell $(PYTHON) -c "from __future__ import print_function; import numpy; print('-isystem ' + numpy.__path__[0] + '/core/include/numpy/')")
+      # NUMPY is available -> next step should not fail
+      # That's why we are not checking if the NUMPY_INCL_FLAG is defined.
+      ifeq ($(NUMPY_CHECKED), 0)
+        export NUMPY_INCL_FLAG := $(shell $(PYTHON) -c "from __future__ import print_function; import numpy; print('-isystem ' + numpy.__path__[0] + '/core/include/numpy/')")
+        # Take the second word -> the path (the first word is "isystem")
+        NUMPY_INCL_PATH := $(word 2, ${NUMPY_INCL_FLAG})
+        # Now check that the 'arrayobject.h' file is present in the
+        # supposed numpy directory. Otherwise, compilation will fail.
+        # The absence of the file likely indicates a missing numpy-devel
+        # package (see issue #134 on github)
+        NUMPY_NEEDED_HEADER_FILE := ${NUMPY_INCL_PATH}arrayobject.h
+        ifeq (,$(wildcard ${NUMPY_NEEDED_HEADER_FILE}))
+          $(error Required $(ccred)numpy headers$(ccreset) are missing...stopping the compilation. You might be able to fix this by installing $(ccblue)numpy-devel$(ccreset))
+        endif
+        export NUMPY_CHECKED:=1
+      endif
+
+      export PYTHON_CFLAGS := $(PYTHON_CONFIG_INCL) $(NUMPY_INCL_FLAG)
       export PYTHON_LIBDIR := $(shell $(PYTHON_CONFIG_EXE) --prefix)/lib
       export PYTHON_LIBS   := $(shell $(PYTHON_CONFIG_EXE) --libs)
       export PYTHON_LINK :=
       # export PYTHON_LINK   := -L$(PYTHON_LIBDIR) $(PYTHON_LIBS) -Xlinker -rpath -Xlinker $(PYTHON_LIBDIR)
       # export PYTHON_LINK   := -L$(PYTHON_LIBDIR) $(PYTHON_LIBS) -Xlinker -rpath -Xlinker $(PYTHON_LIBDIR)
-      SOABI := $(shell $(PYTHON) -c "from __future__ import print_function; import sysconfig; print(sysconfig.get_config_var('SOABI'))")
+      SOABI := $(shell $(PYTHON) -c "from __future__ import print_function; import sysconfig; print(sysconfig.get_config_var('SOABI'))" 2>/dev/null)
       export PYTHON_SOABI := 
       ifdef SOABI
         ifneq ($(SOABI), None)
@@ -509,7 +527,7 @@ ifeq ($(DO_CHECKS), 1)
   endif
 
   ## Everything is checked and ready. Print out the variables.
-  export MAKEFILE_VARS_PRINTED := 0
+  export MAKEFILE_VARS_PRINTED ?= 0
   ifeq ($(MAKEFILE_VARS_PRINTED), 0)
     MAKEFILE_VARS := MAKE CC OPT CFLAGS CLINK PYTHON
     # I want the equal sign in the info print out later to be aligned

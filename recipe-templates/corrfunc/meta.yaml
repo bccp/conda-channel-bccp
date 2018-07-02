@@ -5,11 +5,14 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/nickhand/Corrfunc.git
-  git_tag: master
+  fn: {{ name }}-{{ version }}.tar.gz
+#  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/manodeep/Corrfunc/archive/{{ version }}.tar.gz
+#  git_url: https://github.com/nickhand/Corrfunc.git
+#  git_tag: master
 
 build:
-  number : 4
+  number : 5
 
 requirements:
   build:
