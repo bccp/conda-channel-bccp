@@ -12,11 +12,11 @@ source:
 #  git_tag: master
 
 build:
-  number : 6
+  number : 7
 
 requirements:
   build:
-    - '{{ compiler("c") }}' # [linux]
+    - '{{ compiler("c") }}'
     - gsl
 
   host:
