@@ -12,7 +12,7 @@ source:
 #  git_tag: master
 
 build:
-  number : 5
+  number : 6
 
 requirements:
   build:
@@ -30,6 +30,11 @@ requirements:
     - '{{ pin_compatible("numpy", lower_bound="1.9") }}'
     - gsl
     - future
+
+# We can probably pin this to pin compatible in the future.
+# see https://abi-laboratory.pro/?view=timeline&l=gsl
+pin_run_as_build:
+    - gsl
 
 test:
   # Python imports
