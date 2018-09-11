@@ -13,17 +13,11 @@ build:
     number: 8
     skip: True  # [win]
     skip: True  # [osx]
-    skip: True  # [linux]
     track_features:
       - mpich
 
 requirements:
-    build:
-        - {{ compiler("c") }}
-        - {{ compiler("cxx") }}
-        - {{ compiler("fortran") }}
-        - libgcc-ng # needed for -lgomp
-    build:
+    host:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("fortran") }}
