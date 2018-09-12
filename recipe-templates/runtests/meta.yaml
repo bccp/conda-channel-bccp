@@ -10,12 +10,15 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 0
+  number : 1
   script : python setup.py install
 
 requirements:
   host:
     - python
+    - mpi4py
+    - pytest
+    - coverage
 
   run:
     - python
