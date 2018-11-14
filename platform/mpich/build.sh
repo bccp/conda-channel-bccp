@@ -10,9 +10,9 @@
 # cmake `;list` conversion bug (either in cmake or the scripts)
 # https://github.com/pytorch/pytorch/issues/8466
 
-export FFLAGS="-fopenmp -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -O2 -pipe"
-export CFLAGS="-march=nocona -mtune=haswell -fPIC -fstack-protector-strong -O2 -pipe"
-export CXXFLAGS="-std=c++17 -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -O2 -pipe"
+export FFLAGS="-fopenmp -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
+export CFLAGS="-march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
+export CXXFLAGS="-std=c++17 -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
 
 # don't know if this is useful.
 export FCFLAGS="$FFLAGS"
