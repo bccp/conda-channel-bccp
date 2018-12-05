@@ -28,13 +28,14 @@
 - name: fastpm
 
 - name: fitsio
+  past_versions: [ 1.0.0rc1 ]
 
 - name: halotools
 
 # needs manual update of common.mk.in against
 # the source code !
 - name: Corrfunc
-  version : 2.1.0rc1
+  version : 2.2.0
 
 - name: mcfit
 
