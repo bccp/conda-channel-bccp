@@ -1,6 +1,6 @@
 #!/bin/bash
 
 # add libm see https://github.com/esheldon/fitsio/pull/135
-patch < $RECIPE_DIR/patch.libm
+patch < $RECIPE_DIR/patch.libm || echo Patch failed.
 
-python setup.py install
+$PYTHON setup.py install
