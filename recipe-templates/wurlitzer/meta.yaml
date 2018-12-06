@@ -1,0 +1,39 @@
+{% set name = "wurlitzer" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  md5: {{ md5 }}
+
+build:
+  number: 0
+  script: $PYTHON setup.py install
+
+requirements:
+  host:
+    - python
+
+  run:
+    - python
+
+
+test:
+  imports:
+    - wurlitzer
+
+about:
+  home: https://github.com/minrk/wurlitzer
+  license: GPLv3
+  license_family: GPL3
+  license_file: ''
+  summary:  Capture C-level stdout/stderr in Python
+  description: ''
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
