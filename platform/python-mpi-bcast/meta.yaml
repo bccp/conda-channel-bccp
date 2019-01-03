@@ -1,10 +1,10 @@
 package:
   name: python-mpi-bcast
-  version: 0.1.3
+  version: 0.1.4
 
 source:
-  fn: python-mpi-bcast-0.1.3.tar.gz # [unix]
-  url: https://github.com/rainwoodman/python-mpi-bcast/archive/0.1.2.tar.gz
+  fn: python-mpi-bcast-0.1.4.tar.gz # [unix]
+  url: https://github.com/rainwoodman/python-mpi-bcast/archive/0.1.4.tar.gz
 
 build:
   number: 1
