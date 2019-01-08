@@ -11,7 +11,7 @@ source:
 
 build:
   number : 0
-  script : $PYTHON setup.py install --single-version-exteranlly-managed --record rec.txt
+  script : $PYTHON setup.py install --single-version-externally-managed --record rec.txt
 
 requirements:
   host:
