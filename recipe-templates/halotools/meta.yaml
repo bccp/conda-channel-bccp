@@ -10,7 +10,7 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 4
+  number : 5
 
 requirements:
   build:
@@ -24,7 +24,6 @@ requirements:
     - astropy >=1
     - scipy
     - beautifulsoup4
-    - astropy-helpers
     - requests
 
   run:
