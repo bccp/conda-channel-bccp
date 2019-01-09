@@ -83,7 +83,8 @@ script:
     # vmad does not work with 2.7; skip it.
     - |
       if [ ${PYTHON_VERSION} == 2.7 ]; then
-        rm -rf recipes/vmad-*
+         cat pkglist | grep -v vmad > pkglist.1
+         cp pkglist.1 pkglist
       fi
     - |
       if [ ${PYTHON_VERSION} == 3.6 ]; then
