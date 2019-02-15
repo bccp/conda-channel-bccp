@@ -14,5 +14,5 @@ $PYTHON setup.py install
   echo -e "\nSuccessfully built libtorch at `dirname $PWD`/torch/lib/tmp_install\n"
   }
 } || {
-  echo -e "\nError: failed to build libtorch"
+  echo -e "\nError: failed to build libtorch\n"
 }
