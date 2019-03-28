@@ -1,0 +1,62 @@
+{% set name = "healpy" %}
+
+# take from conda-forge with minimal fiddling
+# we are almost compatible with conda-forge now.
+
+package:
+    name: {{ name|lower }}
+    version: {{version}}
+
+source:
+    url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    md5: {{ md5 }}
+    patches:
+      - macos-c++-linking.patch  # [osx]
+
+build:
+    number: 0
+    skip: True  # [win]
+
+requirements:
+    build:
+        - pkg-config
+        - '{{ compiler("fortran") }}'
+        - '{{ compiler("c") }}'
+        - '{{ compiler("cxx") }}'
+    host:
+        - cython
+        - python
+        - setuptools
+        - numpy
+        - pip
+        - pytest-runner
+        - six
+    run:
+        - python
+        - matplotlib
+        - '{{ pin_compatible("numpy") }}'
+        - six
+        - astropy
+        - scipy
+        - pytest-runner
+
+test:
+    imports:
+        - healpy
+        - healpy.test
+    requires:
+        - pytest
+        - nose
+
+about:
+    home: http://github.com/healpy
+    license: GPL-2.0
+    summary: Healpix tools package for Python
+
+extra:
+    recipe-maintainers:
+        - lpsinger
+        - mwcraig
+        - pkgw
+        - zonca
+

@@ -27,6 +27,8 @@
 
 - name: cachey
 
+- name: healpy
+
 - name: fastpm
 
 - name: fitsio
