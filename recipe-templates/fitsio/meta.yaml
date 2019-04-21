@@ -6,9 +6,9 @@ package:
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/esheldon/fitsio/archive/v{{ version }}.tar.gz
-  {% if md5 %}
-  md5: {{ md5 }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  {% if sha256 %}
+  sha256: {{ sha256 }}
   {% endif %}
 
 build:
