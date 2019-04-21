@@ -32,7 +32,6 @@
 - name: fastpm
 
 - name: fitsio
-  past_versions: [ 1.0.0rc1 ]
 
 - name: halotools
 
