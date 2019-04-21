@@ -160,6 +160,13 @@ class Package(object):
         return self._md5
 
     @property
+    def sha256(self):
+        if not self._sha256:
+            self._retrieve_package_metadata()
+
+        return self._sha256
+
+    @property
     def filename(self):
         return self.url.split('/')[-1]
 
@@ -243,6 +250,7 @@ class Package(object):
                 if a_url['packagetype'] == 'sdist':
                     url = a_url['url']
                     md5sum = a_url['md5_digest']
+                    sha256 = a_url['sha256_digest']
                     break
             else:
                 # No source distribution, so raise an index error
@@ -254,8 +262,10 @@ class Package(object):
                   self.required_version))
             url = None
             md5sum = None
+            sha256 = None
         self._url = url
         self._md5 = md5sum
+        self._sha256 = sha256
         self._version = version
 
 
@@ -343,7 +353,7 @@ def render_template(package, template, folder=TEMPLATE_FOLDER):
     full_template_path = os.path.abspath(folder)
     jinja_env = Environment(loader=FileSystemLoader(full_template_path), undefined=PassThroughUndefined)
     tpl = jinja_env.get_template('/'.join([package.conda_name, template]))
-    rendered = tpl.render(version=package.version, md5=package.md5)
+    rendered = tpl.render(version=package.version, md5=package.md5, sha256=package.sha256)
     return rendered
 
 
