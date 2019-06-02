@@ -1,4 +1,4 @@
-{% set build = 5 %}
+{% set build = 6 %}
 {% set version = '0.0.1_git54fdc78' %}
 {% set major = version.rpartition('.')[0] %}
 
