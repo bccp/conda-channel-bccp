@@ -10,12 +10,17 @@
 # cmake `;list` conversion bug (either in cmake or the scripts)
 # https://github.com/pytorch/pytorch/issues/8466
 
-export FFLAGS="-fopenmp -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
-export CFLAGS="-march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
-export CXXFLAGS="-std=c++17 -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
+if [[ $OSTYPE == darwin* ]]; then
+  export FFLAGS="-march=nocona -mtune=core2 -ftree-vectorize -fPIC -fstack-protector -O2 -pipe"
+else
+  export FFLAGS="-fopenmp -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
+  export CFLAGS="-march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
+  export CXXFLAGS="-std=c++17 -march=nocona -mtune=haswell -fPIC -fstack-protector-strong -Og -g -pipe"
+fi
 
 # don't know if this is useful.
 export FCFLAGS="$FFLAGS"
+export FORTRANFLAGS="$FFLAGS"
 export FC="$F90"
 
 # don't know if this is useful.
