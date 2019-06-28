@@ -4,6 +4,11 @@ language: c
 
 group: deprecated-2017Q2 # https://github.com/travis-ci/travis-ci/issues/4704
 
+addons:
+  apt:
+    packages:
+    - pkgconf
+
 os:
   - linux
   - osx
