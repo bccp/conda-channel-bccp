@@ -19,7 +19,8 @@ build:
 
 requirements:
     build:
-        - pkg-config
+        # use system provided pkg-config
+        - pkg-config # [osx]
         - '{{ compiler("fortran") }}'
         - '{{ compiler("c") }}'
         - '{{ compiler("cxx") }}'
