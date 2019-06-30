@@ -1,5 +1,5 @@
 numpy:
-  - 1.9 # [unix]
+  - 1.13 # [unix]
 
 python:
   - 3.6
