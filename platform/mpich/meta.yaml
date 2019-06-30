@@ -10,17 +10,18 @@ source:
     sha256: 5db53bf2edfaa2238eb6a0a5bc3d2c2ccbfbb1badd79b664a1a919d2ce2330f1
 
 build:
-    number: 0
+    number: 1
     skip: True  # [win]
     track_features:
       - mpich
 
 requirements:
-    host:
+    build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
         - {{ compiler("fortran") }}
-        - libgcc-ng # [linux] needed for -lgomp 
+        - make # [unix]
+    host: []
 
 test:
     requires:
