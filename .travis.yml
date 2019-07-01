@@ -8,8 +8,8 @@ os:
   - linux
   - osx
 
-# 9.4 doesn't compile, try 10.1
-osx_image: xcode10.1
+# 9.4 doesn't compile, try 10.2
+osx_image: xcode10.2
 
 sudo: true
 
