@@ -15,10 +15,6 @@ matrix:
         - chmod +x ~/uninstall_homebrew
         - ~/uninstall_homebrew -fq
         - curl -fsSL http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh > miniconda.sh
-        - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
-        - ls -l /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs
-        #- xcode-select -p
-        #- echo /Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 
 env:
     global:
@@ -32,6 +28,12 @@ env:
 # Matrix is fully specified (for now) by os versions
 
 install:
+    - |
+      cat > conda_build_config.yml <<EOF
+      CONDA_BUILD_SYSROOT:
+        - $(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk # [OSX]
+      EOF
+    - ls -l conda_build_config.yml
     # Install and set up miniconda.
     - bash miniconda.sh -b -p $CONDA_INSTALL_LOCN
     - export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
