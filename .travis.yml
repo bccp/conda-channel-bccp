@@ -77,12 +77,6 @@ script:
     # Packages are uploaded as they are built.
     - |
       VARIANT=variants/pc/python-${PYTHON_VERSION}.yaml
-    # vmad does not work with 2.7; skip it.
-    - |
-      if [ ${PYTHON_VERSION} == 2.7 ]; then
-         cat pkglist | grep -v vmad > pkglist.1
-         cp pkglist.1 pkglist
-      fi
     - |
       if [ ${PYTHON_VERSION} == 3.6 ]; then
          bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
