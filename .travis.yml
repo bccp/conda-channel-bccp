@@ -15,7 +15,8 @@ matrix:
         - chmod +x ~/uninstall_homebrew
         - ~/uninstall_homebrew -fq
         - curl -fsSL http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh > miniconda.sh
-        - export CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
+        - xcode-select -p
+        - echo /Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk
 
 env:
     global:
