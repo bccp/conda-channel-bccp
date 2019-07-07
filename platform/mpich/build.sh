@@ -46,6 +46,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --disable-wrapper-rpath \
             --enable-cxx \
             --enable-fortran
+cat config.log
 
 make -j"${CPU_COUNT:-1}"
 make install
