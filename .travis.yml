@@ -28,13 +28,7 @@ env:
 # Matrix is fully specified (for now) by os versions
 
 install:
-    - |
-      cat > conda_build_config.yml <<END
-      CONDA_BUILD_SYSROOT:
-        - $(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk # [osx]
-      END
-    - ls -l conda_build_config.yml
-    - cat conda_build_config.yml
+    - bash osxinit.sh
     # Install and set up miniconda.
     - bash miniconda.sh -b -p $CONDA_INSTALL_LOCN
     - export PATH=${CONDA_INSTALL_LOCN}/bin:$PATH
