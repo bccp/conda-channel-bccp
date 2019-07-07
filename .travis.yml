@@ -6,37 +6,10 @@ sudo: true
 
 matrix:
   include:
-    - os: linux
-      env: PYTHON_VERSION=3.7
-      compiler: gcc
-      before_install:
-        - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    - os: linux
-      env: PYTHON_VERSION=3.6
-      compiler: gcc
-      before_install:
-        - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-    - os: linux
-      env: PYTHON_VERSION=2.7
-      compiler: gcc
-      before_install:
-        - wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
     - os: osx
       osx_image: xcode8
       compiler: clang
       env: PYTHON_VERSION=3.7
-      before_install:
-        - wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
-    - os: osx
-      osx_image: xcode8
-      compiler: clang
-      env: PYTHON_VERSION=3.6
-      before_install:
-        - wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
-    - os: osx
-      osx_image: xcode8
-      compiler: clang
-      env: PYTHON_VERSION=2.7
       before_install:
         - wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
 
@@ -104,7 +77,5 @@ script:
       else
          bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT  # no upload for other builds.
       fi
-    - bash build-all.sh platform pkglist-platform-py -m $VARIANT $INSPECT $UPLOAD
-    - bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
     - sleep 10 # https://github.com/travis-ci/travis-ci/issues/6018
 
