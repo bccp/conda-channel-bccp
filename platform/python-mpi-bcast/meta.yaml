@@ -7,10 +7,8 @@ source:
   url: https://github.com/rainwoodman/python-mpi-bcast/archive/0.1.4.tar.gz
 
 build:
-  number: 2
+  number: 3
   detect_binary_files_with_prefix: true
-  features:
-     - '{{ mpi }}'
   skip : True # [osx]
   skip : True # [win]
 

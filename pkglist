@@ -5,14 +5,9 @@ pmesh-*
 abopt-*
 vmad-*
 bigfile-*
-cachey-*
 classylss-*
-wurlitzer-*
 corrfunc-*
 fake_spectra-*
-fitsio-*
-halotools-*
-# healpy-*
 kdcount-*
 mcfit-*
 mpi4py_test-*

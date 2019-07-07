@@ -10,9 +10,7 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 5
-  features:
-    - '{{ mpi }}'
+  number : 8
 
 requirements:
   build:

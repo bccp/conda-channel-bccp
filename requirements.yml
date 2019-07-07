@@ -19,21 +19,12 @@
 - name: pmesh
 
 - name: nbodykit
-  past_versions: [0.1.11]
 
 - name: abopt
 
 - name: vmad
 
-- name: cachey
-
-- name: healpy
-
 - name: fastpm
-
-- name: fitsio
-
-- name: halotools
 
 # needs manual update of common.mk.in against
 # the source code !
@@ -43,5 +34,3 @@
 - name: mcfit
 
 - name: fake_spectra
-
-- name: wurlitzer
