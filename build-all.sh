@@ -26,7 +26,7 @@ while read package ; do
     if [[ $package == '#'* ]]; then
         continue
     fi
-    log2dots conda build $* $pkgroot/$package || {
+    conda build $* $pkgroot/$package || {
         echo "----- Failed -----"
         exit 1
     }

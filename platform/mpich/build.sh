@@ -9,6 +9,7 @@ unset F90 F77
 export LDFLAGS="${LDFLAGS/-Wl,--as-needed/}"
 
 # avoid absolute-paths in compilers
+export PATH=$PATH:$(dirname "$CC")
 export CC=$(basename "$CC")
 export CXX=$(basename "$CXX")
 export FC=$(basename "$FC")
@@ -45,8 +46,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --disable-dependency-tracking \
             --disable-wrapper-rpath \
             --enable-cxx \
-            --enable-fortran
-cat config.log
+            --enable-fortran || cat config.log
 
 make -j"${CPU_COUNT:-1}"
 make install
