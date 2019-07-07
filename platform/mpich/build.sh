@@ -1,9 +1,9 @@
 #!/bin/bash
 
+echo sysroot is ${CONDA_BUILD_SYSROOT}
 # configure balks if F90 is defined
 # with a fatal deprecation message pointing to FC
 unset F90 F77
-
 # remove --as-needed, which causes problems for downstream builds,
 # seen in failures in petsc, slepc, and hdf5 at least
 export LDFLAGS="${LDFLAGS/-Wl,--as-needed/}"
