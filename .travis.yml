@@ -11,6 +11,9 @@ matrix:
       compiler: clang
       env: PYTHON_VERSION=3.7
       before_install:
+        - curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall > ~/uninstall_homebrew
+        - chmod +x ~/uninstall_homebrew
+        - ~/uninstall_homebrew -fq
         - wget http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh
 
 env:
