@@ -31,7 +31,7 @@ install:
     - |
       cat > conda_build_config.yml <<END
       CONDA_BUILD_SYSROOT:
-        - $(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk # [OSX]
+        - $(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk # [osx]
       END
     - ls -l conda_build_config.yml
     - cat conda_build_config.yml
