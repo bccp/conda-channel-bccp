@@ -1,21 +1,16 @@
+CONDA_BUILD_SYSROOT:
+  - /opt/MacOSX10.9.sdk        # [osx]
+
 numpy:
   - 1.14 # [unix]
 
 python:
   - 3.7
-  #- 3.5
-  #- 2.7
 
 mpi:
-#  - openmpi #   [osx]
   - mpich
-#  - mpich2  #   [linux]
 
 pin_run_as_build:
-    openmpi:
-      max_pin: x.x
     mpich:
-      max_pin: x.x
-    mpich2:
       max_pin: x.x
 
