@@ -70,7 +70,7 @@ install:
           UPLOAD="";
       fi
 script:
-    - INSPECT="--skip-existing -c bccp"
+    - INSPECT="--skip-existing -c conda-forge -c bccp"
     - python extrude_recipes.py requirements.yml
 
     # Packages are uploaded as they are built.
