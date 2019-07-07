@@ -44,8 +44,8 @@ install:
 
     # set the ordering of additional channels
     - conda config --prepend channels defaults
+    - conda config --append channels conda-forge
     - conda config --append channels bccp
-    - conda config --append channels astropy
 
     # Install a couple of dependencies we need for sure.
     - conda install --quiet --yes astropy anaconda-client jinja2 cython pycrypto
@@ -75,14 +75,13 @@ script:
 
     # Packages are uploaded as they are built.
     - |
-      VARIANT=variants/pc/python-${PYTHON_VERSION}.yaml
+      VARIANT=variants/conda-forge/python-${PYTHON_VERSION}.yaml
     - |
       if [ ${PYTHON_VERSION} == 3.6 ]; then
          bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
       else
          bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT  # no upload for other builds.
       fi
-    - bash build-all.sh platform pkglist-platform-py -m $VARIANT $INSPECT $UPLOAD
     - bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
     - sleep 10 # https://github.com/travis-ci/travis-ci/issues/6018
 
