@@ -31,7 +31,6 @@ export MPICHLIB_FFLAGS=$FFLAGS
 unset FFLAGS
 export MPICHLIB_FCFLAGS=$FCFLAGS
 unset FCFLAGS
-
 # set some specific flags that we *do* want recorded in the compilers
 # only the bare minimum of prefix-awareness here
 export CFLAGS="-I$PREFIX/include"
