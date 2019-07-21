@@ -44,7 +44,6 @@ install:
 
     # set the ordering of additional channels
     - conda config --prepend channels defaults
-    - conda config --append channels conda-forge
     - conda config --append channels bccp
 
     # Install a couple of dependencies we need for sure.
@@ -70,18 +69,13 @@ install:
           UPLOAD="";
       fi
 script:
-    - INSPECT="--skip-existing -c conda-forge -c bccp"
+    - INSPECT="--skip-existing -c bccp"
     - python extrude_recipes.py requirements.yml
 
     # Packages are uploaded as they are built.
     - |
-      VARIANT=variants/conda-forge/python-${PYTHON_VERSION}.yaml
-    - |
-      if [ ${PYTHON_VERSION} == 3.6 ]; then
-         bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
-      else
-         bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT  # no upload for other builds.
-      fi
+      VARIANT=variants/pc/python-${PYTHON_VERSION}.yaml
+    - bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
     - bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
     - sleep 10 # https://github.com/travis-ci/travis-ci/issues/6018
 
