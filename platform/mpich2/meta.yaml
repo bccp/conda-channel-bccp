@@ -12,8 +12,6 @@ build:
   number: 7
   skip: True  # [win]
   skip: True  # [osx]
-  track_features:
-    - mpich2
 
 requirements:
 #  build:

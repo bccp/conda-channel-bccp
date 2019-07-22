@@ -16,8 +16,6 @@ build:
     number: {{ build }}
     skip: True  # [win]
     skip: True  # [linux]
-    track_features:
-        - openmpi
 
 requirements:
     build:
