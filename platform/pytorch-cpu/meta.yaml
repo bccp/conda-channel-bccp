@@ -13,8 +13,6 @@ build:
   number: 2
   skip: True  # [win]
   skip: True  # [osx]
-  features:
-    - '{{ mpi }}'
 
 requirements:
   build:

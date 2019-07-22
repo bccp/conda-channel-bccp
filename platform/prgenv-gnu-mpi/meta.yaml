@@ -9,8 +9,6 @@ build:
     number: {{ build }}
     skip: True  # [win]
     skip: True  # [osx]
-    track_features:
-     - {{ crayhost }}.prgenv.gnu.mpi
 
 requirements:
     run :

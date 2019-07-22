@@ -1,23 +1,19 @@
 package:
   name: mpi4py
-  version: 3.0.0
+  version: 3.0.2
 
 source:
-  fn: mpi4py-3.0.0.tar.gz # [unix]
-  url: https://pypi.python.org/packages/31/27/1288918ac230cc9abc0da17d84d66f3db477757d90b3d6b070d709391a15/mpi4py-3.0.0.tar.gz #[unix]
-  md5: bfe19f20cef5e92f6e49e50fb627ee70  #[unix]
+  fn: mpi4py-3.0.2.tar.gz # [unix]
+  url: https://files.pythonhosted.org/packages/04/f5/a615603ce4ab7f40b65dba63759455e3da610d9a155d4d4cece1d8fd6706/mpi4py-3.0.2.tar.gz #[unix]
+  sha256: f8d629d1e3e3b7b89cb99d0e3bc5505e76cc42089829807950d5c56606ed48e0 #[unix]
 
 build:
-  number: 8
+  number: 0
   detect_binary_files_with_prefix: true
-  features:
-     - '{{ mpi }}'
 
 requirements:
-#  build:
-#    - python
-#    - '{{ compiler("c") }}'
-#    - '{{ mpi }}'
+  build:
+    - '{{ compiler("c") }}'
 
   host:
     - python
