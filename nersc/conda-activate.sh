@@ -21,11 +21,11 @@ if ! [ $# == 1 ]; then
 fi
 
 case $1 in
-    2.7 | 3.6 | 3.5 )
+    2.7 | 3.7 | 3.6 )
     ;;
 
     *)
-    (>&2 echo "give a Python version number 2.7, 3.5 or 3.6")
+    (>&2 echo "give a Python version number 2.7, 3.6 or 3.7")
     (>&2 echo "    (Got $1)")
     return 1
     ;;
