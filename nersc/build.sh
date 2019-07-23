@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# where are we running this?
+hostname
+
 # only one argument allowed
 if [ $# -eq 0 ] || [ $# -gt 2 ] || [ $# -eq 2 ] && [ "$2" != "--clean" ]; then
     echo "usage: build.sh PYTHON [--clean]"
@@ -94,8 +97,15 @@ bundle ()
     source $CONDA_PREFIX/envs/$ENVNAME/libexec/python-mpi-bcast/activate.sh    
 
     # and tar the install
-    bundle-anaconda /usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz $CONDA_PREFIX/envs/$ENVNAME ||
+    local NEW=/usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz.new
+    local OLD=/usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz.yesterday
+    local DST=/usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz
+    bundle-anaconda $NEW $CONDA_PREFIX/envs/$ENVNAME ||
     { echo "bundle-anaconda failed"; exit 1; }
+
+    # rotate
+    mv $DST $OLD
+    mv $NEW $DST
 }
 
 install_script()
