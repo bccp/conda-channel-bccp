@@ -16,6 +16,8 @@ for fn in \
     chmod +x $fn
 done
 
+mkdir -p ${PREFIX}/bin
+
 for fn in \
     mpicc \
     mpicxx \
@@ -23,9 +25,10 @@ for fn in \
     mpif77 \
     mpif90 \
     ; do
-    install $fn $PREFIX/bin/
+    install $fn ${PREFIX}/bin/
 done
 
+mkdir -p ${PREFIX}/etc
 mkdir -p ${STDLIB_DIR}
-install mpi.conf $PREFIX/etc/
+install mpi.conf ${PREFIX}/etc/
 install _sysconfigdata_x86_64_conda_nersc_prgenv_gnu.py ${STDLIB_DIR}
