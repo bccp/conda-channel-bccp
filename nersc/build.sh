@@ -83,7 +83,7 @@ install ()
     conda install -y -n $ENVNAME $INSTALL_FLAG --use-local \
 	python=$PYTHON \
 	${MPI} \
-	--file nersc/environment.txt
+	--file nersc/environment.txt || { echo "install packages faied"; exit 1; }
 }
 
 bundle ()
