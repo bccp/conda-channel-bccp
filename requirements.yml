@@ -34,3 +34,11 @@
 - name: mcfit
 
 - name: fake_spectra
+
+# these are also on conda-forge
+- name: halotools
+
+- name: fitsio
+
+- name: cachey
+
