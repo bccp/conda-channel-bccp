@@ -8,12 +8,14 @@ source:
   sha256: f8d629d1e3e3b7b89cb99d0e3bc5505e76cc42089829807950d5c56606ed48e0 #[unix]
 
 build:
-  number: 0
+  number: 1
   detect_binary_files_with_prefix: true
 
 requirements:
-  build:
-    - '{{ compiler("c") }}'
+# disable build section to make sure mpi4py's get_config() is properly
+# set.
+#  build:
+#    - '{{ compiler("c") }}'
 
   host:
     - python
