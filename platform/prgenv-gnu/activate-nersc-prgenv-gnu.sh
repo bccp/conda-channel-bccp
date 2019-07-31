@@ -10,6 +10,8 @@ source /etc/bash.bashrc.local
 
 module unload PrgEnv-intel
 module load PrgEnv-gnu
+# As of Jul 30th 2019, hugepages crashes mpi4py
+module unload craype-hugepages2M
 module list
 
 export CFLAGS="-fPIC"
