@@ -31,9 +31,9 @@ case $1 in
     ;;
 esac 
 
-_ENVNAME=bcast-anaconda-$1
+_ENVNAME=bcast-bccp-$1
 
-source $_BCCP_DIR/anaconda3/envs/$_ENVNAME/bin/activate-bcast
+source $_BCCP_DIR/conda/envs/$_ENVNAME/bin/activate-bcast
 
 #$_BCCP_DIR/python-mpi-bcast/nersc/${NERSC_HOST}/system-libraries.tar.gz \
 

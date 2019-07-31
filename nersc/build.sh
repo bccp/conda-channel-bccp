@@ -46,7 +46,7 @@ fi
 MPI=${NERSC_HOST}.prgenv.gnu.mpi 
 
 # activate our root anaconda install to start
-source /usr/common/contrib/bccp/anaconda3/bin/activate root
+source /global/common/software/m3035/conda/bin/activate root
 
 # purge intermediate results
 conda build purge
@@ -79,7 +79,7 @@ install ()
     
     export CONDA_TARGET_PREFIX_OVERRIDE=/dev/shm/local
     local PYTHON=$1
-    local ENVNAME=bcast-anaconda-$1
+    local ENVNAME=bcast-bccp-$1
 
     conda env remove -y -n $ENVNAME
     conda create -y -n $ENVNAME
@@ -91,15 +91,15 @@ install ()
 
 bundle ()
 {
-    local ENVNAME=bcast-anaconda-$1
+    local ENVNAME=bcast-bccp-$1
 
     # enable python-mpi-bcast
     source $CONDA_PREFIX/envs/$ENVNAME/libexec/python-mpi-bcast/activate.sh    
 
     # and tar the install
-    local NEW=/usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz.new
-    local OLD=/usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz.yesterday
-    local DST=/usr/common/contrib/bccp/anaconda3/envs/$ENVNAME.tar.gz
+    local NEW=$CONDA_PREFIX/envs/$ENVNAME.tar.gz.new
+    local OLD=$CONDA_PREFIX/envs/$ENVNAME.tar.gz.yesterday
+    local DST=$CONDA_PREFIX/envs/$ENVNAME.tar.gz
     bundle-anaconda $NEW $CONDA_PREFIX/envs/$ENVNAME ||
     { echo "bundle-anaconda failed"; exit 1; }
 
@@ -110,7 +110,7 @@ bundle ()
 
 install_script()
 {
-    local ENVNAME=bcast-anaconda-$1
+    local ENVNAME=bcast-bccp-$1
     source $CONDA_PREFIX/envs/$ENVNAME/libexec/python-mpi-bcast/activate.sh    
     cp $_DIRNAME/activate-bcast $CONDA_PREFIX/envs/$ENVNAME/bin
 }
