@@ -45,3 +45,7 @@ export MPICH_MAX_THREAD_SAFETY=multiple
 export KMP_AFFINITY=disabled
 export MPICH_GNI_FORK_MODE=FULLCOPY
 
+# remove any PYTHONPATH left-overs from Cray
+export -n PYTHONPATH
+# and PYTHONSTARTUP reads the history from HOME, which can be slow.
+export -n PYTHONSTARTUP
