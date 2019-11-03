@@ -20,6 +20,7 @@ conda packages in this repository on NERSC:
 
 5. Check to make sure that the job was added using ``crontab -l``.
 
+6. The conda channel is at https://portal.nersc.gov/project/m3035/channels/cori/bccp
 
 Assumptions
 -----------

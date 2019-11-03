@@ -3,12 +3,6 @@
 # where are we running this?
 hostname
 
-# only one argument allowed
-if [ $# -eq 0 ] || [ $# -gt 2 ] || [ $# -eq 2 ] && [ "$2" != "--clean" ]; then
-    echo "usage: build.sh PYTHON [--clean]"
-    exit 1
-fi
-
 if [[ -n $BASH_VERSION ]]; then
     _SCRIPT_LOCATION=${BASH_SOURCE[0]}
 elif [[ -n $ZSH_VERSION ]]; then
@@ -18,9 +12,30 @@ else
     exit 1
 fi
 
+OPTS=`getopt -o c --long clean -- "$@"`
+if [ $? != 0 ]; then
+    echo "usage: build.sh PYTHON [command] [--clean]"
+    exit 1
+fi
+
+INSTALL_FLAG=""
+BUILD_FLAG="--skip-existing"
+eval set -- "$OPTS"
+while true; do
+    case "$1" in 
+    -c | --clean )
+    # get the CLEAN flags
+        INSTALL_FLAG="-f"
+        BUILD_FLAG=""
+    shift ;;
+    -- )
+    shift; break;;
+    esac
+done
+
 # the PYTHON version to build
 PYTHON=$1
-shift
+COMMAND=$2
 
 # start build from the parent of nersc directory, where these scripts are.
 
@@ -32,16 +47,6 @@ _DIRNAME=`readlink -f ${_DIRNAME}`
 pushd $_PARENTDIR
 
 git pull
-
-INSTALL_FLAG=""
-BUILD_FLAG="--skip-existing"
-
-# get the CLEAN flags
-if [ "$1" = "--clean" ]; then
-    INSTALL_FLAG="-f"
-    BUILD_FLAG=""
-    shift
-fi
 
 MPI=${NERSC_HOST}.prgenv.gnu.mpi 
 
@@ -87,6 +92,15 @@ install ()
 	python=$PYTHON \
 	${MPI} \
 	--file nersc/environment.txt || { echo "install packages faied"; exit 1; }
+    conda clean --all --yes
+}
+
+sync () {
+    CHANNEL_DEST=/project/projectdirs/m3035/www/channels/${NERSC_HOST}/bccp
+    mkdir -p $CHANNEL_DEST
+    rsync -avr $CONDA_PREFIX/conda-bld/linux-64 $CHANNEL_DEST
+    rsync -avr $CONDA_PREFIX/conda-bld/noarch $CHANNEL_DEST
+    conda index $CHANNEL_DEST
 }
 
 bundle ()
@@ -115,14 +129,19 @@ install_script()
     cp $_DIRNAME/activate-bcast $CONDA_PREFIX/envs/$ENVNAME/bin
 }
 
-# build packages for specific python version
-build $PYTHON
+if [ -z "$COMMAND" ]; then
+  # build packages for specific python version
+  build $PYTHON
+  # copy packages to https://portal.nersc.gov/project/m3035/channels/${NERSC_HOST}/bccp
+  sync $PYTHON
+  # install
+  install $PYTHON
+  # bundle
+  bundle $PYTHON
+  # install the activate scripts
+  install_script $PYTHON
+else
+  $COMMAND $PYTHON 
+fi
 
-# install
-install $PYTHON
-
-# install
-bundle $PYTHON
-
-install_script $PYTHON
 popd # return to start directory
