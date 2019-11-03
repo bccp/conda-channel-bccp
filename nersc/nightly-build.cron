@@ -4,14 +4,14 @@
 script_path=$(readlink -f build.sh)
 
 # log directory
-log_dir=/usr/common/contrib/bccp/build-logs
+log_dir=/global/common/software/m3035/maint/build-logs
 
 # mail to only if we fail
 mailto="MAILTO=\"nhand@berkeley.edu,yfeng1@berkeley.edu\""
 (echo "$mailto"; ) | crontab -
 
 # the python versions to build
-python="2.7\n3.6\n3.7"
+python="3.7"
 
 # build each python version in successive order
 filename="${log_dir}/conda-build-@-\`date +\%Y-\%m-\%d\`-cron.log"
