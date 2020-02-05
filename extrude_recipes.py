@@ -449,6 +449,10 @@ def main(args=None):
 from jinja2.runtime import Undefined
 
 class PassThroughUndefined(Undefined):
+    def __getattr__(self, attr):
+        # workaround https://github.com/pallets/jinja/blame/0166b4c8b800de108b60acdf7ccc01a7bcf5f49a/src/jinja2/runtime.py#L282
+        return None
+
     def __str__(self):
         return u'{{ %s }}' % self._undefined_name
 
