@@ -25,4 +25,4 @@ install:
     - source activate test
 
 script:
-    - mpirun -n 1 python testenvironment.py
+    - mpirun -n 1 python test_environment.py
