@@ -21,8 +21,8 @@ before_install:
 
 install:
     - conda create -q --yes -n test python=$PYTHON_VERSION cmake
-    - conda install -y -q -c bccp nbodykit mpi4py
     - source activate test
+    - conda install -y -q -c bccp nbodykit mpi4py
 
 script:
     - mpirun -n 1 python test_environment.py
