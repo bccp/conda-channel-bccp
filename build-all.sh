@@ -22,6 +22,15 @@ log2dots ()
     )
 }
 
+trap 'kill $(jobs -p)' EXIT
+
+(
+while true; do
+sleep 300;
+echo "Keep Alive.."
+done
+) &
+
 while read package ; do 
     if [[ $package == '#'* ]]; then
         continue
