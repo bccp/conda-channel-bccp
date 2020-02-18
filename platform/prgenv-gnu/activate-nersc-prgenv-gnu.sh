@@ -24,6 +24,7 @@ export F77=ftn
 # set a reasonable number for number of threads,
 # to avoid 'pthreads_create: Resource temporarily unavailable' error.
 export OMP_NUM_THREADS=2
+export NUMEXPR_MAX_THREADS=2
 
 # see https://github.com/ContinuumIO/anaconda-issues/issues/9621
 # do not use SYSCONFIG:
@@ -49,3 +50,13 @@ export MPICH_GNI_FORK_MODE=FULLCOPY
 export -n PYTHONPATH
 # and PYTHONSTARTUP reads the history from HOME, which can be slow.
 export -n PYTHONSTARTUP
+
+# Hack to avoid astropy accessing the home directory.
+# This will ignore the astropy configurations in the home dir.
+export XDG_CACHE_HOME=/dev/shm/local/cache
+export XDG_CONFIG_HOME=/dev/shm/local/config
+mkdir -p $XDG_CACHE_HOME
+mkdir -p $XDG_CONFIG_HOME
+
+mkdir -p $XDG_CACHE_HOME/astropy
+mkdir -p $XDG_CONFIG_HOME/astropy
