@@ -95,12 +95,10 @@ the packages on Linux and OSX.
 
 platform directory
 ++++++++++++++++++
-The current version of openmpi and mpich
-on default anaconda channels are not properly set up to use the cross
-compilation toolchain for the compiler wrappers. We therefore
-build openmpi, mpich and a mpi4py that depends on them. The plan is to add
-updated openmpi, mpich and mpi4py to the default anaconda channel eventually,
-and stop including these packages.
+bccp used to ship mpich and mpi4py that properly allows compiling packages
+with the ctng cross compilation tool chain provided by conda. This is
+no longer an issue since at least Mar 15 2020. We therefore have switched
+to use the mpich and mpi4py on the default channel.
 
 
 pkglist
