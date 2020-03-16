@@ -32,3 +32,8 @@ mkdir -p ${PREFIX}/etc
 mkdir -p ${STDLIB_DIR}
 install mpi.conf ${PREFIX}/etc/
 install _sysconfigdata_x86_64_conda_nersc_prgenv_gnu.py ${STDLIB_DIR}
+
+# Copy cray specific pkgconfig files such that if pkg-config is installed,
+# we link to the correct cray packages.
+mkdir -p ${PREFIX}/lib/pkgconfig
+cp /usr/lib64/pkgconfig/*cray*.pc ${PREFIX}/lib/pkgconfig
