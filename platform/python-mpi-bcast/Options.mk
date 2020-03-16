@@ -11,7 +11,7 @@
 # MPICC='cc -static'
 
 # static build
-MPICC=mpicc -static
+MPICC=mpicc -static -pthread
 
 # install location; use $PREFIX from conda
 # PREFIX=${PREFIX}
