@@ -10,7 +10,7 @@ source:
   md5: {{ md5 }}
 
 build:
-  number : 5
+  number : 6
   script : $PYTHON setup.py install --single-version-externally-managed  --record rec.txt
 
 requirements:

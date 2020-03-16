@@ -10,7 +10,7 @@ source:
   md5: {{ md5}}
 
 build:
-  number : 7
+  number : 8
 
 requirements:
   build:
