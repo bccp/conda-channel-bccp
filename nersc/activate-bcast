@@ -17,7 +17,7 @@ _DIRNAME=`readlink -f $_DIRNAME`
 
 source $_DIRNAME/../../bin/activate $_DIRNAME
 source $CONDA_PREFIX/libexec/python-mpi-bcast/activate.sh \
-       /dev/shm/local "srun -n $SLURM_JOB_NUM_NODES"
+       /dev/shm/local "srun -i none -n $SLURM_JOB_NUM_NODES"
 
 bcast ${CONDA_PREFIX}.tar.gz
 
