@@ -1,3 +1,7 @@
+# This version of mpi4py disables the build section to avoid
+# mpi4py.get_config() pointing to a wrong path.
+# This has been fixed (likely due to conda-build) in the default channel.
+
 package:
   name: mpi4py
   version: 3.0.2
