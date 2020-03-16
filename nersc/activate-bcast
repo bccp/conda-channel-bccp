@@ -21,5 +21,9 @@ source $CONDA_PREFIX/libexec/python-mpi-bcast/activate.sh \
 
 bcast ${CONDA_PREFIX}.tar.gz
 
+echo "Warming up astropy's config system ...."
+python -c 'import astropy'
+srun -i none -n $SLURM_JOB_NUM_NODES --ntasks-per-node=1 python -c 'import astropy'
+
 #$_BCCP_DIR/python-mpi-bcast/nersc/${NERSC_HOST}/system-libraries.tar.gz \
 

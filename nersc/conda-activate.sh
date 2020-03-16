@@ -34,6 +34,3 @@ esac
 _ENVNAME=bcast-bccp-$1
 
 source $_BCCP_DIR/conda/envs/$_ENVNAME/bin/activate-bcast
-
-#$_BCCP_DIR/python-mpi-bcast/nersc/${NERSC_HOST}/system-libraries.tar.gz \
-
