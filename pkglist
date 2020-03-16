@@ -10,7 +10,6 @@ corrfunc-*
 fake_spectra-*
 kdcount-*
 mcfit-*
-mpi4py_test-*
 halotools-*
 fitsio-*
 cachey-*
