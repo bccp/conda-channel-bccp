@@ -53,8 +53,8 @@ export -n PYTHONSTARTUP
 
 # Hack to avoid astropy accessing the home directory.
 # This will ignore the astropy configurations in the home dir.
-export XDG_CACHE_HOME=/dev/shm/local/cache
-export XDG_CONFIG_HOME=/dev/shm/local/config
+export XDG_CACHE_HOME=/tmp/cache
+export XDG_CONFIG_HOME=/tmp/config
 mkdir -p $XDG_CACHE_HOME
 mkdir -p $XDG_CONFIG_HOME
 
