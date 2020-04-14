@@ -1,11 +1,11 @@
 package:
   name: pytorch-cpu
-  version: 0.4.0
+  version: 1.1.0
 
 source:
   # use git checkout to recursively get the submodule dependencies
   # the release tarballs do not carry dependencies.
-  git_rev: v0.4.0
+  git_rev: ec8b1c9
   git_url: https://github.com/pytorch/pytorch/
 
 build:
