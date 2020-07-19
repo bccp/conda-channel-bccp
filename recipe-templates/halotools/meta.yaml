@@ -35,6 +35,8 @@ requirements:
     - requests
 
 test:
+  requires:
+    - pytest-astropy
   # Python imports
   imports:
     - halotools
