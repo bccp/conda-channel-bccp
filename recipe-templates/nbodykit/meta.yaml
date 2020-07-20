@@ -37,7 +37,7 @@ requirements:
     - fitsio
     - classylss >=0.2
     - mcfit
-    - sympy
+    - sympy !=1.6.0, !=1.6.1
     - numexpr
     - corrfunc
 
