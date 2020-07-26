@@ -20,6 +20,7 @@ build:
 requirements:
     build:
         - pkg-config
+        - llvm-openmp  # [osx]
         - '{{ compiler("fortran") }}'
         - '{{ compiler("c") }}'
         - '{{ compiler("cxx") }}'
