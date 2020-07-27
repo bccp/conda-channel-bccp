@@ -4,12 +4,12 @@
 
 package:
   name: mpi4py
-  version: 3.0.2
+  version: 3.0.3
 
 source:
-  fn: mpi4py-3.0.2.tar.gz # [unix]
-  url: https://files.pythonhosted.org/packages/04/f5/a615603ce4ab7f40b65dba63759455e3da610d9a155d4d4cece1d8fd6706/mpi4py-3.0.2.tar.gz #[unix]
-  sha256: f8d629d1e3e3b7b89cb99d0e3bc5505e76cc42089829807950d5c56606ed48e0 #[unix]
+  fn: mpi4py-3.0.3.tar.gz # [unix]
+  url: https://files.pythonhosted.org/packages/ec/8f/bbd8de5ba566dd77e408d8136e2bab7fdf2b97ce06cab830ba8b50a2f588/mpi4py-3.0.3.tar.gz # [unix]
+  sha256: 012d716c8b9ed1e513fcc4b18e5af16a8791f51e6d1716baccf988ad355c5a1f #[unix]
 
 build:
   number: 1
@@ -22,6 +22,7 @@ requirements:
 #    - '{{ compiler("c") }}'
 
   host:
+    - cython
     - python
     - '{{ compiler("c") }}'
     - '{{ mpi }}'
