@@ -15,4 +15,4 @@ fitsio-*
 cachey-*
 nbodykit-*
 fastpm-*
-healpy-*
+# healpy-* disabled due to libcurl madness. Use conda-forge's.
