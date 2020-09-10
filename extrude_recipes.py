@@ -8,6 +8,7 @@ from pkg_resources import parse_version
 import requests
 
 import ruamel_yaml as yaml
+import time
 
 from conda import exports as conda_exports
 
@@ -24,6 +25,7 @@ RECIPE_FOLDER = 'recipes'
 CONDA_FORGE_RECIPE_BASE = 'https://raw.githubusercontent.com/conda-forge/{}-feedstock/master/recipe/meta.yaml'
 
 def get_pypi_info(name):
+    time.sleep(0.1)  # throttle RPC rate of to 10 / sec.
     url = "https://pypi.python.org/pypi/{}/json".format(name)
     return sorted(requests.get(url).json()["releases"], key=parse_version, reverse=True)
 
