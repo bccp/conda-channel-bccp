@@ -12,20 +12,26 @@ source:
 #  git_tag: master
 
 build:
-  number : 10
+  number : 11
+  # script: '{{ PYTHON }} -m pip install . -vv --install-option="CC=${CC}"'
 
 requirements:
   build:
     - '{{ compiler("c") }}'
-    - gsl
+    - make >=3.80
+    - gsl  # for gsl-config.
 
   host:
     - python
     - numpy
     - future
+    - pip
     - gsl
+    - llvm-openmp  # [osx]
+#    - libcblas
 
   run:
+    - llvm-openmp  # [osx]
     - python
     - '{{ pin_compatible("numpy", lower_bound="1.9") }}'
     - gsl
