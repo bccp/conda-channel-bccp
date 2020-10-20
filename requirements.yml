@@ -29,7 +29,7 @@
 # needs manual update of common.mk.in against
 # the source code !
 - name: Corrfunc
-  version : 2.3.0
+  version : 2.3.4
 
 - name: mcfit
 
