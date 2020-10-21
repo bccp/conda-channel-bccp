@@ -225,7 +225,10 @@ ifeq ($(DO_CHECKS), 1)
     # Normally, one would use -xHost with icc instead of -march=native
     # But -xHost does not allow you to later turn off just AVX-512,
     # which we may decide is necessary if the GAS bug is present
-    CFLAGS += -march=native
+
+    # NOTE: bccp-conda-channel-fix LOCAL CHANGES
+    #  disable native because this overrides the conda defaults and may enable additional instruction sets.
+    # CFLAGS += -march=native
     ifeq (USE_OMP,$(findstring USE_OMP,$(OPT)))
       CFLAGS += -qopenmp
       CLINK  += -qopenmp
@@ -330,7 +333,9 @@ ifeq ($(DO_CHECKS), 1)
     endif # CC is clang
 
     CFLAGS += -funroll-loops
-    CFLAGS += -march=native -fno-strict-aliasing
+    # NOTE: bccp-conda-channel-fix LOCAL CHANGES
+    #  disable native because this overrides the conda defaults and may enable additional instruction sets.
+    # CFLAGS += -march=native -fno-strict-aliasing
     CFLAGS += -Wformat=2  -Wpacked  -Wnested-externs -Wpointer-arith  -Wredundant-decls  -Wfloat-equal -Wcast-qual
     CFLAGS +=  -Wcast-align -Wmissing-declarations -Wmissing-prototypes  -Wnested-externs -Wstrict-prototypes  #-D_POSIX_C_SOURCE=2 -Wpadded -Wconversion
     CFLAGS += -Wno-unused-local-typedefs ## to suppress the unused typedef warning for the compile time assert for sizeof(struct config_options)
