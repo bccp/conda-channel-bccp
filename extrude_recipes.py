@@ -4,7 +4,6 @@ from __future__ import (division, print_function, absolute_import)
 from argparse import ArgumentParser
 import os
 import re
-from pkg_resources import parse_version
 import requests
 
 import ruamel_yaml as yaml
@@ -12,23 +11,13 @@ import time
 
 from conda import exports as conda_exports
 
-from six.moves import xmlrpc_client as xmlrpclib
 
 from jinja2 import Environment, FileSystemLoader, Template
 from jinja2.exceptions import TemplateNotFound
 
-PYPI_XMLRPC = 'https://pypi.python.org/pypi'
 TEMPLATE_FOLDER = 'recipe-templates'
 ALL_PLATFORMS = ['osx-64', 'linux-64', 'linux-32', 'win-32', 'win-64']
 RECIPE_FOLDER = 'recipes'
-
-CONDA_FORGE_RECIPE_BASE = 'https://raw.githubusercontent.com/conda-forge/{}-feedstock/master/recipe/meta.yaml'
-
-def get_pypi_info(name):
-    time.sleep(0.1)  # throttle RPC rate of to 10 / sec.
-    url = "https://pypi.python.org/pypi/{}/json".format(name)
-    return sorted(requests.get(url).json()["releases"], key=parse_version, reverse=True)
-
 
 class Package(object):
     """
@@ -46,8 +35,7 @@ class Package(object):
     """
 
     # The class should only need one client for communicating with PyPI
-    client = xmlrpclib.ServerProxy(PYPI_XMLRPC)
-
+    session = requests.Session()
     def __init__(self, conda_name, version=None,
                  pypi_name=None,
                  numpy_compiled_extensions=False,
@@ -239,25 +227,22 @@ class Package(object):
         Get URL and md5 checksum from PyPI for either the specified version
         or the most recent version.
         """
+        json = self.session.get("https://pypi.org/pypi/{pypi_name}/json".format(pypi_name=self.pypi_name)).json()
         if self.required_version is None:
-            version = get_pypi_info(self.pypi_name)
+            version = json['info']['version']
         else:
             version = self.required_version
 
-        urls = self.client.release_urls(self.pypi_name, version)
-        try:
-            # Many packages now have wheels, need to iterate over download
-            # URLs to get the source distribution.
-            for a_url in urls:
-                if a_url['packagetype'] == 'sdist':
-                    url = a_url['url']
-                    md5sum = a_url['md5_digest']
-                    sha256 = a_url['sha256_digest']
-                    break
-            else:
-                # No source distribution, so raise an index error
-                raise IndexError
-        except IndexError:
+        urls = json['releases'][version]
+        # Many packages now have wheels, need to iterate over download
+        # URLs to get the source distribution.
+        for a_url in urls:
+            if a_url['packagetype'] == 'sdist':
+                url = a_url['url']
+                md5sum = a_url['digests']['md5']
+                sha256 = a_url['digests']['sha256']
+                break
+        else:
             # Apparently a pypi release isn't required to have any source?
             # If it doesn't, then return None
             print('No source found for {}: {}'.format(self.pypi_name,
@@ -311,17 +296,12 @@ def get_package_versions(requirements_path):
         include_extras = p.get('include_extras', False)
 
         # find the versions
-        version = p.get('version', None)
-        if version is None:
-            releases = get_pypi_info(pypi_name)
-            versions = [releases[0]] # build the latest from pypi
-            past_versions = p.get('past_versions', [])
-            for past_ver in past_versions:
-                if past_ver not in versions:
-                    versions.append(past_ver)
-        else:
-            versions = [version]
-
+        version = p.get('version', None)  # None for latest.
+        versions = [version]
+        past_versions = p.get('past_versions', [])
+        for past_ver in past_versions:
+            if past_ver not in versions:
+                versions.append(past_ver)
 
         # TODO: Get supported platforms from requirements,
         #       not from recipe template.
