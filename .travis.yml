@@ -22,7 +22,7 @@ env:
         - TARGET_ARCH="x64"
         - CONDA_INSTALL_LOCN="${HOME}/miniconda"
 
-        # Defines BINSTAR_TOKEN_RELEASE for bccp
+        # Defines BINSTAR_TOKEN for bccp
         - secure: "0fIuL2KuDNRVWFERTa3Z6oVyFSc01CISoJWEui+oLCjkSceN68UsHbOQ/o5lv2SA6JFCOGwqkTlcf+51ewPG4kt7mqYUS+2snNeSxA+2/fYfI/pjgbePVsN6uhke0UHUOgljEvy9qUlfZ7Ai2q2/Z/ijPFn01dd7vw0fItZZJ1vnQtq7L1bYOkK5jh1T0ns3FW0MG8KnT1j+m89ZIT4fsdQw/l8vnu5mEev4bvUUqXQ2dRDHR+/ZLme1wj/HHXbiSR7+i+l3N1OJpc2fWZKiZrnM+Tyl3xwG17FvSZ6qHoay5wwyW/hy2foce4uBSbVHmQQVcgBzLSKxB0JvPNadnsi3Vs2ktgKT1eigxQEak1W6YO6qZa7272AvlVkhTIqMzQ6YA/Skr+1kv5xYMxKWKhzTRKOlirrBtku02+dKZ3mgNxlTzxjFBPbZrixqz3eNsOGhKvNFzGn1vdtwSe5uKODK1nB+CWWdCX4AwmfmE06grmGmgkuTRL0WqbDuM8f0L5ulyGIwB06KpUtpG/duwtxC/2puZGwkvXbjb0R8SrR1+6JB9d7D0dLcdxXgw/35OFn0CDB9NodQ23K8MxbzBbPaBXrvqMQ3IU7kWoguqjSK7yjDw6AQTX7691VFMUhgqjjOL36bhrF+f3FeJlII3zO3SJi1qmwK3uVFAsHPkZY="
         # Defines BINSTAR_TOKEN_QA for bccp-qa
         - secure: "nKgvxgvvc4iRqO+4lVFoJxTwciTopLGb5DXdcNc4kUShx0LRDMu5o9t2goWlc/VDS3YYj4MPsoMo6kvrBeuRJW8bsyXnEHuU0EqM054PJDTv+bPFc/BFzlvgoYWzVY6ZAOnGoFrXNW7B8D+KGWQBMTybds5U49tcHGqwd33Wsep4qOI6dtkZlNgIYvl+FXiSzowNCbPrjEPVic3s25qkyQ1X4hULsR5i5+kTZqlkk///tPNR+3kbXJe1aXpuDok7LD5Epd4FhcXy+sBl4DfTeih6A2IzdZBRf2bjs5Jz46Z7/b6CMJk13g7n+//47hHURZhDQa2Qc0oxdxeZQuL5jv3aXB8Eu5ZqdzOb4gq4bSlP6XgKvOj3gg8I3NIygoPGl5NwEpII3vFff8lBDYn4e2ocNdNqubBzgyMSOqyG9LuODOgqHNa+SqgAbPx/0O+YO24AQ0V0JfnquZkkJ18lRxMoyM3k+KCpG5dQHssgNmBxxugVBJjsUmzaICdXHO+sRJJIJp9i8qRI4QFhbVydroBURicVdrGSyUpq1sDNvCi054EuNUDG0IW/rFYV25yHu3DrU+smRPAlT4lCXgxKwCBZPoAYj85eYoG4MnmrS4XyLHr/H8TDATkMjqZm3r5NCd8nVF5ew+aGOtZY+4joX0sgdqkt0mTplRHI8w+Pl40="
@@ -68,16 +68,16 @@ install:
           echo "Uplading disabled";
           UPLOAD="";
       else
-        if [ "$TRAVIS_PULL_REQUEST" == "true" ]; then
+        if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
           INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_QA"
           UPLOAD="--user $DESTINATION_CONDA_CHANNEL_QA --token $BINSTAR_TOKEN_QA";
           conda config --set anaconda_upload true
-          echo "Uploading enabled to $UPLOAD";
+          echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_QA";
         elif [ "$TRAVIS_BRANCH" == "master" ]; then
           INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_RELEASE"
-          UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token $BINSTAR_TOKEN_RELEASE";
+          UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token $BINSTAR_TOKEN";
           conda config --set anaconda_upload true
-          echo "Uploading enabled to $UPLOAD";
+          echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_RELEASE";
         else
           echo "Uplading disabled";
           UPLOAD="";
