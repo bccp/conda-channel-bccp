@@ -75,12 +75,12 @@ jobs:
         else
           if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
             INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_QA"
-            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_QA --token ${{ secrets.BINSTAR_TOKEN_QA }}";
+            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_QA --token ${{ secrets.BINSTAR_TOKEN_QA }}"
             conda config --set anaconda_upload true
             echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_QA";
           elif [ "$TRAVIS_BRANCH" == "master" ]; then
             INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_RELEASE"
-            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token ${{ secrets.BINSTAR_TOKEN }}";
+            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token ${{ secrets.BINSTAR_TOKEN_RELEASE }}"
             conda config --set anaconda_upload true
             echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_RELEASE";
           else
