@@ -17,6 +17,7 @@ jobs:
     env:
       DESTINATION_CONDA_CHANNEL_RELEASE: "bccp"
       DESTINATION_CONDA_CHANNEL_QA: "bccp-qa"
+      PYTHON_VERSION : ${{ matrix.python-version }}
 
     defaults:
       run:
@@ -79,7 +80,7 @@ jobs:
             echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_QA";
           elif [ "$TRAVIS_BRANCH" == "master" ]; then
             INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_RELEASE"
-            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token {{ secrets.BINSTAR_TOKEN }}";
+            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token ${{ secrets.BINSTAR_TOKEN }}";
             conda config --set anaconda_upload true
             echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_RELEASE";
           else
@@ -89,6 +90,6 @@ jobs:
         fi
 
         python extrude_recipes.py requirements.yml
-        VARIANT=variants/pc/python-$${ matrix.python-version }.yaml
+        VARIANT=variants/pc/python-$PYTHON_VERSION.yaml
         bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
         bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
