@@ -1,0 +1,94 @@
+# main test workflow; ported from .travis.yaml
+
+name: main
+
+on:
+  schedule:
+    - cron:  '* * * * 5'   # Runs on every Friday.
+  push:
+    branches: [ '*', $default-branch ]
+    tags: ['[0-9]*']   # anything looks like a version.
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    env:
+      DESTINATION_CONDA_CHANNEL_RELEASE: "bccp"
+      DESTINATION_CONDA_CHANNEL_QA: "bccp-qa"
+
+    defaults:
+      run:
+        shell: bash -l {0}   # for conda.
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        python-version: [ 3.8, 3.9 ]
+
+    steps:
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
+
+    - name: Cache conda
+      uses: actions/cache@v1
+      env:
+        # Increase this value to reset cache.
+        CACHE_NUMBER: 0
+      with:
+        path: ~/conda_pkgs_dir
+        key:
+          ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}
+
+    - name: Setup Conda Environment
+      uses: conda-incubator/setup-miniconda@v2.0.1
+      with:
+        activate-environment: test
+        channels: default,bccp,conda-forge
+        show-channel-urls: true
+        use-only-tar-bz2: true
+        auto-update-conda: true
+        python-version: ${{ matrix.python-version }}
+
+    - name: Setup test env
+      run: |
+        conda config --set always_yes true
+        conda install --quiet --yes astropy anaconda-client jinja2 cython pycrypto
+        conda install ruamel_yaml
+        # latest conda build
+        conda install conda-build # 'conda-build<3.1'
+        conda info -a
+        conda list
+
+
+    - name: Build
+      run: |
+        # Only upload if this is NOT a pull request.
+        if [ $TRAVIS_REPO_SLUG != "bccp/conda-channel-bccp" ]; then
+            INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_QA"
+            echo "Uplading disabled";
+            UPLOAD="";
+        else
+          if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+            INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_QA"
+            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_QA --token ${{ secrets.BINSTAR_TOKEN_QA }}";
+            conda config --set anaconda_upload true
+            echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_QA";
+          elif [ "$TRAVIS_BRANCH" == "master" ]; then
+            INSPECT="--skip-existing -c $DESTINATION_CONDA_CHANNEL_RELEASE"
+            UPLOAD="--user $DESTINATION_CONDA_CHANNEL_RELEASE --token {{ secrets.BINSTAR_TOKEN }}";
+            conda config --set anaconda_upload true
+            echo "Uploading enabled to $DESTINATION_CONDA_CHANNEL_RELEASE";
+          else
+            echo "Uplading disabled";
+            UPLOAD="";
+          fi
+        fi
+
+        python extrude_recipes.py requirements.yml
+        VARIANT=variants/pc/python-$${ matrix.python-version }.yaml
+        bash build-all.sh platform pkglist-platform -m $VARIANT $INSPECT $UPLOAD
+        bash build-all.sh recipes pkglist -m $VARIANT $INSPECT $UPLOAD
