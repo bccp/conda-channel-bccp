@@ -1,0 +1,19 @@
+numpy:
+  - 1.18 # [unix]
+
+python:
+  - 3.9
+
+mpi:
+#  - openmpi #   [osx]
+  - mpich
+#  - mpich2  #   [linux]
+
+pin_run_as_build:
+    openmpi:
+      max_pin: x.x
+    mpich:
+      max_pin: x.x
+    mpich2:
+      max_pin: x.x
+
